@@ -1,7 +1,8 @@
 import { validator } from "../../src/core/engine/Validator"
 import { configDict } from "./predefined/ConfigNodes"
-import { doubleEntryIngoingConnection, doubleEntryOutgoingConnection2, dualDuplicateEntryOutgoingConnection, emptyConnections, falseIndexMappingConnection, falseIndexMappingConnection2, falseIngoingConnection, falseInputConnection, falseOutgoingConnection, falseSelfIdConnection, falseSelfIdConnection2, falseSelfIndexConnection, falseSelfIndexConnection2, falseSelfIndexConnection3, falseSelfIndexConnection4, falseSelfIoIdConnection, falseSelfIoIdConnection2, missingIngoingConnection, missingOutgoingConnection, onlyFalseIndexConnection, simpleValidConnection, tooManyIngoingConnection, tooManyIngoingConnection2, tooManyOutgoingConnection, tooManyOutgoingConnection2 } from "./predefined/Connections"
 import { engineNodeDict } from "./predefined/EngineNodes"
+import { doubleEntryIngoingConnection, doubleEntryOutgoingConnection2, dualDuplicateEntryOutgoingConnection, emptyConnections, falseIndexMappingConnection, falseIndexMappingConnection2, falseIngoingConnection, falseInputConnection, falseOutgoingConnection, falseSelfIdConnection, falseSelfIdConnection2, falseSelfIndexConnection, falseSelfIndexConnection2, falseSelfIndexConnection3, falseSelfIndexConnection4, falseSelfIoIdConnection, falseSelfIoIdConnection2, missingIngoingConnection, missingOutgoingConnection, onlyFalseIndexConnection, tooManyIngoingConnection, tooManyIngoingConnection2, tooManyOutgoingConnection, tooManyOutgoingConnection2 } from "./predefined/InvalidConnections"
+import { simpleValidConnection } from "./predefined/ValidConnections"
 
 describe("invalid graphs", () => {
 
