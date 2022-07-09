@@ -15,3 +15,7 @@ export interface EngineNode {
     inputs: EngineIO<any, any>[];
     outputs: EngineIO<any, any>[];
 }
+
+export interface EngineNodeDict {
+    [k: string]: EngineNode;
+}

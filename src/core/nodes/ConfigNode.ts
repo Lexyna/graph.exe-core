@@ -19,3 +19,7 @@ export interface ConfigNode {
     onInit?: (...io: EngineIO<any, any>[]) => void;
     onDestroy?: (...io: EngineIO<any, any>[]) => void;
 }
+
+export interface ConfigNodeDict {
+    [k: string]: ConfigNode;
+}
