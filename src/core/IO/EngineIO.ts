@@ -10,8 +10,6 @@ import { CON_MAPPING } from "./IOMapping";
  * value: The data transmitted to another node
  */
 export interface EngineIO<K, T> {
-    nodeId: string;
-    index: number;
     type: string;
     mapping: CON_MAPPING;
     data: K;

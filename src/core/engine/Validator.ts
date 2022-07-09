@@ -4,14 +4,14 @@ import { ConfigNodeDict } from "../nodes/ConfigNode";
 import { EngineNodeDict } from "../nodes/EngineNode";
 
 /**
- * Validates whatever a passed graph is valid, 'executeable', or not
+ * Validates whatever a passed graph is valid, 'executable', or not
  * @param config  
  * @param nodes 
  * @param connections 
  * @param entry 
  * @returns boolean: true if Graph is executable, false otherwise
  */
-export const Validator = (
+export const validator = (
     config: ConfigNodeDict,
     nodes: EngineNodeDict,
     connections: EngineConnections,
@@ -32,6 +32,9 @@ export const Validator = (
 
     if (!isValidConfig) return false;
 
+    if (Object.keys(connections.input).length === 0 ||
+        Object.keys(connections.output).length === 0) return false;
+
     let isValidInputMapping = true;
     let isValidOutputMapping = true;
 
@@ -43,13 +46,27 @@ export const Validator = (
 
         if (!isValidInputMapping) return;
 
+        if (value.connections.length == 0) isValidInputMapping = false;
+
+        if (key !== value.self.nodeId + value.self.type + value.self.index ||
+            key !== value.self.ioId) {
+            isValidOutputMapping = false;
+            return;
+        }
+
+        if (!nodes[value.self.nodeId].inputs[value.self.index]) {
+            isValidInputMapping = false;
+            return;
+        }
+
         if (nodes[value.self.nodeId].inputs[value.self.index].mapping == CON_MAPPING.SINGLE && value.connections.length > 1)
             isValidInputMapping = false;
 
-        for (let io in value.connections)
-            if (!connections.output[io]) isValidInputMapping = false;
+        for (let io of value.connections)
+            if (!connections.output[io.ioId]) isValidInputMapping = false;
+            else if (!nodes[connections.output[io.ioId].self.nodeId].outputs[connections.output[io.ioId].self.index]) isValidInputMapping = false;
             else if (
-                nodes[connections.output[io].self.nodeId].outputs[connections.output[io].self.index].type !=
+                nodes[connections.output[io.ioId].self.nodeId].outputs[connections.output[io.ioId].self.index].type !=
                 nodes[value.self.nodeId].inputs[value.self.index].type)
                 isValidInputMapping = false;
     })
@@ -64,11 +81,24 @@ export const Validator = (
 
         if (!isValidOutputMapping) return;
 
+        if (value.connections.length == 0) isValidOutputMapping = false;
+
+        if (key !== value.self.nodeId + value.self.type + value.self.index ||
+            key !== value.self.ioId) {
+            isValidOutputMapping = false;
+            return;
+        }
+
+        if (!nodes[value.self.nodeId].outputs[value.self.index]) {
+            isValidOutputMapping = false;
+            return;
+        }
+
         if (nodes[value.self.nodeId].outputs[value.self.index].mapping == CON_MAPPING.SINGLE && value.connections.length > 1)
             isValidOutputMapping = false;
 
-        for (let io in value.connections)
-            if (!connections.input[io]) isValidOutputMapping = false;
+        for (let io of value.connections)
+            if (!connections.input[io.ioId]) isValidOutputMapping = false;
     })
 
     if (!isValidOutputMapping) return false;
@@ -80,15 +110,15 @@ export const Validator = (
      */
     Object.entries(connections.input).forEach(([key, value]) => {
 
-        if (isValidConnection) return;
+        if (!isValidConnection) return;
 
-        for (let io in value.connections) {
+        for (let io of value.connections) {
 
             if (!isValidConnection) return;
 
             let hasConnection: boolean = false;
 
-            connections.output[io].connections.forEach(con => {
+            connections.output[io.ioId].connections.forEach(con => {
 
                 if (hasConnection) return;
 
@@ -101,6 +131,27 @@ export const Validator = (
             if (!hasConnection) isValidConnection = false;
         }
     })
+
+    let hasDuplicates: boolean = false;
+
+    /**
+     * Checks if Outgoing connections contain duplicates
+     */
+    Object.entries(connections.output).forEach(([key, value]) => {
+
+        if (hasDuplicates) return;
+
+        const tracker: { [k: string]: number } = {};
+
+        for (let io of value.connections) {
+            if (hasDuplicates) return;
+            if (tracker[io.ioId]) hasDuplicates = true;
+            tracker[io.ioId] = 1;
+        }
+
+    })
+
+    if (hasDuplicates) return false;
 
     if (!isValidConnection) return false;
 

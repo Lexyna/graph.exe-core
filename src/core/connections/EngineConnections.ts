@@ -36,8 +36,9 @@ export interface OutgoingConnections {
  * PortID: nodeId + type + index
  */
 export interface ConnectionDetails {
+    ioId: string;
     nodeId: string;
-    type: ConnectionType;
+    type: CONNECTION_TYPE;
     index: number;
 }
 
