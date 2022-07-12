@@ -26,7 +26,7 @@ import {
     tooManyOutgoingConnection,
     tooManyOutgoingConnection2
 } from "./predefined/InvalidConnections"
-import { addingTwoNumberConnection, simpleValidConnection } from "./predefined/ValidConnections"
+import { addingThreeNumberConnection, addingTwoNumberConnection, simpleValidConnection } from "./predefined/ValidConnections"
 
 describe("invalid graphs", () => {
 
@@ -145,7 +145,11 @@ describe("valid graphs", () => {
         expect(validator(configDict, engineNodeDict, simpleValidConnection, "root")).toBe(true);
     })
 
-    test.only("adding Two numbers graph", () => {
+    test("adding Two numbers graph", () => {
         expect(validator(configDict, engineNodeDict, addingTwoNumberConnection, "root")).toBe(true);
+    })
+
+    test("adding three number graph", () => {
+        expect(validator(configDict, engineNodeDict, addingThreeNumberConnection, "root")).toBe(true);
     })
 })
