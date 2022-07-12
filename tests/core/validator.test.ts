@@ -1,8 +1,32 @@
 import { validator } from "../../src/core/engine/Validator"
 import { configDict } from "./predefined/ConfigNodes"
 import { engineNodeDict } from "./predefined/EngineNodes"
-import { doubleEntryIngoingConnection, doubleEntryOutgoingConnection2, dualDuplicateEntryOutgoingConnection, emptyConnections, falseIndexMappingConnection, falseIndexMappingConnection2, falseIngoingConnection, falseInputConnection, falseOutgoingConnection, falseSelfIdConnection, falseSelfIdConnection2, falseSelfIndexConnection, falseSelfIndexConnection2, falseSelfIndexConnection3, falseSelfIndexConnection4, falseSelfIoIdConnection, falseSelfIoIdConnection2, missingIngoingConnection, missingOutgoingConnection, onlyFalseIndexConnection, tooManyIngoingConnection, tooManyIngoingConnection2, tooManyOutgoingConnection, tooManyOutgoingConnection2 } from "./predefined/InvalidConnections"
-import { simpleValidConnection } from "./predefined/ValidConnections"
+import {
+    doubleEntryIngoingConnection,
+    doubleEntryOutgoingConnection2,
+    dualDuplicateEntryOutgoingConnection,
+    emptyConnections, falseIndexMappingConnection,
+    falseIndexMappingConnection2,
+    falseIngoingConnection,
+    falseInputConnection,
+    falseOutgoingConnection,
+    falseSelfIdConnection,
+    falseSelfIdConnection2,
+    falseSelfIndexConnection,
+    falseSelfIndexConnection2,
+    falseSelfIndexConnection3,
+    falseSelfIndexConnection4,
+    falseSelfIoIdConnection,
+    falseSelfIoIdConnection2,
+    missingIngoingConnection,
+    missingOutgoingConnection,
+    onlyFalseIndexConnection,
+    tooManyIngoingConnection,
+    tooManyIngoingConnection2,
+    tooManyOutgoingConnection,
+    tooManyOutgoingConnection2
+} from "./predefined/InvalidConnections"
+import { addingTwoNumberConnection, simpleValidConnection } from "./predefined/ValidConnections"
 
 describe("invalid graphs", () => {
 
@@ -119,5 +143,9 @@ describe("invalid graphs", () => {
 describe("valid graphs", () => {
     test("simple valid connection", () => {
         expect(validator(configDict, engineNodeDict, simpleValidConnection, "root")).toBe(true);
+    })
+
+    test.only("adding Two numbers graph", () => {
+        expect(validator(configDict, engineNodeDict, addingTwoNumberConnection, "root")).toBe(true);
     })
 })

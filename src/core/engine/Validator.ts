@@ -50,7 +50,7 @@ export const validator = (
 
         if (key !== value.self.nodeId + value.self.type + value.self.index ||
             key !== value.self.ioId) {
-            isValidOutputMapping = false;
+            isValidInputMapping = false;
             return;
         }
 
