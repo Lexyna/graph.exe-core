@@ -71,22 +71,22 @@ export const addEngineNode1OUTPUT0: ConnectionDetails = {
 }
 
 export const addEngineNode2INPUT0: ConnectionDetails = {
-    ioId: "addEngineNode1INPUT0",
-    nodeId: "addEngineNode1",
+    ioId: "addEngineNode2INPUT0",
+    nodeId: "addEngineNode2",
     type: CONNECTION_TYPE.INPUT,
     index: 0
 }
 
 export const addEngineNode2INPUT1: ConnectionDetails = {
-    ioId: "addEngineNode1INPUT1",
-    nodeId: "addEngineNode1",
+    ioId: "addEngineNode2INPUT1",
+    nodeId: "addEngineNode2",
     type: CONNECTION_TYPE.INPUT,
     index: 1
 }
 
 export const addEngineNode2OUTPUT0: ConnectionDetails = {
-    ioId: "addEngineNode1OUTPUT0",
-    nodeId: "addEngineNode1",
+    ioId: "addEngineNode2OUTPUT0",
+    nodeId: "addEngineNode2",
     type: CONNECTION_TYPE.OUTPUT,
     index: 0
 }
@@ -113,22 +113,22 @@ export const subEngineNode1OUTPUT0: ConnectionDetails = {
 }
 
 export const subEngineNode2INPUT0: ConnectionDetails = {
-    ioId: "subEngineNode1INPUT0",
-    nodeId: "subEngineNode1",
+    ioId: "subEngineNode2INPUT0",
+    nodeId: "subEngineNode2",
     type: CONNECTION_TYPE.INPUT,
     index: 0
 }
 
 export const subEngineNode2INPUT1: ConnectionDetails = {
-    ioId: "subEngineNode1INPUT1",
-    nodeId: "subEngineNode1",
+    ioId: "subEngineNode2INPUT1",
+    nodeId: "subEngineNode2",
     type: CONNECTION_TYPE.INPUT,
     index: 1
 }
 
 export const subEngineNode2OUTPUT0: ConnectionDetails = {
-    ioId: "subEngineNode1OUTPUT0",
-    nodeId: "subEngineNode1",
+    ioId: "subEngineNode2OUTPUT0",
+    nodeId: "subEngineNode2",
     type: CONNECTION_TYPE.OUTPUT,
     index: 0
 }
@@ -155,22 +155,22 @@ export const mulEngineNode1OUTPUT0: ConnectionDetails = {
 }
 
 export const mulEngineNode2INPUT0: ConnectionDetails = {
-    ioId: "mulEngineNode1INPUT0",
-    nodeId: "mulEngineNode1",
+    ioId: "mulEngineNode2INPUT0",
+    nodeId: "mulEngineNode2",
     type: CONNECTION_TYPE.INPUT,
     index: 0
 }
 
 export const mulEngineNode2INPUT1: ConnectionDetails = {
-    ioId: "mulEngineNode1INPUT1",
-    nodeId: "mulEngineNode1",
+    ioId: "mulEngineNode2INPUT1",
+    nodeId: "mulEngineNode2",
     type: CONNECTION_TYPE.INPUT,
     index: 1
 }
 
 export const mulEngineNode2OUTPUT0: ConnectionDetails = {
-    ioId: "mulEngineNode1OUTPUT0",
-    nodeId: "mulEngineNode1",
+    ioId: "mulEngineNode2OUTPUT0",
+    nodeId: "mulEngineNode2",
     type: CONNECTION_TYPE.OUTPUT,
     index: 0
 }
@@ -197,22 +197,22 @@ export const divEngineNode1OUTPUT0: ConnectionDetails = {
 }
 
 export const divEngineNode2INPUT0: ConnectionDetails = {
-    ioId: "divEngineNode1INPUT0",
-    nodeId: "divEngineNode1",
+    ioId: "divEngineNode2INPUT0",
+    nodeId: "divEngineNode2",
     type: CONNECTION_TYPE.INPUT,
     index: 0
 }
 
 export const divEngineNode2INPUT1: ConnectionDetails = {
-    ioId: "divEngineNode1INPUT1",
-    nodeId: "divEngineNode1",
+    ioId: "divEngineNode2INPUT1",
+    nodeId: "divEngineNode2",
     type: CONNECTION_TYPE.INPUT,
     index: 1
 }
 
 export const divEngineNode2OUTPUT0: ConnectionDetails = {
-    ioId: "divEngineNode1OUTPUT0",
-    nodeId: "divEngineNode1",
+    ioId: "divEngineNode2OUTPUT0",
+    nodeId: "divEngineNode2",
     type: CONNECTION_TYPE.OUTPUT,
     index: 0
 }
