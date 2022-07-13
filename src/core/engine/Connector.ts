@@ -2,11 +2,11 @@ import { ConnectionDetails, EngineConnections } from "../connections/EngineConne
 
 /**
  *  creates a new connection in the connection dict. returns true if connection successfully got added to the dict
- * @param inputDetails 
  * @param outputDetails 
+ * @param inputDetails
  * @param dict 
  */
-export const connector = (inputDetails: ConnectionDetails, outputDetails: ConnectionDetails, dict: EngineConnections): boolean => {
+export const connector = (outputDetails: ConnectionDetails, inputDetails: ConnectionDetails, dict: EngineConnections): boolean => {
 
     let inputExists = true;
     let outputExists = true;
