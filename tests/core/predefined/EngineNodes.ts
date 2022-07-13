@@ -34,7 +34,7 @@ export const constTwoEngineNode: EngineNode = {
 }
 
 export const constThreeEngineNode: EngineNode = {
-    id: "constOneEngineNode",
+    id: "constThreeEngineNode",
     configId: "constNode",
     autoUpdate: false,
     inputs: [...constNode.inputs],
@@ -42,7 +42,7 @@ export const constThreeEngineNode: EngineNode = {
 }
 
 export const constFourEngineNode: EngineNode = {
-    id: "constOneEngineNode",
+    id: "constFourEngineNode",
     configId: "constNode",
     autoUpdate: false,
     inputs: [...constNode.inputs],
@@ -50,7 +50,7 @@ export const constFourEngineNode: EngineNode = {
 }
 
 export const constFiveEngineNode: EngineNode = {
-    id: "constOneEngineNode",
+    id: "constFiveEngineNode",
     configId: "constNode",
     autoUpdate: false,
     inputs: [...constNode.inputs],

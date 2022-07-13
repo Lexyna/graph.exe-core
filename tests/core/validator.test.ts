@@ -28,7 +28,7 @@ import {
 } from "./predefined/InvalidConnections"
 import { addingThreeNumberConnection, addingTwoNumberConnection, simpleValidConnection } from "./predefined/ValidConnections"
 
-describe("invalid graphs", () => {
+describe("validator test - invalid graphs", () => {
 
     test("Invalid entry", () => {
         expect(validator({}, {}, emptyConnections, "empty")).toBe(false)
@@ -140,7 +140,7 @@ describe("invalid graphs", () => {
     })
 })
 
-describe("valid graphs", () => {
+describe("validator test - valid graphs", () => {
     test("simple valid connection", () => {
         expect(validator(configDict, engineNodeDict, simpleValidConnection, "root")).toBe(true);
     })
