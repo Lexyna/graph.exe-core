@@ -34,7 +34,7 @@ describe("connector test", () => {
 
     })
 
-    test.only("create multiplying three number connection", () => {
+    test("create multiplying three number connection", () => {
 
         //connect  result form mul Node 2 to root
         connector(mulEngineNode2OUTPUT0, rootINPUT0, connectionDict);
