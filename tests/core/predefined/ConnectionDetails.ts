@@ -60,7 +60,7 @@ export const addEngineNode1INPUT1: ConnectionDetails = {
     ioId: "addEngineNode1INPUT1",
     nodeId: "addEngineNode1",
     type: CONNECTION_TYPE.INPUT,
-    index: 0
+    index: 1
 }
 
 export const addEngineNode1OUTPUT0: ConnectionDetails = {
@@ -81,7 +81,7 @@ export const addEngineNode2INPUT1: ConnectionDetails = {
     ioId: "addEngineNode1INPUT1",
     nodeId: "addEngineNode1",
     type: CONNECTION_TYPE.INPUT,
-    index: 0
+    index: 1
 }
 
 export const addEngineNode2OUTPUT0: ConnectionDetails = {
@@ -102,7 +102,7 @@ export const subEngineNode1INPUT1: ConnectionDetails = {
     ioId: "subEngineNode1INPUT1",
     nodeId: "subEngineNode1",
     type: CONNECTION_TYPE.INPUT,
-    index: 0
+    index: 1
 }
 
 export const subEngineNode1OUTPUT0: ConnectionDetails = {
@@ -123,7 +123,7 @@ export const subEngineNode2INPUT1: ConnectionDetails = {
     ioId: "subEngineNode1INPUT1",
     nodeId: "subEngineNode1",
     type: CONNECTION_TYPE.INPUT,
-    index: 0
+    index: 1
 }
 
 export const subEngineNode2OUTPUT0: ConnectionDetails = {
@@ -144,7 +144,7 @@ export const mulEngineNode1INPUT1: ConnectionDetails = {
     ioId: "mulEngineNode1INPUT1",
     nodeId: "mulEngineNode1",
     type: CONNECTION_TYPE.INPUT,
-    index: 0
+    index: 1
 }
 
 export const mulEngineNode1OUTPUT0: ConnectionDetails = {
@@ -165,7 +165,7 @@ export const mulEngineNode2INPUT1: ConnectionDetails = {
     ioId: "mulEngineNode1INPUT1",
     nodeId: "mulEngineNode1",
     type: CONNECTION_TYPE.INPUT,
-    index: 0
+    index: 1
 }
 
 export const mulEngineNode2OUTPUT0: ConnectionDetails = {
@@ -186,7 +186,7 @@ export const divEngineNode1INPUT1: ConnectionDetails = {
     ioId: "divEngineNode1INPUT1",
     nodeId: "divEngineNode1",
     type: CONNECTION_TYPE.INPUT,
-    index: 0
+    index: 1
 }
 
 export const divEngineNode1OUTPUT0: ConnectionDetails = {
@@ -207,7 +207,7 @@ export const divEngineNode2INPUT1: ConnectionDetails = {
     ioId: "divEngineNode1INPUT1",
     nodeId: "divEngineNode1",
     type: CONNECTION_TYPE.INPUT,
-    index: 0
+    index: 1
 }
 
 export const divEngineNode2OUTPUT0: ConnectionDetails = {

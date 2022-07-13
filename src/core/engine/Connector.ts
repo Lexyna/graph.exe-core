@@ -34,7 +34,7 @@ export const connector = (inputDetails: ConnectionDetails, outputDetails: Connec
 
     //Input is currently registered in dict
     if (inputExists && !outputExists) {
-        input.connections.concat(outputDetails);
+        input.connections.push(outputDetails);
         dict.output[outputDetails.ioId] = {
             self: outputDetails,
             connections: [inputDetails]
@@ -48,7 +48,7 @@ export const connector = (inputDetails: ConnectionDetails, outputDetails: Connec
             self: inputDetails,
             connections: [outputDetails]
         }
-        output.connections.concat(inputDetails);
+        output.connections.push(inputDetails);
         return true;
     }
 
@@ -67,8 +67,8 @@ export const connector = (inputDetails: ConnectionDetails, outputDetails: Connec
 
         if (isDuplicate) return false;
 
-        input.connections.concat(outputDetails);
-        output.connections.concat(inputDetails);
+        input.connections.push(outputDetails);
+        output.connections.push(inputDetails);
 
         return true;
     }
