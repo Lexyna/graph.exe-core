@@ -1,7 +1,7 @@
 import { ConnectionDetails, EngineConnections } from "../connections/EngineConnections";
 
 /**
- *  creates a new connection in the connection dict. returns true if connection successfully got added to the dict
+ *  Creates a new connection in the connection dict. returns true if connection successfully got added to the dict
  * @param outputDetails 
  * @param inputDetails
  * @param dict 
