@@ -17,14 +17,20 @@ export const splitter = (outputDetails: ConnectionDetails, inputDetails: Connect
         return false;
 
     input.connections.forEach((con, index) => {
-        if (con.ioId === inputDetails.ioId)
+        if (con.ioId === outputDetails.ioId)
             input.connections.splice(index, 1);
     })
 
     output.connections.forEach((con, index) => {
-        if (con.ioId === outputDetails.ioId)
+        if (con.ioId === inputDetails.ioId)
             output.connections.splice(index, 1);
     })
+
+    //If connections is empty, remove entry in dict
+    if (input.connections.length === 0)
+        delete dict.input[inputDetails.ioId];
+    if (output.connections.length === 0)
+        delete dict.output[outputDetails.ioId];
 
     return true;
 }
