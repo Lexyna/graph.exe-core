@@ -1,7 +1,7 @@
 import { EngineIO } from "../../../src/core/IO/EngineIO";
 import { ConfigNode, ConfigNodeDict } from "../../../src/core/nodes/ConfigNode";
-import { numberIn } from "./InputPorts";
-import { numberOut } from "./OutputPorts";
+import { numberIn, signalIn } from "./InputPorts";
+import { numberOut, signalOut } from "./OutputPorts";
 
 export let testValue: number = 0;
 
@@ -57,11 +57,21 @@ export const divNode: ConfigNode = {
     }
 }
 
+export const signalNode: ConfigNode = {
+    id: "signalNode",
+    inputs: [signalIn],
+    outputs: [signalOut],
+    exe: function (): void {
+
+    }
+}
+
 export const configDict: ConfigNodeDict = {
     "rootNode": rootNode,
     "constNode": constNode,
     "addNode": addNode,
     "subNode": subNode,
     "mulNode": mulNode,
-    "divNode": divNode
+    "divNode": divNode,
+    "signalNode": signalNode
 }

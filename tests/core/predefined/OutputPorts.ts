@@ -8,3 +8,9 @@ export const numberOut: EngineIO<null, number> = {
     value: 0
 }
 
+export const signalOut: EngineIO<null, null> = {
+    type: "signal",
+    mapping: CON_MAPPING.SINGLE,
+    data: null,
+    value: null
+}

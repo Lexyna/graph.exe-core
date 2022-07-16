@@ -8,3 +8,10 @@ export const numberIn: EngineIO<null, number> = {
     data: null,
     value: 0
 }
+
+export const signalIn: EngineIO<null, null> = {
+    type: "signal",
+    mapping: CON_MAPPING.MULTI,
+    data: null,
+    value: null
+}

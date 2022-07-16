@@ -1,5 +1,5 @@
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
-import { addNode, constNode, divNode, mulNode, rootNode, subNode } from "./ConfigNodes";
+import { addNode, constNode, divNode, mulNode, rootNode, signalNode, subNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
@@ -119,6 +119,14 @@ export const divEngineNode2: EngineNode = {
     autoUpdate: false,
     inputs: [...divNode.inputs],
     outputs: [...divNode.outputs]
+}
+
+export const signalEngineNode1: EngineNode = {
+    id: "signalEngineNode1",
+    configId: "signalNode",
+    autoUpdate: false,
+    inputs: [...signalNode.inputs],
+    outputs: [...signalNode.outputs]
 }
 
 export const engineNodeDict: EngineNodeDict = {

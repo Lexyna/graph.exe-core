@@ -40,7 +40,7 @@ describe("Extractor tests", () => {
 
     })
 
-    test.only("div node2 test", () => {
+    test("div node2 test", () => {
 
         const res: NodePorts = {
             nodeId: "divEngineNode2",
