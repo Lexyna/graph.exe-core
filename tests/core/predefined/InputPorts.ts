@@ -15,3 +15,10 @@ export const signalIn: EngineIO<null, null> = {
     data: null,
     value: null
 }
+
+export const stringIn: EngineIO<null, string> = {
+    type: "string",
+    mapping: CON_MAPPING.SINGLE,
+    data: null,
+    value: ""
+}

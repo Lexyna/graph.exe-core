@@ -1,8 +1,8 @@
 import { connector } from "../../src/core/connections/Connector";
 import { EngineConnections } from "../../src/core/connections/EngineConnections";
 import { executeGraph } from "../../src/core/engine/OTG";
-import { configDict, resetTestValue, testValue } from "./predefined/ConfigNodes";
-import { addEngineNode1INPUT0, addEngineNode1INPUT1, addEngineNode1OUTPUT0, addEngineNode2INPUT0, addEngineNode2INPUT1, addEngineNode2OUTPUT0, constFiveEngineNodeOUTPUT0, constFourEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, rootINPUT0, subEngineNode2INPUT0, subEngineNode2INPUT1, subEngineNode2OUTPUT0 } from "./predefined/ConnectionDetails";
+import { configDict, resetTestString, resetTestValue, testString, testValue } from "./predefined/ConfigNodes";
+import { addEngineNode1INPUT0, addEngineNode1INPUT1, addEngineNode1OUTPUT0, addEngineNode2INPUT0, addEngineNode2INPUT1, addEngineNode2OUTPUT0, constFiveEngineNodeOUTPUT0, constFourEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, rootINPUT0, subEngineNode2INPUT0, subEngineNode2INPUT1, subEngineNode2OUTPUT0, textCombineEngineNode1INPUT0, textCombineEngineNode1INPUT1, textHelloEngineNodeOUTPUT0, textWorldEngineNodeOUTPUT0 } from "./predefined/ConnectionDetails";
 import { engineNodeDict, initializeNodeValues } from "./predefined/EngineNodes";
 import { addingThreeNumberConnection, addingTwoNumberConnection, simpleValidConnection } from "./predefined/ValidConnections";
 
@@ -11,6 +11,7 @@ describe("otg test", () => {
     beforeEach(() => {
 
         resetTestValue();
+        resetTestString();
         initializeNodeValues();
 
     })
@@ -101,6 +102,34 @@ describe("otg test", () => {
         executeGraph(configDict, engineNodeDict, connectionDict, "root");
         expect(testValue).toBe(-64)
 
+    })
+
+    test("simple string concat", () => {
+
+        const connectionDict: EngineConnections = {
+            input: {},
+            output: {}
+        }
+
+        connector(textHelloEngineNodeOUTPUT0, textCombineEngineNode1INPUT0, connectionDict);
+        connector(textWorldEngineNodeOUTPUT0, textCombineEngineNode1INPUT1, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "textCombineEngineNode1");
+        expect(testString).toBe("Hello World")
+    })
+
+    test("simple string concat reverse", () => {
+
+        const connectionDict: EngineConnections = {
+            input: {},
+            output: {}
+        }
+
+        connector(textWorldEngineNodeOUTPUT0, textCombineEngineNode1INPUT0, connectionDict);
+        connector(textHelloEngineNodeOUTPUT0, textCombineEngineNode1INPUT1, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "textCombineEngineNode1");
+        expect(testString).toBe("WorldHello ")
     })
 
 })

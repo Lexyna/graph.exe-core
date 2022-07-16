@@ -1,5 +1,5 @@
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
-import { addNode, constNode, divNode, mulNode, rootNode, signalNode, subNode } from "./ConfigNodes";
+import { addNode, constNode, divNode, mulNode, rootNode, signalNode, subNode, textCombineNode, textNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
@@ -8,6 +8,31 @@ export const rootEngineNode: EngineNode = {
     inputs: rootNode.inputs.map(io => { return { ...io } }),
     outputs: rootNode.outputs.map(io => { return { ...io } })
 }
+
+export const textHelloEngineNode: EngineNode = {
+    id: "textHelloEngineNode",
+    configId: "textNode",
+    autoUpdate: false,
+    inputs: textNode.inputs.map(io => { return { ...io } }),
+    outputs: textNode.outputs.map(io => { return { ...io } })
+}
+
+export const textWorldEngineNode: EngineNode = {
+    id: "textWorldEngineNode",
+    configId: "textNode",
+    autoUpdate: false,
+    inputs: textNode.inputs.map(io => { return { ...io } }),
+    outputs: textNode.outputs.map(io => { return { ...io } })
+}
+
+export const textCombineEngineNode1: EngineNode = {
+    id: "textCombineEngineNode1",
+    configId: "textCombineNode",
+    autoUpdate: false,
+    inputs: textCombineNode.inputs.map(io => { return { ...io } }),
+    outputs: textCombineNode.outputs.map(io => { return { ...io } })
+}
+
 
 export const constZeroEngineNode: EngineNode = {
     id: "constZeroEngineNode",
@@ -147,6 +172,9 @@ export const signalEngineNode3: EngineNode = {
 
 export const engineNodeDict: EngineNodeDict = {
     "root": rootEngineNode,
+    "textHelloEngineNode": textHelloEngineNode,
+    "textWorldEngineNode": textWorldEngineNode,
+    "textCombineEngineNode1": textCombineEngineNode1,
     "constZeroEngineNode": constZeroEngineNode,
     "constOneEngineNode": constOneEngineNode,
     "constTwoEngineNode": constTwoEngineNode,
@@ -163,7 +191,7 @@ export const engineNodeDict: EngineNodeDict = {
     "divEngineNode2": divEngineNode2,
     "signalEngineNode1": signalEngineNode1,
     "signalEngineNode2": signalEngineNode2,
-    "signalEngineNode3": signalEngineNode3
+    "signalEngineNode3": signalEngineNode3,
 }
 
 export const initializeNodeValues = () => {
@@ -173,4 +201,6 @@ export const initializeNodeValues = () => {
     constThreeEngineNode.outputs[0].value = 3;
     constFourEngineNode.outputs[0].value = 4;
     constFiveEngineNode.outputs[0].value = 5;
+    textHelloEngineNode.outputs[0].value = "Hello ";
+    textWorldEngineNode.outputs[0].value = "World"
 }

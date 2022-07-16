@@ -7,6 +7,41 @@ export const rootINPUT0: ConnectionDetails = {
     index: 0
 }
 
+export const textHelloEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "textHelloEngineNodeOUTPUT0",
+    nodeId: "textHelloEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const textWorldEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "textWorldEngineNodeOUTPUT0",
+    nodeId: "textWorldEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const textCombineEngineNode1INPUT0: ConnectionDetails = {
+    ioId: "textCombineEngineNode1INPUT0",
+    nodeId: "textCombineEngineNode1",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const textCombineEngineNode1INPUT1: ConnectionDetails = {
+    ioId: "textCombineEngineNode1INPUT1",
+    nodeId: "textCombineEngineNode1",
+    type: CONNECTION_TYPE.INPUT,
+    index: 1
+}
+
+export const textCombineEngineNode1OUTPUT0: ConnectionDetails = {
+    ioId: "textCombineEngineNode1OUTPUT0",
+    nodeId: "textCombineEngineNode1",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
 export const constZeroEngineNodeOUTPUT0: ConnectionDetails = {
     ioId: "constZeroEngineNodeOUTPUT0",
     nodeId: "constZeroEngineNode",

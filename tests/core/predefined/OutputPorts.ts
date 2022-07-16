@@ -14,3 +14,10 @@ export const signalOut: EngineIO<null, null> = {
     data: null,
     value: null
 }
+
+export const stringOut: EngineIO<null, string> = {
+    type: "string",
+    mapping: CON_MAPPING.MULTI,
+    data: null,
+    value: ""
+}
