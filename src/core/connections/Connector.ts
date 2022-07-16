@@ -1,4 +1,4 @@
-import { ConnectionDetails, EngineConnections } from "../connections/EngineConnections";
+import { ConnectionDetails, EngineConnections } from "./EngineConnections";
 
 /**
  *  Creates a new connection in the connection dict. returns true if connection successfully got added to the dict

@@ -1,4 +1,4 @@
-import { ConnectionDetails, EngineConnections } from "../connections/EngineConnections";
+import { ConnectionDetails, EngineConnections } from "./EngineConnections";
 
 
 /**

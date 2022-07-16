@@ -1,4 +1,5 @@
 import { EngineNode } from "../nodes/EngineNode";
+import { LogicNode } from "../nodes/LogicNode";
 import { ConnectionDetails, CONNECTION_TYPE } from "./EngineConnections";
 
 /**
@@ -17,7 +18,7 @@ export interface NodePorts {
  * @param node The node to extract io ports from
  * @returns array of ConnectionDetails, containing an ordered list of Input/Output ConnectionDetails
  */
-export const extractor = (node: EngineNode): NodePorts => {
+export const extractor = (node: EngineNode | LogicNode): NodePorts => {
 
     const nodePorts: NodePorts = {
         nodeId: node.id,
