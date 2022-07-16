@@ -1,5 +1,5 @@
+import { connector } from "../../src/core/connections/Connector"
 import { EngineConnections } from "../../src/core/connections/EngineConnections"
-import { connector } from "../../src/core/engine/Connector"
 import { validator } from "../../src/core/engine/Validator"
 import { configDict } from "./predefined/ConfigNodes"
 import { signalEngineNode1INPUT0, signalEngineNode2OUTPUT0, signalEngineNode3INPUT0, signalEngineNode3OUTPUT0 } from "./predefined/ConnectionDetails"

@@ -1,5 +1,5 @@
-import { connector } from "../../src/core/engine/Connector"
-import { splitter } from "../../src/core/engine/Splitter"
+import { connector } from "../../src/core/connections/Connector"
+import { splitter } from "../../src/core/connections/Splitter"
 import { addEngineNode1OUTPUT0, addEngineNode2INPUT1, constFiveEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, rootINPUT0 } from "./predefined/ConnectionDetails"
 import { addingThreeNumberConnectionAfterSplit2, addingTwoNumberConnectionAfterSplit1 } from "./predefined/splitterConnections"
 import { addingThreeNumberConnection, addingTwoNumberConnection } from "./predefined/ValidConnections"
