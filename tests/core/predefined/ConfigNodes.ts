@@ -5,6 +5,8 @@ import { numberOut, signalOut } from "./OutputPorts";
 
 export let testValue: number = 0;
 
+export const resetTestValue = () => { testValue = 0 }
+
 export const rootNode: ConfigNode = {
     id: "rootNode",
     inputs: [numberIn],
