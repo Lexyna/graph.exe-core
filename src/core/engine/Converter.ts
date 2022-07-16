@@ -36,9 +36,11 @@ export const nodeConverter = (graph: GraphExe, config: ConfigNodeDict, nodeDict:
             }
         })
 
+        const update = config[value.configId].autoUpdate;
+
         const logicNode: LogicNode = {
             id: value.id,
-            autoUpdate: value.autoUpdate,
+            autoUpdate: !(update === undefined) ? update : true,
             inputs: graphIoInput,
             outputs: graphIoOutput,
             exe: config[value.configId].exe,

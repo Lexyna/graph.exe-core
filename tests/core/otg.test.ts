@@ -1,7 +1,7 @@
 import { executeGraph } from "../../src/core/engine/OTG";
 import { configDict, resetTestValue, testValue } from "./predefined/ConfigNodes";
 import { engineNodeDict, initializeNodeValues } from "./predefined/EngineNodes";
-import { simpleValidConnection } from "./predefined/ValidConnections";
+import { addingTwoNumberConnection, simpleValidConnection } from "./predefined/ValidConnections";
 
 describe("otg test", () => {
 
@@ -12,10 +12,14 @@ describe("otg test", () => {
 
     })
 
-    test.only("simple const 5 connection", () => {
-
+    test("simple const 5 connection", () => {
         executeGraph(configDict, engineNodeDict, simpleValidConnection, "root");
         expect(testValue).toBe(1)
+    })
+
+    test("addTwoNumber connection", () => {
+        executeGraph(configDict, engineNodeDict, addingTwoNumberConnection, "root");
+        expect(testValue).toBe(2)
     })
 
 })
