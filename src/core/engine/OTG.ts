@@ -31,10 +31,9 @@ export const executeGraph = (
     if (!validator(config, nodes, connections, entry))
         return;
 
-    const ontTimeGraph = createOTG(config, nodes, connections, entry);
+    const oneTimeGraph: GraphExe = createOTG(config, nodes, connections, entry);
 
-
-
+    executeNode(oneTimeGraph.nodes[entry], false, oneTimeGraph);
 }
 
 /**
