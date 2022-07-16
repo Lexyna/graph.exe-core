@@ -129,6 +129,22 @@ export const signalEngineNode1: EngineNode = {
     outputs: [...signalNode.outputs]
 }
 
+export const signalEngineNode2: EngineNode = {
+    id: "signalEngineNode2",
+    configId: "signalNode",
+    autoUpdate: false,
+    inputs: [...signalNode.inputs],
+    outputs: [...signalNode.outputs]
+}
+
+export const signalEngineNode3: EngineNode = {
+    id: "signalEngineNode3",
+    configId: "signalNode",
+    autoUpdate: false,
+    inputs: [...signalNode.inputs],
+    outputs: [...signalNode.outputs]
+}
+
 export const engineNodeDict: EngineNodeDict = {
     "root": rootEngineNode,
     "constZeroEngineNode": constZeroEngineNode,
@@ -144,7 +160,10 @@ export const engineNodeDict: EngineNodeDict = {
     "mulEngineNode1": mulEngineNode1,
     "mulEngineNode2": mulEngineNode2,
     "divEngineNode1": divEngineNode1,
-    "divEngineNode2": divEngineNode2
+    "divEngineNode2": divEngineNode2,
+    "signalEngineNode1": signalEngineNode1,
+    "signalEngineNode2": signalEngineNode2,
+    "signalEngineNode3": signalEngineNode3
 }
 
 export const initializeNodeValues = () => {

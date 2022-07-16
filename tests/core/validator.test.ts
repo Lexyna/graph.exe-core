@@ -1,5 +1,8 @@
+import { EngineConnections } from "../../src/core/connections/EngineConnections"
+import { connector } from "../../src/core/engine/Connector"
 import { validator } from "../../src/core/engine/Validator"
 import { configDict } from "./predefined/ConfigNodes"
+import { signalEngineNode1INPUT0, signalEngineNode2OUTPUT0, signalEngineNode3INPUT0, signalEngineNode3OUTPUT0 } from "./predefined/ConnectionDetails"
 import { engineNodeDict } from "./predefined/EngineNodes"
 import {
     doubleEntryIngoingConnection,
@@ -138,6 +141,20 @@ describe("validator test - invalid graphs", () => {
     test("dual double Entry connection 2", () => {
         expect(validator(configDict, engineNodeDict, dualDuplicateEntryOutgoingConnection, "root")).toBe(false);
     })
+
+    test("invalid multi signal connection", () => {
+
+        const connectionDict: EngineConnections = {
+            input: {},
+            output: {}
+        }
+
+        connector(signalEngineNode2OUTPUT0, signalEngineNode1INPUT0, connectionDict);
+        connector(signalEngineNode2OUTPUT0, signalEngineNode3INPUT0, connectionDict);
+
+        expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(false);
+
+    })
 })
 
 describe("validator test - valid graphs", () => {
@@ -151,5 +168,19 @@ describe("validator test - valid graphs", () => {
 
     test("adding three number graph", () => {
         expect(validator(configDict, engineNodeDict, addingThreeNumberConnection, "root")).toBe(true);
+    })
+
+    test("valid multi signal connection", () => {
+
+        const connectionDict: EngineConnections = {
+            input: {},
+            output: {}
+        }
+
+        connector(signalEngineNode2OUTPUT0, signalEngineNode1INPUT0, connectionDict);
+        connector(signalEngineNode3OUTPUT0, signalEngineNode1INPUT0, connectionDict);
+
+        expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(true);
+
     })
 })

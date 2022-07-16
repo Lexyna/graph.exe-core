@@ -216,3 +216,45 @@ export const divEngineNode2OUTPUT0: ConnectionDetails = {
     type: CONNECTION_TYPE.OUTPUT,
     index: 0
 }
+
+export const signalEngineNode1INPUT0: ConnectionDetails = {
+    ioId: "signalEngineNode1INPUT0",
+    nodeId: "signalEngineNode1",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const signalEngineNode1OUTPUT0: ConnectionDetails = {
+    ioId: "signalEngineNode1OUTPUT0",
+    nodeId: "signalEngineNode1",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const signalEngineNode2INPUT0: ConnectionDetails = {
+    ioId: "signalEngineNode2INPUT0",
+    nodeId: "signalEngineNode2",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const signalEngineNode2OUTPUT0: ConnectionDetails = {
+    ioId: "signalEngineNode2OUTPUT0",
+    nodeId: "signalEngineNode2",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const signalEngineNode3INPUT0: ConnectionDetails = {
+    ioId: "signalEngineNode3INPUT0",
+    nodeId: "signalEngineNode3",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const signalEngineNode3OUTPUT0: ConnectionDetails = {
+    ioId: "signalEngineNode3OUTPUT0",
+    nodeId: "signalEngineNode3",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
