@@ -1,4 +1,5 @@
-import { GraphExe } from "../engine/OTG";
+import { ConnectionDetails } from "../connections/EngineConnections";
+import { GraphExe } from "../engine/Core";
 import { CON_MAPPING } from "./IOMapping";
 
 
@@ -12,4 +13,5 @@ export interface LogicIO<K, T> {
     data: K;
     value: T;
     graph_ref: GraphExe;
+    details: ConnectionDetails
 }

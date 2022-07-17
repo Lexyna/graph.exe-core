@@ -1,6 +1,8 @@
 import { connectionFinder } from "../connections/ConnectionFinder";
-import { ConnectionDetails, EngineConnections } from "../connections/EngineConnections";
+import { ConnectionDetails, CONNECTION_TYPE, EngineConnections } from "../connections/EngineConnections";
 import { extractor, NodePorts } from "../connections/Extractor";
+import { EngineIO } from "../IO/EngineIO";
+import { LogicIO } from "../IO/LogicIO";
 import { LogicNode, LogicNodeDict } from "../nodes/LogicNode";
 
 export interface GraphExe {
@@ -42,6 +44,26 @@ const resolveDependency = (node: LogicNode, graph: GraphExe) => {
             node.inputs[con.index].value = graph.nodes[dep.nodeId].outputs[dep.index].value;
 
         })
+
+    })
+}
+
+/**
+ * Trigger all nodes connected with this ioPort
+ * @param io OUTPUT Port triggering all connected nodes
+ */
+export const next = (io: EngineIO<any, any>) => {
+    //Function definition expects EngineIO, allowing us to call the function inside node function. But all EngineIO's 
+    //are converted to LogicIO's at runtime, allowing us to make this cast 
+    const logicIO: LogicIO<any, any> = io as LogicIO<any, any>;
+
+    if (logicIO.details.type !== CONNECTION_TYPE.OUTPUT) return;
+
+    const toTrigger: ConnectionDetails[] = connectionFinder(logicIO.details, logicIO.graph_ref.connections);
+
+    toTrigger.forEach(con => {
+
+        executeNode(logicIO.graph_ref.nodes[con.nodeId], false, logicIO.graph_ref);
 
     })
 

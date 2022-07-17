@@ -1,9 +1,9 @@
+import { CONNECTION_TYPE } from "../connections/EngineConnections";
 import { LogicIO } from "../IO/LogicIO";
 import { ConfigNodeDict } from "../nodes/ConfigNode";
 import { EngineNodeDict } from "../nodes/EngineNode";
 import { LogicNode, LogicNodeDict } from "../nodes/LogicNode";
-import { GraphExe } from "./OTG";
-
+import { GraphExe } from "./Core";
 
 /**
  * Converts EngineNodes to LogicNodes in in order for runtime port forwarding to work
@@ -22,7 +22,13 @@ export const nodeConverter = (graph: GraphExe, config: ConfigNodeDict, nodeDict:
                 mapping: io.mapping,
                 data: io.data,
                 value: io.value,
-                graph_ref: graph
+                graph_ref: graph,
+                details: {
+                    ioId: value.id + CONNECTION_TYPE.INPUT + index,
+                    nodeId: value.id,
+                    type: CONNECTION_TYPE.INPUT,
+                    index: index
+                }
             }
         })
 
@@ -32,7 +38,13 @@ export const nodeConverter = (graph: GraphExe, config: ConfigNodeDict, nodeDict:
                 mapping: io.mapping,
                 data: io.data,
                 value: io.value,
-                graph_ref: graph
+                graph_ref: graph,
+                details: {
+                    ioId: value.id + CONNECTION_TYPE.OUTPUT + index,
+                    nodeId: value.id,
+                    type: CONNECTION_TYPE.OUTPUT,
+                    index: index
+                }
             }
         })
 
