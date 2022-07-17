@@ -33,7 +33,17 @@ export const executeGraph = (
 
     const oneTimeGraph: GraphExe = createOTG(config, nodes, connections, entry);
 
+    Object.entries(oneTimeGraph.nodes).forEach(([key, node]) => {
+        if (node.onInit)
+            node.onInit(...node.inputs, ...node.outputs);
+    })
+
     executeNode(oneTimeGraph.nodes[entry], false, oneTimeGraph);
+
+    Object.entries(oneTimeGraph.nodes).forEach(([key, node]) => {
+        if (node.onDestroy)
+            node.onDestroy(...node.inputs, ...node.outputs)
+    })
 }
 
 /**
