@@ -1,5 +1,5 @@
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
-import { addNode, constNode, divNode, mulNode, rootNode, signalNode, subNode, textCombineNode, textNode } from "./ConfigNodes";
+import { addNode, constNode, divNode, forNode, ifNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
@@ -7,6 +7,54 @@ export const rootEngineNode: EngineNode = {
     autoUpdate: false,
     inputs: rootNode.inputs.map(io => { return { ...io } }),
     outputs: rootNode.outputs.map(io => { return { ...io } })
+}
+
+export const starterEngineNode: EngineNode = {
+    id: "starterEngineNode",
+    configId: "starterNode",
+    autoUpdate: false,
+    inputs: starterNode.inputs.map(io => { return { ...io } }),
+    outputs: starterNode.outputs.map(io => { return { ...io } })
+}
+
+export const logEngineNode1: EngineNode = {
+    id: "logEngineNode1",
+    configId: "logNode",
+    autoUpdate: false,
+    inputs: logNode.inputs.map(io => { return { ...io } }),
+    outputs: logNode.outputs.map(io => { return { ...io } })
+}
+
+export const logEngineNode2: EngineNode = {
+    id: "logEngineNode2",
+    configId: "logNode",
+    autoUpdate: false,
+    inputs: logNode.inputs.map(io => { return { ...io } }),
+    outputs: logNode.outputs.map(io => { return { ...io } })
+}
+
+export const forEngineNode1: EngineNode = {
+    id: "forEngineNode1",
+    configId: "forNode",
+    autoUpdate: false,
+    inputs: forNode.inputs.map(io => { return { ...io } }),
+    outputs: forNode.outputs.map(io => { return { ...io } })
+}
+
+export const ifEngineNode: EngineNode = {
+    id: "ifEngineNode",
+    configId: "ifNode",
+    autoUpdate: false,
+    inputs: ifNode.inputs.map(io => { return { ...io } }),
+    outputs: ifNode.outputs.map(io => { return { ...io } })
+}
+
+export const numberToStringConverterEngineNode1: EngineNode = {
+    id: "numberToStringConverterEngineNode1",
+    configId: "numberToStringConverterNode",
+    autoUpdate: false,
+    inputs: numberToStringConverterNode.inputs.map(io => { return { ...io } }),
+    outputs: numberToStringConverterNode.outputs.map(io => { return { ...io } })
 }
 
 export const textHelloEngineNode: EngineNode = {
@@ -172,6 +220,7 @@ export const signalEngineNode3: EngineNode = {
 
 export const engineNodeDict: EngineNodeDict = {
     "root": rootEngineNode,
+    "starterEngineNode": starterEngineNode,
     "textHelloEngineNode": textHelloEngineNode,
     "textWorldEngineNode": textWorldEngineNode,
     "textCombineEngineNode1": textCombineEngineNode1,
@@ -192,6 +241,11 @@ export const engineNodeDict: EngineNodeDict = {
     "signalEngineNode1": signalEngineNode1,
     "signalEngineNode2": signalEngineNode2,
     "signalEngineNode3": signalEngineNode3,
+    "logEngineNode1": logEngineNode1,
+    "logEngineNode2": logEngineNode2,
+    "forEngineNode1": forEngineNode1,
+    "numberToStringConverterEngineNode1": numberToStringConverterEngineNode1,
+    "ifEngineNode": ifEngineNode
 }
 
 export const initializeNodeValues = () => {

@@ -6,7 +6,7 @@ import { LogicIO } from "../IO/LogicIO";
 import { LogicNode, LogicNodeDict } from "../nodes/LogicNode";
 
 /**
- * Stores information about the node that calls another node and keeps track of how many times this node has called another node
+ * Stores information about nodes that call other nodes and keeps track of how many times this node has called other nodes.  
  * Used to decide if a dependency node should be executed or not. 
  */
 interface CalleeDict {

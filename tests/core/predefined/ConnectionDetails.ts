@@ -7,6 +7,118 @@ export const rootINPUT0: ConnectionDetails = {
     index: 0
 }
 
+export const starterEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "starterEngineNodeOUTPUT0",
+    nodeId: "starterEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const logEngineNode1INPUT0: ConnectionDetails = {
+    ioId: "logEngineNode1INPUT0",
+    nodeId: "logEngineNode1",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const logEngineNode1INPUT1: ConnectionDetails = {
+    ioId: "logEngineNode1INPUT1",
+    nodeId: "logEngineNode1",
+    type: CONNECTION_TYPE.INPUT,
+    index: 1
+}
+
+export const logEngineNode1OUTPUT0: ConnectionDetails = {
+    ioId: "logEngineNode1OUTPUT0",
+    nodeId: "logEngineNode1",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const logEngineNode2INPUT0: ConnectionDetails = {
+    ioId: "logEngineNode2INPUT0",
+    nodeId: "logEngineNode2",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const logEngineNode2INPUT1: ConnectionDetails = {
+    ioId: "logEngineNode2INPUT1",
+    nodeId: "logEngineNode2",
+    type: CONNECTION_TYPE.INPUT,
+    index: 1
+}
+
+export const logEngineNode2OUTPUT0: ConnectionDetails = {
+    ioId: "logEngineNode2OUTPUT0",
+    nodeId: "logEngineNode2",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const forEngineNode1INPUT0: ConnectionDetails = {
+    ioId: "forEngineNode1INPUT0",
+    nodeId: "forEngineNode1",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const forEngineNode1OUTPUT0: ConnectionDetails = {
+    ioId: "forEngineNode1OUTPUT0",
+    nodeId: "forEngineNode1",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const forEngineNode1OUTPUT1: ConnectionDetails = {
+    ioId: "forEngineNode1OUTPUT1",
+    nodeId: "forEngineNode1",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 1
+}
+
+export const ifEngineNodeINPUT0: ConnectionDetails = {
+    ioId: "ifEngineNodeINPUT0",
+    nodeId: "ifEngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const ifEngineNodeINPUT1: ConnectionDetails = {
+    ioId: "ifEngineNodeINPUT1",
+    nodeId: "ifEngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 1
+}
+
+export const ifEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "ifEngineNodeOUTPUT0",
+    nodeId: "ifEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const ifEngineNodeOUTPUT1: ConnectionDetails = {
+    ioId: "ifEngineNodeOUTPUT1",
+    nodeId: "ifEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 1
+}
+
+export const numberToStringConverterEngineNode1INPUT0: ConnectionDetails = {
+    ioId: "numberToStringConverterEngineNode1INPUT0",
+    nodeId: "numberToStringConverterEngineNode1",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const numberToStringConverterEngineNode1OUTPUT0: ConnectionDetails = {
+    ioId: "numberToStringConverterEngineNode1OUTPUT0",
+    nodeId: "numberToStringConverterEngineNode1",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
 export const textHelloEngineNodeOUTPUT0: ConnectionDetails = {
     ioId: "textHelloEngineNodeOUTPUT0",
     nodeId: "textHelloEngineNode",
