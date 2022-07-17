@@ -48,7 +48,8 @@ const createOTG = (
     const otg: GraphExe = {
         nodes: {},
         connections: Object.assign({}, connections),
-        entry: entry
+        entry: entry,
+        calleeDict: {}
     }
 
     const graphNodeDict = nodeConverter(otg, config, nodes);

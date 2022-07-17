@@ -5,20 +5,29 @@ import { EngineIO } from "../IO/EngineIO";
 import { LogicIO } from "../IO/LogicIO";
 import { LogicNode, LogicNodeDict } from "../nodes/LogicNode";
 
+/**
+ * Stores information about the node that calls another node and keeps track of how many times this node has called another node
+ * Used to decide if a dependency node should be executed or not. 
+ */
+interface CalleeDict {
+    [k: string]: number
+}
+
 export interface GraphExe {
     nodes: LogicNodeDict,
     connections: EngineConnections,
-    entry: string
+    entry: string,
+    calleeDict: CalleeDict
 }
 
 /**
  * Executes the logic of a node
  * @param node The to be executed node
- * @param isDependency Handles of output nodes should be fired form this node 
+ * @param isTriggered allows node on stack to be explicitly called vio the next() function
  */
-export const executeNode = (node: LogicNode, isDependency: boolean, graph: GraphExe,) => {
+export const executeNode = (node: LogicNode, isTriggered: boolean, graph: GraphExe,) => {
     resolveDependency(node, graph);
-    if (isDependency && !node.autoUpdate) return;
+    if (graph.calleeDict[node.id] && !isTriggered) return;
     node.exe(...node.inputs, ...node.outputs);
 }
 
@@ -38,7 +47,7 @@ const resolveDependency = (node: LogicNode, graph: GraphExe) => {
         dependencies.forEach(dep => {
 
             //execute the dependencyNode and set it's ioPorts value
-            executeNode(graph.nodes[dep.nodeId], true, graph);
+            executeNode(graph.nodes[dep.nodeId], false, graph);
 
             //assign the computed value to this input now
             node.inputs[con.index].value = graph.nodes[dep.nodeId].outputs[dep.index].value;
@@ -61,10 +70,21 @@ export const next = (io: EngineIO<any, any>) => {
 
     const toTrigger: ConnectionDetails[] = connectionFinder(logicIO.details, logicIO.graph_ref.connections);
 
+    //Stores the information that this node has called other nodes, preventing it from triggering again as a dependency 
+    if (logicIO.graph_ref.calleeDict[logicIO.details.nodeId])
+        logicIO.graph_ref.calleeDict[logicIO.details.nodeId]++;
+    else
+        logicIO.graph_ref.calleeDict[logicIO.details.nodeId] = 1;
+
     toTrigger.forEach(con => {
 
-        executeNode(logicIO.graph_ref.nodes[con.nodeId], false, logicIO.graph_ref);
+        executeNode(logicIO.graph_ref.nodes[con.nodeId], true, logicIO.graph_ref);
 
     })
+
+    //Remove callee information from graph
+    logicIO.graph_ref.calleeDict[logicIO.details.nodeId]--;
+    if (logicIO.graph_ref.calleeDict[logicIO.details.nodeId] === 0)
+        delete logicIO.graph_ref.calleeDict[logicIO.details.nodeId];
 
 }
