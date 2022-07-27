@@ -1,5 +1,5 @@
 import { connectionFinder } from "../connections/ConnectionFinder";
-import { ConnectionDetails, CONNECTION_TYPE, EngineConnections, IngoingConnections, OutgoingConnections } from "../connections/EngineConnections";
+import { ConnectionDetails, CONNECTION_TYPE, EngineConnections, IoIdInfo } from "../connections/EngineConnections";
 import { extractor, NodePorts } from "../connections/Extractor";
 import { EngineIO } from "../IO/EngineIO";
 import { LogicIO } from "../IO/LogicIO";
@@ -108,14 +108,21 @@ export const detectCircles = (connections: EngineConnections, entry: string): Ca
 
 }
 
-const getIOConnectionFromNode = (nodeId: string, connections: EngineConnections) => {
+const getIOInfoFromNodeId = (nodeId: string, connections: EngineConnections): [IoIdInfo[], IoIdInfo[]] => {
 
-    const ingoing: IngoingConnections[] = [];
-    const outgoing: OutgoingConnections[] = [];
+    const ingoing: IoIdInfo[] = [];
+    const outgoing: IoIdInfo[] = [];
 
     Object.entries(connections.input).forEach(([key, value]) => {
-        if (value.self.nodeId === nodeId) { }
-        //ingoing.push();
+        if (value.self.nodeId === nodeId)
+            ingoing.push(value);
     })
+
+    Object.entries(connections.output).forEach(([key, value]) => {
+        if (value.self.nodeId === nodeId)
+            outgoing.push(value);
+    })
+
+    return [ingoing, outgoing];
 
 }
