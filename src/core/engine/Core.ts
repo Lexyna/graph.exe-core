@@ -13,6 +13,10 @@ interface CalleeDict {
     [k: string]: number
 }
 
+interface NodeIoInfo {
+    inputs: IoIdInfo[],
+    outputs: IoIdInfo[]
+}
 export interface GraphExe {
     nodes: LogicNodeDict,
     connections: EngineConnections,
@@ -100,15 +104,70 @@ export const detectCircles = (connections: EngineConnections, entry: string): Ca
     const ignoreDependencies: CalleeDict = {}
     const completedOutputs: CalleeDict = {}
 
-    const stack: string[] = [];
+    const triggeredInput: CalleeDict = {};
 
+    const entryNodeInfo: NodeIoInfo = getIOInfoFromNodeId(entry, connections);
 
+    traverseNodeOutput(entryNodeInfo, connections, ignoreDependencies, triggeredInput, completedOutputs);
 
     return ignoreDependencies;
 
 }
 
-const getIOInfoFromNodeId = (nodeId: string, connections: EngineConnections): [IoIdInfo[], IoIdInfo[]] => {
+/**
+ * Recursively travels trough the all output ports of the node in the connections and keeps track of already traveled paths    
+ * @param nodeInfo The node to travel from to other nodes
+ * @param connections The EngineConnections defining this graph
+ * @param ignoreDependencies All dependencies that will be ignore at execution
+ * @param triggeredInput Keeps track of inputs we hav already triggered
+ * @param completedOutputs Keeps track of output we have already traversed
+ */
+const traverseNodeOutput = (nodeInfo: NodeIoInfo, connections: EngineConnections, ignoreDependencies: CalleeDict, triggeredInput: CalleeDict, completedOutputs: CalleeDict) => {
+
+    for (let i = 0; i < nodeInfo.outputs.length; i++) {
+
+        const ioId = nodeInfo.outputs[i].self.ioId;
+
+        //If we've already visited this output, we can ignore it, otherwise add it to the completedDict
+        if (completedOutputs[ioId])
+            continue;
+        else
+            completedOutputs[ioId] = 0;
+
+        //Travel to all nodes connected to this output
+        const next: ConnectionDetails[] = nodeInfo.outputs[i].connections;
+
+        for (let j = 0; j < next.length; j++) {
+
+            const ioId: string = next[j].ioId;
+
+            //If the ioId is already in the triggeredInput dict, we have found a circular dependency on this port and add this IoId to the ignore Dict
+            if (triggeredInput[ioId]) {
+                ignoreDependencies[ioId]
+                continue;
+            }
+
+            //Add the input of the next node we will traverse, so we can catch circular dependencies
+            triggeredInput[ioId] = 0;
+
+            //Resolve the next Node
+            const nextNodeInfo = getIOInfoFromNodeId(next[j].nodeId, connections);
+
+            traverseNodeOutput(nextNodeInfo, connections, ignoreDependencies, triggeredInput, completedOutputs);
+
+        }
+
+    }
+
+}
+
+/**
+ * Returns IoIdInfo for all Io ports on this node base ond the connections provided   
+ * @param nodeId The node to return all Io port infos from
+ * @param connections The EngineConnections used to define this graph
+ * @returns 
+ */
+const getIOInfoFromNodeId = (nodeId: string, connections: EngineConnections): NodeIoInfo => {
 
     const ingoing: IoIdInfo[] = [];
     const outgoing: IoIdInfo[] = [];
@@ -123,6 +182,9 @@ const getIOInfoFromNodeId = (nodeId: string, connections: EngineConnections): [I
             outgoing.push(value);
     })
 
-    return [ingoing, outgoing];
+    return {
+        inputs: ingoing,
+        outputs: outgoing
+    };
 
 }
