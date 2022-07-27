@@ -1,5 +1,5 @@
 import { connectionFinder } from "../connections/ConnectionFinder";
-import { ConnectionDetails, CONNECTION_TYPE, EngineConnections } from "../connections/EngineConnections";
+import { ConnectionDetails, CONNECTION_TYPE, EngineConnections, IngoingConnections, OutgoingConnections } from "../connections/EngineConnections";
 import { extractor, NodePorts } from "../connections/Extractor";
 import { EngineIO } from "../IO/EngineIO";
 import { LogicIO } from "../IO/LogicIO";
@@ -86,5 +86,36 @@ export const next = (io: EngineIO<any, any>) => {
     logicIO.graph_ref.calleeDict[logicIO.details.nodeId]--;
     if (logicIO.graph_ref.calleeDict[logicIO.details.nodeId] === 0)
         delete logicIO.graph_ref.calleeDict[logicIO.details.nodeId];
+
+}
+
+/**
+ * Used to catch circular references in the engine, ignoring them upon dependency resolution 
+ * @param connections The connections defining this graph
+ * @param entry The entry point for the graph
+ * @returns 
+ */
+export const detectCircles = (connections: EngineConnections, entry: string): CalleeDict => {
+
+    const ignoreDependencies: CalleeDict = {}
+    const completedOutputs: CalleeDict = {}
+
+    const stack: string[] = [];
+
+
+
+    return ignoreDependencies;
+
+}
+
+const getIOConnectionFromNode = (nodeId: string, connections: EngineConnections) => {
+
+    const ingoing: IngoingConnections[] = [];
+    const outgoing: OutgoingConnections[] = [];
+
+    Object.entries(connections.input).forEach(([key, value]) => {
+        if (value.self.nodeId === nodeId) { }
+        //ingoing.push();
+    })
 
 }

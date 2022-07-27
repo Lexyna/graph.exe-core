@@ -7,16 +7,18 @@ export interface EngineConnections {
     output: OutgoingConnections;
 }
 
+export interface IoIdInfo {
+    self: ConnectionDetails;
+    connections: ConnectionDetails[];
+}
+
 /**
  * Defines ingoing connections for a Input Port
  * k: id of the input port (nodeId + INPUT + index)
  * ConnectionDetails are always OUTPUT Ports
  */
 export interface IngoingConnections {
-    [k: string]: {
-        self: ConnectionDetails;
-        connections: ConnectionDetails[];
-    }
+    [k: string]: IoIdInfo
 }
 
 /**
@@ -25,10 +27,7 @@ export interface IngoingConnections {
  * ConnectionDetails are always INPUT Ports
  */
 export interface OutgoingConnections {
-    [k: string]: {
-        self: ConnectionDetails;
-        connections: ConnectionDetails[];
-    }
+    [k: string]: IoIdInfo
 }
 
 /**
