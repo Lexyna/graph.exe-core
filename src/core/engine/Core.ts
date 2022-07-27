@@ -75,7 +75,7 @@ export const next = (io: EngineIO<any, any>) => {
     const toTrigger: ConnectionDetails[] = connectionFinder(logicIO.details, logicIO.graph_ref.connections);
 
     //Stores the information that this node has called other nodes, preventing it from triggering again as a dependency 
-    if (logicIO.graph_ref.calleeDict[logicIO.details.nodeId])
+    if (logicIO.graph_ref.calleeDict[logicIO.details.nodeId] !== undefined)
         logicIO.graph_ref.calleeDict[logicIO.details.nodeId]++;
     else
         logicIO.graph_ref.calleeDict[logicIO.details.nodeId] = 1;
@@ -129,7 +129,7 @@ const traverseNodeOutput = (nodeInfo: NodeIoInfo, connections: EngineConnections
         const ioId = nodeInfo.outputs[i].self.ioId;
 
         //If we've already visited this output, we can ignore it, otherwise add it to the completedDict
-        if (completedOutputs[ioId])
+        if (completedOutputs[ioId] !== undefined)
             continue;
         else
             completedOutputs[ioId] = 0;
@@ -142,8 +142,8 @@ const traverseNodeOutput = (nodeInfo: NodeIoInfo, connections: EngineConnections
             const ioId: string = next[j].ioId;
 
             //If the ioId is already in the triggeredInput dict, we have found a circular dependency on this port and add this IoId to the ignore Dict
-            if (triggeredInput[ioId]) {
-                ignoreDependencies[ioId]
+            if (triggeredInput[ioId] !== undefined) {
+                ignoreDependencies[ioId] = 0;
                 continue;
             }
 
