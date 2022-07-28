@@ -112,6 +112,11 @@ export const forwardCirclesDetection = (connections: EngineConnections, entry: s
 
     const entryNodeInfo: NodeIoInfo = getIOInfoFromNodeId(entry, connections);
 
+    entryNodeInfo.inputs.forEach(ioInfo => {
+        triggeredInput[ioInfo.self.ioId] = 0;
+    })
+
+
     traverseNodeOutput(entryNodeInfo, connections, ignoreDependencies, triggeredInput, completedOutputs);
 
     return ignoreDependencies;
@@ -174,15 +179,15 @@ const traverseNodeOutput = (nodeInfo: NodeIoInfo, connections: EngineConnections
  */
 export const dependencyCirclesDetection = (connections: EngineConnections, entry: string): boolean => {
 
-    const completedOutputs: CalleeDict = {}
+    const completedInputs: CalleeDict = {}
 
-    const triggeredInput: CalleeDict = {};
+    const triggeredOutputs: CalleeDict = {};
 
     const entryNodeInfo: NodeIoInfo = getIOInfoFromNodeId(entry, connections);
 
     const res: boolWrapper = { value: false }
 
-    traverseNodeInput(entryNodeInfo, connections, triggeredInput, completedOutputs, res);
+    traverseNodeInput(entryNodeInfo, connections, triggeredOutputs, completedInputs, res);
 
     return res.value;
 }

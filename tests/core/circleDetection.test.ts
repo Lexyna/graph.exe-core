@@ -109,9 +109,33 @@ describe("forward circle Detection - test", () => {
 
     })
 
+    test("Every input is a loop", () => {
+
+        const res: CalleeDict = {
+            "forEngineNode1INPUT0": 0,
+            "logEngineNode1INPUT0": 0,
+            "ifEngineNodeINPUT0": 0
+        }
+
+        connector(forEngineNode1OUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(logEngineNode1OUTPUT0, forEngineNode1INPUT0, connectionDict);
+
+        connector(logEngineNode1OUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(ifEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(ifEngineNodeOUTPUT1, logEngineNode1INPUT0, connectionDict);
+
+        const ret = forwardCirclesDetection(connectionDict, "forEngineNode1")
+
+        expect(ret).toEqual(res);
+
+    })
+
 })
 
-describe("dependency circle detection", () => {
+describe("dependency circle detection - tests", () => {
 
     let connectionDict: EngineConnections;
     interface CalleeDict {
