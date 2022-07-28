@@ -166,7 +166,8 @@ const traverseNodeOutput = (nodeInfo: NodeIoInfo, connections: EngineConnections
 }
 
 /**
- * Used to catch circular references in the engine, ignoring them upon dependency resolution 
+ * Used to catch circular references in the dependencies, preventing the graph execution if a circular dependency has been found. 
+ * This safety check can be disabled
  * @param connections The connections defining this graph
  * @param entry The entry point for the graph
  * @returns 
