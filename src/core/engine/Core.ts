@@ -24,6 +24,10 @@ export interface GraphExe {
     calleeDict: CalleeDict
 }
 
+interface boolWrapper {
+    value: boolean;
+}
+
 /**
  * Executes the logic of a node
  * @param node The to be executed node
@@ -99,7 +103,7 @@ export const next = (io: EngineIO<any, any>) => {
  * @param entry The entry point for the graph
  * @returns 
  */
-export const detectCircles = (connections: EngineConnections, entry: string): CalleeDict => {
+export const forwardCirclesDetection = (connections: EngineConnections, entry: string): CalleeDict => {
 
     const ignoreDependencies: CalleeDict = {}
     const completedOutputs: CalleeDict = {}
@@ -159,6 +163,72 @@ const traverseNodeOutput = (nodeInfo: NodeIoInfo, connections: EngineConnections
 
     }
 
+}
+
+/**
+ * Used to catch circular references in the engine, ignoring them upon dependency resolution 
+ * @param connections The connections defining this graph
+ * @param entry The entry point for the graph
+ * @returns 
+ */
+export const dependencyCirclesDetection = (connections: EngineConnections, entry: string): boolean => {
+
+    const completedOutputs: CalleeDict = {}
+
+    const triggeredInput: CalleeDict = {};
+
+    const entryNodeInfo: NodeIoInfo = getIOInfoFromNodeId(entry, connections);
+
+    const res: boolWrapper = { value: false }
+
+    traverseNodeInput(entryNodeInfo, connections, triggeredInput, completedOutputs, res);
+
+    return res.value;
+}
+
+/**
+ * Recursively travels backwards trough the all input ports of the node in the connections and keeps track of already traveled paths    
+ * @param nodeInfo The node to travel from to other nodes
+ * @param connections The EngineConnections defining this graph
+ * @param triggeredOutputs Keeps track of inputs we hav already triggered
+ * @param completedInputs Keeps track of output we have already traversed
+ */
+const traverseNodeInput = (nodeInfo: NodeIoInfo, connections: EngineConnections, triggeredOutputs: CalleeDict, completedInputs: CalleeDict, foundLoop: boolWrapper) => {
+
+    if (foundLoop.value)
+        return;
+
+    for (let i = 0; i < nodeInfo.inputs.length; i++) {
+
+        const ioId = nodeInfo.inputs[i].self.ioId;
+
+        if (completedInputs[ioId] !== undefined)
+            continue;
+        else
+            completedInputs[ioId] = 0;
+
+        const dependencies: ConnectionDetails[] = nodeInfo.inputs[i].connections;
+
+        for (let j = 0; j < dependencies.length; j++) {
+
+            const depIoId: string = dependencies[j].ioId;
+
+            if (triggeredOutputs[depIoId] !== undefined) {
+                foundLoop.value = true;
+                return;
+            }
+
+            triggeredOutputs[depIoId] = 0;
+
+            const dependencyNodeInfo = getIOInfoFromNodeId(dependencies[j].nodeId, connections);
+
+            traverseNodeInput(dependencyNodeInfo, connections, triggeredOutputs, completedInputs, foundLoop);
+
+        }
+
+    }
+
+    return foundLoop;
 }
 
 /**
