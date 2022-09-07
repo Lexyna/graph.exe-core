@@ -180,7 +180,7 @@ export const mulEngineNode2: EngineNode = {
 
 export const divEngineNode1: EngineNode = {
     id: "divEngineNode1",
-    configId: "mulNode",
+    configId: "divNode",
     autoUpdate: false,
     inputs: divNode.inputs.map(io => { return { ...io } }),
     outputs: divNode.outputs.map(io => { return { ...io } })
@@ -188,7 +188,7 @@ export const divEngineNode1: EngineNode = {
 
 export const divEngineNode2: EngineNode = {
     id: "divEngineNode2",
-    configId: "mulNode",
+    configId: "divNode",
     autoUpdate: false,
     inputs: divNode.inputs.map(io => { return { ...io } }),
     outputs: divNode.outputs.map(io => { return { ...io } })

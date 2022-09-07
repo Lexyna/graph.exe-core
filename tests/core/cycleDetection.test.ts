@@ -368,33 +368,33 @@ describe("dependency cycle detection - tests", () => {
 
         const res = false;
 
-        connector(divEngineNode2OUTPUT0, rootINPUT0, connectionDict); //fine
+        connector(divEngineNode2OUTPUT0, rootINPUT0, connectionDict);
 
-        connector(mulEngineNode2OUTPUT0, divEngineNode2INPUT0, connectionDict); //fine
+        connector(mulEngineNode2OUTPUT0, divEngineNode2INPUT0, connectionDict);
 
-        connector(subEngineNode1OUTPUT0, divEngineNode2INPUT1, connectionDict); //fine
+        connector(subEngineNode1OUTPUT0, divEngineNode2INPUT1, connectionDict);
 
-        connector(divEngineNode1OUTPUT0, mulEngineNode2INPUT0, connectionDict); //fine
+        connector(divEngineNode1OUTPUT0, mulEngineNode2INPUT0, connectionDict);
 
-        connector(divEngineNode1OUTPUT0, subEngineNode1INPUT0, connectionDict); //fine
+        connector(divEngineNode1OUTPUT0, subEngineNode1INPUT0, connectionDict);
 
-        connector(mulEngineNode1OUTPUT0, divEngineNode1INPUT0, connectionDict); //fine
+        connector(mulEngineNode1OUTPUT0, divEngineNode1INPUT0, connectionDict);
 
-        connector(constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT0, connectionDict); //fine
+        connector(constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT0, connectionDict);
 
-        connector(constFiveEngineNodeOUTPUT0, mulEngineNode1INPUT1, connectionDict); //fine
+        connector(constFiveEngineNodeOUTPUT0, mulEngineNode1INPUT1, connectionDict);
 
-        connector(addEngineNode2OUTPUT0, divEngineNode1INPUT1, connectionDict); //fine
+        connector(addEngineNode2OUTPUT0, divEngineNode1INPUT1, connectionDict);
 
-        connector(addEngineNode1OUTPUT0, addEngineNode2INPUT0, connectionDict); //fine
+        connector(addEngineNode1OUTPUT0, addEngineNode2INPUT0, connectionDict);
 
-        connector(constThreeEngineNodeOUTPUT0, addEngineNode2INPUT1, connectionDict); //fine
+        connector(constThreeEngineNodeOUTPUT0, addEngineNode2INPUT1, connectionDict);
 
-        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict); //fine
+        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
 
-        connector(addEngineNode1OUTPUT0, subEngineNode1INPUT1, connectionDict); //fine
+        connector(addEngineNode1OUTPUT0, subEngineNode1INPUT1, connectionDict);
 
-        connector(constThreeEngineNodeOUTPUT0, mulEngineNode2INPUT1, connectionDict); //fine
+        connector(constThreeEngineNodeOUTPUT0, mulEngineNode2INPUT1, connectionDict);
 
         connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
 
