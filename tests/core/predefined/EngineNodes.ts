@@ -148,7 +148,7 @@ export const addEngineNode2: EngineNode = {
 
 export const subEngineNode1: EngineNode = {
     id: "subEngineNode1",
-    configId: "addNode",
+    configId: "subNode",
     autoUpdate: false,
     inputs: subNode.inputs.map(io => { return { ...io } }),
     outputs: subNode.outputs.map(io => { return { ...io } })
