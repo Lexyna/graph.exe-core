@@ -70,7 +70,8 @@ const createIMG = (
         nodes: {},
         connections: Object.assign({}, connections),
         entry: "",
-        calleeDict: {}
+        calleeDict: {},
+        ignoreDict: {}
     }
 
     const graphNodeDicts = nodeConverter(inMemoryGraph, config, nodes);

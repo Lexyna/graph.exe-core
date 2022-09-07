@@ -304,7 +304,7 @@ describe("otg executive graph with forward loops", () => {
 
         connector(incrementTestValueEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
 
-        connector(ifEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+        connector(ifEngineNodeOUTPUT1, incrementTestValueEngineNodeINPUT0, connectionDict);
 
         connector(incrementTestValueEngineNodeOUTPUT1, ifEngineNodeINPUT1, connectionDict);
 

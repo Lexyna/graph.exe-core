@@ -37,6 +37,7 @@ export const incrementTestValueNode: ConfigNode = {
     exe: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>, numberOut: EngineIO<null, number>): void {
         testValue++;
         numberOut.value = testValue;
+        next(signalOut);
     }
 }
 

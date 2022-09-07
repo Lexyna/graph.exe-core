@@ -2,7 +2,7 @@ import { EngineConnections } from "../connections/EngineConnections";
 import { ConfigNodeDict } from "../nodes/ConfigNode";
 import { EngineNodeDict } from "../nodes/EngineNode";
 import { nodeConverter } from "./Converter";
-import { executeNode, GraphExe } from "./Core";
+import { executeNode, forwardCycleDetection, GraphExe } from "./Core";
 import { validator } from "./Validator";
 
 /**
@@ -49,10 +49,13 @@ const createOTG = (
         nodes: {},
         connections: Object.assign({}, connections),
         entry: entry,
-        calleeDict: {}
+        calleeDict: {},
+        ignoreDict: {}
     }
 
     const graphNodeDict = nodeConverter(otg, config, nodes);
+
+    otg.ignoreDict = forwardCycleDetection(connections, entry);
 
     otg.nodes = graphNodeDict;
 

@@ -22,6 +22,7 @@ export interface GraphExe {
     connections: EngineConnections,
     entry: string,
     calleeDict: CalleeDict
+    ignoreDict: CalleeDict
 }
 
 interface boolWrapper {
@@ -49,6 +50,10 @@ const resolveDependency = (node: LogicNode, graph: GraphExe) => {
     const ports: NodePorts = extractor(node);
 
     ports.inputs.forEach((con) => {
+
+        //if this dependency would call a circular loop, ignore it
+        if (graph.ignoreDict[con.ioId] != undefined)
+            return;
 
         const dependencies: ConnectionDetails[] = connectionFinder(con, graph.connections);
 
