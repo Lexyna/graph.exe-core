@@ -3,15 +3,27 @@ import { EngineConnections } from "../../src/core/connections/EngineConnections"
 import { dependencyCycleDetection, forwardCycleDetection } from "../../src/core/engine/Core";
 import {
     addEngineNode1INPUT0,
-    addEngineNode1INPUT1, addEngineNode1OUTPUT0, constTwoEngineNodeOUTPUT0, forEngineNode1INPUT0,
+    addEngineNode1INPUT1, addEngineNode1OUTPUT0, addEngineNode2INPUT0, addEngineNode2INPUT1, addEngineNode2OUTPUT0, constFiveEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, forEngineNode1INPUT0,
     forEngineNode1OUTPUT0,
+    forEngineNode1OUTPUT1,
     ifEngineNodeINPUT0,
     ifEngineNodeOUTPUT0,
     ifEngineNodeOUTPUT1,
     logEngineNode1INPUT0,
+    logEngineNode1INPUT1,
     logEngineNode1OUTPUT0,
+    logEngineNode2INPUT0,
+    logEngineNode2OUTPUT0,
+    mulEngineNode1INPUT0,
+    mulEngineNode1INPUT1,
+    mulEngineNode1OUTPUT0,
+    numberToStringConverterEngineNode1INPUT0,
+    numberToStringConverterEngineNode1OUTPUT0,
     rootINPUT0,
-    starterEngineNodeOUTPUT0
+    starterEngineNodeOUTPUT0,
+    subEngineNode1INPUT0,
+    subEngineNode1INPUT1,
+    subEngineNode1OUTPUT0
 } from "./predefined/ConnectionDetails";
 
 /**
@@ -137,15 +149,76 @@ describe("forward cycle Detection - test", () => {
 
     })
 
-    test("dependency activation loop", () => {
+    test("indirect forward loop", () => {
+
+        const res: CalleeDict = {
+            "logEngineNode1INPUT0": 0,
+        }
+
+        connector(starterEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(numberToStringConverterEngineNode1OUTPUT0, logEngineNode1INPUT1, connectionDict);
+
+        connector(forEngineNode1OUTPUT1, numberToStringConverterEngineNode1INPUT0, connectionDict);
+
+        connector(forEngineNode1OUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(logEngineNode1OUTPUT0, forEngineNode1INPUT0, connectionDict);
+
+        const ret = forwardCycleDetection(connectionDict, "starterEngineNode");
+
+        expect(ret).toEqual(res);
+
+    })
+
+    test("advanced indirect forward loop", () => {
+
+        const res: CalleeDict = {
+            "logEngineNode1INPUT0": 0,
+        }
+
+        connector(starterEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(logEngineNode1OUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(ifEngineNodeOUTPUT0, logEngineNode2INPUT0, connectionDict);
+
+        connector(logEngineNode2OUTPUT0, forEngineNode1INPUT0, connectionDict);
+
+        connector(forEngineNode1OUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        const ret = forwardCycleDetection(connectionDict, "starterEngineNode");
+
+        expect(ret).toEqual(res);
+
+    })
+
+    test("advanced indirect forward loop 2", () => {
+
+        const res: CalleeDict = {
+            "ifEngineNodeINPUT0": 0,
+        }
+
+        connector(starterEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(logEngineNode1OUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(ifEngineNodeOUTPUT0, logEngineNode2INPUT0, connectionDict);
+
+        connector(logEngineNode2OUTPUT0, forEngineNode1INPUT0, connectionDict);
+
+        connector(forEngineNode1OUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        const ret = forwardCycleDetection(connectionDict, "starterEngineNode");
+
+        expect(ret).toEqual(res);
 
     })
 
 })
 
 /**
- * Tests to detect and prevent cycles from dependencies.
- *  
+ * Tests to detect and prevent cycles from dependencies. 
  */
 describe("dependency cycle detection - tests", () => {
 
@@ -175,6 +248,77 @@ describe("dependency cycle detection - tests", () => {
 
         expect(ret).toEqual(res);
 
+    })
+
+    test("dependency loop over two nodes", () => {
+
+        const res = true;
+
+        connector(mulEngineNode1OUTPUT0, rootINPUT0, connectionDict);
+
+        connector(addEngineNode1OUTPUT0, mulEngineNode1INPUT0, connectionDict);
+
+        connector(addEngineNode2OUTPUT0, mulEngineNode1INPUT1, connectionDict);
+
+        connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
+
+        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
+
+        connector(addEngineNode1OUTPUT0, addEngineNode2INPUT0, connectionDict);
+
+        connector(subEngineNode1OUTPUT0, addEngineNode2INPUT1, connectionDict);
+
+        connector(constTwoEngineNodeOUTPUT0, subEngineNode1INPUT0, connectionDict);
+
+        connector(mulEngineNode1OUTPUT0, subEngineNode1INPUT1, connectionDict);
+
+        const ret = dependencyCycleDetection(connectionDict, "root");
+
+        expect(ret).toEqual(res);
+
+    })
+
+    test("simple no loop graph", () => {
+
+        const res = false;
+
+        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
+
+        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
+
+        connector(addEngineNode1OUTPUT0, rootINPUT0, connectionDict);
+
+        const ret = dependencyCycleDetection(connectionDict, "root");
+
+        expect(ret).toEqual(res);
+
+    })
+
+    test("no dependency loop", () => {
+
+        const res = false;
+
+        connector(mulEngineNode1OUTPUT0, rootINPUT0, connectionDict);
+
+        connector(addEngineNode1OUTPUT0, mulEngineNode1INPUT0, connectionDict);
+
+        connector(addEngineNode2OUTPUT0, mulEngineNode1INPUT1, connectionDict);
+
+        connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
+
+        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
+
+        //connector(addEngineNode1OUTPUT0, addEngineNode2INPUT0, connectionDict);
+
+        connector(subEngineNode1OUTPUT0, addEngineNode2INPUT1, connectionDict);
+
+        connector(constTwoEngineNodeOUTPUT0, subEngineNode1INPUT0, connectionDict);
+
+        connector(constTwoEngineNodeOUTPUT0, subEngineNode1INPUT1, connectionDict);
+
+        const ret = dependencyCycleDetection(connectionDict, "root");
+
+        expect(ret).toEqual(res);
     })
 
 })

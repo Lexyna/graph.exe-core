@@ -124,7 +124,7 @@ export const forwardCycleDetection = (connections: EngineConnections, entry: str
 }
 
 /**
- * Recursively travels trough the all output ports of the node in the connections and keeps track of already traveled paths    
+ * Recursively travels trough all output ports of the node in the connections and keeps track of already traveled paths    
  * @param nodeInfo The node to travel from to other nodes
  * @param connections The EngineConnections defining this graph
  * @param ignoreDependencies All dependencies that will be ignore at execution
