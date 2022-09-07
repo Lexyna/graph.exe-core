@@ -308,7 +308,7 @@ describe("dependency cycle detection - tests", () => {
 
         connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
 
-        //connector(addEngineNode1OUTPUT0, addEngineNode2INPUT0, connectionDict);
+        connector(addEngineNode1OUTPUT0, addEngineNode2INPUT0, connectionDict);
 
         connector(subEngineNode1OUTPUT0, addEngineNode2INPUT1, connectionDict);
 

@@ -230,6 +230,8 @@ const traverseNodeInput = (nodeInfo: NodeIoInfo, connections: EngineConnections,
 
             traverseNodeInput(dependencyNodeInfo, connections, triggeredOutputs, completedInputs, foundLoop);
 
+            delete triggeredOutputs[depIoId];
+
         }
 
     }
