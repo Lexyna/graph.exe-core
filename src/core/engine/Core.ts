@@ -31,7 +31,7 @@ interface boolWrapper {
 /**
  * Executes the logic of a node
  * @param node The to be executed node
- * @param isTriggered allows node on stack to be explicitly called vio the next() function
+ * @param isTriggered allows node on stack to be explicitly called via the next() function
  */
 export const executeNode = (node: LogicNode, isTriggered: boolean, graph: GraphExe,) => {
     resolveDependency(node, graph);
@@ -40,9 +40,9 @@ export const executeNode = (node: LogicNode, isTriggered: boolean, graph: GraphE
 }
 
 /**
- *  Resolves all dependencies (input ports) for this node based on the connections
- * @param node 
- * @param graph 
+ *  Resolves all dependencies (input ports) for the passed node based on the connections in the graph
+ * @param node Node to resolve dependencies from
+ * @param graph Graph to search for connections 
  */
 const resolveDependency = (node: LogicNode, graph: GraphExe) => {
 

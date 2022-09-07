@@ -14,7 +14,7 @@ export interface NodePorts {
 }
 
 /**
- *  Extractor the ConnectionDetails of all ioPorts from a (engine) node  
+ *  Extracts the ConnectionDetails of all ioPorts from the passed (engine) node  
  * @param node The node to extract io ports from
  * @returns array of ConnectionDetails, containing an ordered list of Input/Output ConnectionDetails
  */
