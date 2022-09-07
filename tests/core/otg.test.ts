@@ -141,9 +141,9 @@ describe("otg dependency graph test", () => {
 
         connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
 
-        //
+        //((2*5)/(5+2+3))*3)/(1-7)
         executeGraph(configDict, engineNodeDict, connectionDict, "root");
-        expect(testValue).toBe(-2)
+        expect(testValue).toBe(-0.5)
 
     })
 
