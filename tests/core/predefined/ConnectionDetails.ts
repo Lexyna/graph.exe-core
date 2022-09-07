@@ -14,6 +14,27 @@ export const starterEngineNodeOUTPUT0: ConnectionDetails = {
     index: 0
 }
 
+export const incrementTestValueEngineNodeINPUT0: ConnectionDetails = {
+    ioId: "incrementTestValueEngineNodeINPUT0",
+    nodeId: "incrementTestValueEngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const incrementTestValueEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "incrementTestValueEngineNodeOUTPUT0",
+    nodeId: "incrementTestValueEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const incrementTestValueEngineNodeOUTPUT1: ConnectionDetails = {
+    ioId: "incrementTestValueEngineNodeOUTPUT1",
+    nodeId: "incrementTestValueEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 1
+}
+
 export const logEngineNode1INPUT0: ConnectionDetails = {
     ioId: "logEngineNode1INPUT0",
     nodeId: "logEngineNode1",

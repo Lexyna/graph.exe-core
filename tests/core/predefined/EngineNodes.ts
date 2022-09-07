@@ -1,5 +1,5 @@
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
-import { addNode, constNode, divNode, forNode, ifNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode } from "./ConfigNodes";
+import { addNode, constNode, divNode, forNode, ifNode, incrementTestValueNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
@@ -15,6 +15,14 @@ export const starterEngineNode: EngineNode = {
     autoUpdate: false,
     inputs: starterNode.inputs.map(io => { return { ...io } }),
     outputs: starterNode.outputs.map(io => { return { ...io } })
+}
+
+export const incrementTestValueEngineNode: EngineNode = {
+    id: "incrementTestValueEngineNode",
+    configId: "incrementTestValueNode",
+    autoUpdate: false,
+    inputs: incrementTestValueNode.inputs.map(io => { return { ...io } }),
+    outputs: incrementTestValueNode.outputs.map(io => { return { ...io } })
 }
 
 export const logEngineNode1: EngineNode = {
@@ -244,6 +252,7 @@ export const engineNodeDict: EngineNodeDict = {
     "logEngineNode1": logEngineNode1,
     "logEngineNode2": logEngineNode2,
     "forEngineNode1": forEngineNode1,
+    "incrementTestValueEngineNode": incrementTestValueEngineNode,
     "numberToStringConverterEngineNode1": numberToStringConverterEngineNode1,
     "ifEngineNode": ifEngineNode
 }

@@ -30,6 +30,16 @@ export const starterNode: ConfigNode = {
     }
 }
 
+export const incrementTestValueNode: ConfigNode = {
+    id: "incrementTestValueNode",
+    inputs: [signalIn],
+    outputs: [signalOut, numberOut],
+    exe: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>, numberOut: EngineIO<null, number>): void {
+        testValue++;
+        numberOut.value = testValue;
+    }
+}
+
 export const logNode: ConfigNode = {
     id: "logNode",
     inputs: [signalIn, stringIn],
@@ -159,5 +169,6 @@ export const configDict: ConfigNodeDict = {
     "logNode": logNode,
     "forNode": forNode,
     "ifNode": ifNode,
+    "incrementTestValueNode": incrementTestValueNode,
     "numberToStringConverterNode": numberToStringConverterNode
 }
