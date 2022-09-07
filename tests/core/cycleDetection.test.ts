@@ -3,7 +3,7 @@ import { EngineConnections } from "../../src/core/connections/EngineConnections"
 import { dependencyCycleDetection, forwardCycleDetection } from "../../src/core/engine/Core";
 import {
     addEngineNode1INPUT0,
-    addEngineNode1INPUT1, addEngineNode1OUTPUT0, addEngineNode2INPUT0, addEngineNode2INPUT1, addEngineNode2OUTPUT0, constFiveEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, forEngineNode1INPUT0,
+    addEngineNode1INPUT1, addEngineNode1OUTPUT0, addEngineNode2INPUT0, addEngineNode2INPUT1, addEngineNode2OUTPUT0, constFiveEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, divEngineNode1INPUT0, divEngineNode1INPUT1, divEngineNode1OUTPUT0, divEngineNode2INPUT0, divEngineNode2INPUT1, divEngineNode2OUTPUT0, forEngineNode1INPUT0,
     forEngineNode1OUTPUT0,
     forEngineNode1OUTPUT1,
     ifEngineNodeINPUT0,
@@ -17,6 +17,9 @@ import {
     mulEngineNode1INPUT0,
     mulEngineNode1INPUT1,
     mulEngineNode1OUTPUT0,
+    mulEngineNode2INPUT0,
+    mulEngineNode2INPUT1,
+    mulEngineNode2OUTPUT0,
     numberToStringConverterEngineNode1INPUT0,
     numberToStringConverterEngineNode1OUTPUT0,
     rootINPUT0,
@@ -294,7 +297,7 @@ describe("dependency cycle detection - tests", () => {
 
     })
 
-    test("no dependency loop", () => {
+    test("no loop graph", () => {
 
         const res = false;
 
@@ -319,6 +322,86 @@ describe("dependency cycle detection - tests", () => {
         const ret = dependencyCycleDetection(connectionDict, "root");
 
         expect(ret).toEqual(res);
+    })
+
+    test("advanced graph with loop", () => {
+
+        const res = true;
+
+        connector(divEngineNode2OUTPUT0, rootINPUT0, connectionDict);
+
+        connector(mulEngineNode2OUTPUT0, divEngineNode2INPUT0, connectionDict);
+
+        connector(subEngineNode1OUTPUT0, divEngineNode2INPUT1, connectionDict);
+
+        connector(divEngineNode1OUTPUT0, mulEngineNode2INPUT0, connectionDict);
+
+        connector(divEngineNode1OUTPUT0, subEngineNode1INPUT0, connectionDict);
+
+        connector(mulEngineNode1OUTPUT0, divEngineNode1INPUT0, connectionDict);
+
+        connector(constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT0, connectionDict);
+
+        connector(constFiveEngineNodeOUTPUT0, mulEngineNode1INPUT1, connectionDict);
+
+        connector(addEngineNode2OUTPUT0, divEngineNode1INPUT1, connectionDict);
+
+        connector(addEngineNode1OUTPUT0, addEngineNode2INPUT0, connectionDict);
+
+        connector(constThreeEngineNodeOUTPUT0, addEngineNode2INPUT1, connectionDict);
+
+        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
+
+        connector(addEngineNode1OUTPUT0, subEngineNode1INPUT1, connectionDict);
+
+        connector(constThreeEngineNodeOUTPUT0, mulEngineNode2INPUT1, connectionDict);
+
+        connector(divEngineNode2OUTPUT0, addEngineNode1INPUT1, connectionDict);
+
+        const ret = dependencyCycleDetection(connectionDict, "root");
+
+        expect(ret).toEqual(res);
+
+    })
+
+    test("advanced graph without loop", () => {
+
+        const res = false;
+
+        connector(divEngineNode2OUTPUT0, rootINPUT0, connectionDict); //fine
+
+        connector(mulEngineNode2OUTPUT0, divEngineNode2INPUT0, connectionDict); //fine
+
+        connector(subEngineNode1OUTPUT0, divEngineNode2INPUT1, connectionDict); //fine
+
+        connector(divEngineNode1OUTPUT0, mulEngineNode2INPUT0, connectionDict); //fine
+
+        connector(divEngineNode1OUTPUT0, subEngineNode1INPUT0, connectionDict); //fine
+
+        connector(mulEngineNode1OUTPUT0, divEngineNode1INPUT0, connectionDict); //fine
+
+        connector(constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT0, connectionDict); //fine
+
+        connector(constFiveEngineNodeOUTPUT0, mulEngineNode1INPUT1, connectionDict); //fine
+
+        connector(addEngineNode2OUTPUT0, divEngineNode1INPUT1, connectionDict); //fine
+
+        connector(addEngineNode1OUTPUT0, addEngineNode2INPUT0, connectionDict); //fine
+
+        connector(constThreeEngineNodeOUTPUT0, addEngineNode2INPUT1, connectionDict); //fine
+
+        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict); //fine
+
+        connector(addEngineNode1OUTPUT0, subEngineNode1INPUT1, connectionDict); //fine
+
+        connector(constThreeEngineNodeOUTPUT0, mulEngineNode2INPUT1, connectionDict); //fine
+
+        connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
+
+        const ret = dependencyCycleDetection(connectionDict, "root");
+
+        expect(ret).toEqual(res);
+
     })
 
 })
