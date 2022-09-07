@@ -15,10 +15,11 @@ export const validator = (
     config: ConfigNodeDict,
     nodes: EngineNodeDict,
     connections: EngineConnections,
-    entry: string
+    entry: string,
+    isInMemoryGraph: boolean = false
 ): boolean => {
 
-    if (!nodes[entry])
+    if (!isInMemoryGraph && !nodes[entry])
         return false;
 
     let isValidConfig = true;

@@ -57,5 +57,4 @@ const createOTG = (
     otg.nodes = graphNodeDict;
 
     return otg;
-
 }
