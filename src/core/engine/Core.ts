@@ -103,7 +103,7 @@ export const next = (io: EngineIO<any, any>) => {
  * @param entry The entry point for the graph
  * @returns 
  */
-export const forwardCirclesDetection = (connections: EngineConnections, entry: string): CalleeDict => {
+export const forwardCycleDetection = (connections: EngineConnections, entry: string): CalleeDict => {
 
     const ignoreDependencies: CalleeDict = {}
     const completedOutputs: CalleeDict = {}
@@ -177,7 +177,7 @@ const traverseNodeOutput = (nodeInfo: NodeIoInfo, connections: EngineConnections
  * @param entry The entry point for the graph
  * @returns 
  */
-export const dependencyCirclesDetection = (connections: EngineConnections, entry: string): boolean => {
+export const dependencyCycleDetection = (connections: EngineConnections, entry: string): boolean => {
 
     const completedInputs: CalleeDict = {}
 

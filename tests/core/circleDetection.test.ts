@@ -1,6 +1,6 @@
 import { connector } from "../../src/core/connections/Connector";
 import { EngineConnections } from "../../src/core/connections/EngineConnections";
-import { dependencyCirclesDetection, forwardCirclesDetection } from "../../src/core/engine/Core";
+import { dependencyCycleDetection, forwardCycleDetection } from "../../src/core/engine/Core";
 import {
     addEngineNode1INPUT0,
     addEngineNode1INPUT1, addEngineNode1OUTPUT0, constTwoEngineNodeOUTPUT0, forEngineNode1INPUT0,
@@ -14,6 +14,10 @@ import {
     starterEngineNodeOUTPUT0
 } from "./predefined/ConnectionDetails";
 
+/**
+ * Tests to detects and prevent cycles based on the next() action at runtime.
+ *  Prevents endless dependency calls between nodes
+ */
 describe("forward circle Detection - test", () => {
 
     let connectionDict: EngineConnections;
@@ -39,7 +43,7 @@ describe("forward circle Detection - test", () => {
 
         connector(logEngineNode1OUTPUT0, logEngineNode1INPUT0, connectionDict);
 
-        const ret = forwardCirclesDetection(connectionDict, "starterEngineNode");
+        const ret = forwardCycleDetection(connectionDict, "starterEngineNode");
 
         expect(ret).toEqual(res);
 
@@ -57,7 +61,7 @@ describe("forward circle Detection - test", () => {
 
         connector(ifEngineNodeOUTPUT0, forEngineNode1INPUT0, connectionDict);
 
-        const ret = forwardCirclesDetection(connectionDict, "starterEngineNode")
+        const ret = forwardCycleDetection(connectionDict, "starterEngineNode")
 
         expect(ret).toEqual(res)
 
@@ -78,7 +82,7 @@ describe("forward circle Detection - test", () => {
 
         connector(ifEngineNodeOUTPUT1, ifEngineNodeINPUT0, connectionDict);
 
-        const ret = forwardCirclesDetection(connectionDict, "starterEngineNode");
+        const ret = forwardCycleDetection(connectionDict, "starterEngineNode");
 
         expect(ret).toEqual(res);
 
@@ -103,13 +107,13 @@ describe("forward circle Detection - test", () => {
 
         connector(ifEngineNodeOUTPUT1, logEngineNode1INPUT0, connectionDict);
 
-        const ret = forwardCirclesDetection(connectionDict, "starterEngineNode");
+        const ret = forwardCycleDetection(connectionDict, "starterEngineNode");
 
         expect(ret).toEqual(res)
 
     })
 
-    test("Every input is a loop", () => {
+    test("Entry node loop", () => {
 
         const res: CalleeDict = {
             "forEngineNode1INPUT0": 0,
@@ -127,14 +131,22 @@ describe("forward circle Detection - test", () => {
 
         connector(ifEngineNodeOUTPUT1, logEngineNode1INPUT0, connectionDict);
 
-        const ret = forwardCirclesDetection(connectionDict, "forEngineNode1")
+        const ret = forwardCycleDetection(connectionDict, "forEngineNode1")
 
         expect(ret).toEqual(res);
 
     })
 
+    test("dependency activation loop", () => {
+
+    })
+
 })
 
+/**
+ * Tests to detect and prevent cycles from dependencies.
+ *  
+ */
 describe("dependency circle detection - tests", () => {
 
     let connectionDict: EngineConnections;
@@ -159,7 +171,7 @@ describe("dependency circle detection - tests", () => {
 
         connector(addEngineNode1OUTPUT0, addEngineNode1INPUT0, connectionDict);
 
-        const ret = dependencyCirclesDetection(connectionDict, "root");
+        const ret = dependencyCycleDetection(connectionDict, "root");
 
         expect(ret).toEqual(res);
 
