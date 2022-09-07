@@ -25,6 +25,14 @@ export const incrementTestValueEngineNode: EngineNode = {
     outputs: incrementTestValueNode.outputs.map(io => { return { ...io } })
 }
 
+export const incrementTestValueEngineNode2: EngineNode = {
+    id: "incrementTestValueEngineNode2",
+    configId: "incrementTestValueNode",
+    autoUpdate: false,
+    inputs: incrementTestValueNode.inputs.map(io => { return { ...io } }),
+    outputs: incrementTestValueNode.outputs.map(io => { return { ...io } })
+}
+
 export const logEngineNode1: EngineNode = {
     id: "logEngineNode1",
     configId: "logNode",
@@ -56,6 +64,15 @@ export const ifEngineNode: EngineNode = {
     inputs: ifNode.inputs.map(io => { return { ...io } }),
     outputs: ifNode.outputs.map(io => { return { ...io } })
 }
+
+export const ifEngineNode2: EngineNode = {
+    id: "ifEngineNode2",
+    configId: "ifNode",
+    autoUpdate: false,
+    inputs: ifNode.inputs.map(io => { return { ...io } }),
+    outputs: ifNode.outputs.map(io => { return { ...io } })
+}
+
 
 export const numberToStringConverterEngineNode1: EngineNode = {
     id: "numberToStringConverterEngineNode1",
@@ -253,8 +270,10 @@ export const engineNodeDict: EngineNodeDict = {
     "logEngineNode2": logEngineNode2,
     "forEngineNode1": forEngineNode1,
     "incrementTestValueEngineNode": incrementTestValueEngineNode,
+    "incrementTestValueEngineNode2": incrementTestValueEngineNode2,
     "numberToStringConverterEngineNode1": numberToStringConverterEngineNode1,
-    "ifEngineNode": ifEngineNode
+    "ifEngineNode": ifEngineNode,
+    "ifEngineNode2": ifEngineNode2
 }
 
 export const initializeNodeValues = () => {

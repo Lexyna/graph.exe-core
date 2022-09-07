@@ -35,6 +35,27 @@ export const incrementTestValueEngineNodeOUTPUT1: ConnectionDetails = {
     index: 1
 }
 
+export const incrementTestValueEngineNode2INPUT0: ConnectionDetails = {
+    ioId: "incrementTestValueEngineNode2INPUT0",
+    nodeId: "incrementTestValueEngineNode2",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const incrementTestValueEngineNode2OUTPUT0: ConnectionDetails = {
+    ioId: "incrementTestValueEngineNode2OUTPUT0",
+    nodeId: "incrementTestValueEngineNode2",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const incrementTestValueEngineNode2OUTPUT1: ConnectionDetails = {
+    ioId: "incrementTestValueEngineNode2OUTPUT1",
+    nodeId: "incrementTestValueEngineNode2",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 1
+}
+
 export const logEngineNode1INPUT0: ConnectionDetails = {
     ioId: "logEngineNode1INPUT0",
     nodeId: "logEngineNode1",
@@ -122,6 +143,34 @@ export const ifEngineNodeOUTPUT0: ConnectionDetails = {
 export const ifEngineNodeOUTPUT1: ConnectionDetails = {
     ioId: "ifEngineNodeOUTPUT1",
     nodeId: "ifEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 1
+}
+
+export const ifEngineNode2INPUT0: ConnectionDetails = {
+    ioId: "ifEngineNode2INPUT0",
+    nodeId: "ifEngineNode2",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const ifEngineNode2INPUT1: ConnectionDetails = {
+    ioId: "ifEngineNode2INPUT1",
+    nodeId: "ifEngineNode2",
+    type: CONNECTION_TYPE.INPUT,
+    index: 1
+}
+
+export const ifEngineNode2OUTPUT0: ConnectionDetails = {
+    ioId: "ifEngineNode2OUTPUT0",
+    nodeId: "ifEngineNode2",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const ifEngineNode2OUTPUT1: ConnectionDetails = {
+    ioId: "ifEngineNode2OUTPUT1",
+    nodeId: "ifEngineNode2",
     type: CONNECTION_TYPE.OUTPUT,
     index: 1
 }
