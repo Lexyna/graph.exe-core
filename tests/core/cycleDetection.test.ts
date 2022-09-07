@@ -18,7 +18,7 @@ import {
  * Tests to detects and prevent cycles based on the next() action at runtime.
  *  Prevents endless dependency calls between nodes
  */
-describe("forward circle Detection - test", () => {
+describe("forward cycle Detection - test", () => {
 
     let connectionDict: EngineConnections;
 
@@ -147,7 +147,7 @@ describe("forward circle Detection - test", () => {
  * Tests to detect and prevent cycles from dependencies.
  *  
  */
-describe("dependency circle detection - tests", () => {
+describe("dependency cycle detection - tests", () => {
 
     let connectionDict: EngineConnections;
     interface CalleeDict {
