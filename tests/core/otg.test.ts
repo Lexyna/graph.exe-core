@@ -651,4 +651,30 @@ describe("node update type tests", () => {
 
     })
 
+    test("test DYNAMIC & ALWAYS update option without for loop", () => {
+
+        const res: string[] = ["2"];
+
+        connector(starterEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(ifEngineNodeOUTPUT1, incrementTestValueEngineNode2INPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNode2OUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(numberToStringConverterEngineNode1OUTPUT0, logEngineNode1INPUT1, connectionDict);
+
+        connector(updateTypeALWAYSEngineNodeOUTPUT0, numberToStringConverterEngineNode1INPUT0, connectionDict);
+
+        connector(updateTypeDYNAMICEngineNodeOUTPUT0, ifEngineNodeINPUT1, connectionDict);
+
+        connector(updateTypeALWAYSEngineNodeOUTPUT0, updateTypeDYNAMICEngineNodeINPUT0, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+
+        expect(testLog).toEqual(res);
+
+    })
+
 })
