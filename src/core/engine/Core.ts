@@ -290,7 +290,6 @@ const needsUpdate = (node: LogicNode, graph: GraphExe): boolean => {
         if (dependencies.length == 0)
             continue;
 
-        //Does this makes sense?
         if (!graph.nodes[dependencies[0].nodeId].computed ||
             node.inputs[i].value !== graph.nodes[dependencies[0].nodeId].outputs[dependencies[0].index].value) {
             needsUpdate = true;

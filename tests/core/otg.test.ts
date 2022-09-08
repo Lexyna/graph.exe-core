@@ -678,3 +678,5 @@ describe("node update type tests", () => {
     })
 
 })
+
+//TODO: Create tests for  onInit and onDestroy methods

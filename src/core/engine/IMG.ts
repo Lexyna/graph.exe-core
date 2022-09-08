@@ -13,6 +13,14 @@ interface InMemoryGraphDict {
 const inMemoryGraphDictionary: InMemoryGraphDict = {}
 
 /**
+ * For tests only
+ * @returns 
+ */
+export const getAllInMemoryGraphs = (): InMemoryGraphDict => {
+    return inMemoryGraphDictionary;
+}
+
+/**
  * Create a inMemoryGraph that won't be executed after initialization and lives in memory until it is deleted
  * @param config 
  * @param nodes 
@@ -41,7 +49,6 @@ export const createGraph = (
     })
 
     inMemoryGraphDictionary[graphName] = inMemoryGraph;
-
 }
 
 /**
