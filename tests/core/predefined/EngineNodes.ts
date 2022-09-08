@@ -57,6 +57,14 @@ export const forEngineNode1: EngineNode = {
     outputs: forNode.outputs.map(io => { return { ...io } })
 }
 
+export const forEngineNodeTrigger: EngineNode = {
+    id: "forEngineNodeTrigger",
+    configId: "forNodeTrigger",
+    autoUpdate: true,
+    inputs: forNode.inputs.map(io => { return { ...io } }),
+    outputs: forNode.outputs.map(io => { return { ...io } })
+}
+
 export const ifEngineNode: EngineNode = {
     id: "ifEngineNode",
     configId: "ifNode",
@@ -269,6 +277,7 @@ export const engineNodeDict: EngineNodeDict = {
     "logEngineNode1": logEngineNode1,
     "logEngineNode2": logEngineNode2,
     "forEngineNode1": forEngineNode1,
+    "forEngineNodeTrigger": forEngineNodeTrigger,
     "incrementTestValueEngineNode": incrementTestValueEngineNode,
     "incrementTestValueEngineNode2": incrementTestValueEngineNode2,
     "numberToStringConverterEngineNode1": numberToStringConverterEngineNode1,

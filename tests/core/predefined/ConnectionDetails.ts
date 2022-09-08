@@ -119,6 +119,27 @@ export const forEngineNode1OUTPUT1: ConnectionDetails = {
     index: 1
 }
 
+export const forEngineNodeTriggerINPUT0: ConnectionDetails = {
+    ioId: "forEngineNodeTriggerINPUT0",
+    nodeId: "forEngineNodeTrigger",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const forEngineNodeTriggerOUTPUT0: ConnectionDetails = {
+    ioId: "forEngineNodeTriggerOUTPUT0",
+    nodeId: "forEngineNodeTrigger",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const forEngineNodeTriggerOUTPUT1: ConnectionDetails = {
+    ioId: "forEngineNodeTriggerOUTPUT1",
+    nodeId: "forEngineNodeTrigger",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 1
+}
+
 export const ifEngineNodeINPUT0: ConnectionDetails = {
     ioId: "ifEngineNodeINPUT0",
     nodeId: "ifEngineNode",

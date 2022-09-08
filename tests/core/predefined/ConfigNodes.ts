@@ -63,6 +63,19 @@ export const forNode: ConfigNode = {
     }
 }
 
+export const forNodeTrigger: ConfigNode = {
+    id: "forNodeTrigger",
+    isTrigger: true,
+    inputs: [signalIn],
+    outputs: [signalOut, numberOut],
+    exe: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>, numberOut: EngineIO<null, number>) {
+        for (let i = 0; i < 100; i++) {
+            numberOut.value = i;
+            next(signalOut);
+        }
+    }
+}
+
 export const ifNode: ConfigNode = {
     id: "ifNode",
     inputs: [signalIn, numberIn],
@@ -169,6 +182,7 @@ export const configDict: ConfigNodeDict = {
     "signalNode": signalNode,
     "logNode": logNode,
     "forNode": forNode,
+    "forNodeTrigger": forNodeTrigger,
     "ifNode": ifNode,
     "incrementTestValueNode": incrementTestValueNode,
     "numberToStringConverterNode": numberToStringConverterNode
