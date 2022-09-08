@@ -627,7 +627,7 @@ describe("node update type tests", () => {
 
     })
 
-    test("test DYNAMIC update option without for loop", () => {
+    test("test ALWAYS update option without for loop", () => {
 
         const res: string[] = ["2"];
 
