@@ -1,4 +1,5 @@
 import { EngineIO } from "../IO/EngineIO";
+import { updateType } from "./ConfigNode";
 
 /**
  * EngineNodes get passed to the core and execute the the function of their 'parent' config node. 
@@ -11,7 +12,7 @@ import { EngineIO } from "../IO/EngineIO";
 export interface EngineNode {
     id: string;
     configId: string;
-    alwaysUpdate: boolean;
+    updateType: updateType;
     inputs: EngineIO<any, any>[];
     outputs: EngineIO<any, any>[];
 }

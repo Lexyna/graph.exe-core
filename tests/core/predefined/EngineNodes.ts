@@ -1,10 +1,11 @@
+import { updateType } from "../../../src/core/nodes/ConfigNode";
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
 import { addNode, constNode, divNode, forNode, ifNode, incrementTestValueNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
     configId: "rootNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: rootNode.inputs.map(io => { return { ...io } }),
     outputs: rootNode.outputs.map(io => { return { ...io } })
 }
@@ -12,7 +13,7 @@ export const rootEngineNode: EngineNode = {
 export const starterEngineNode: EngineNode = {
     id: "starterEngineNode",
     configId: "starterNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: starterNode.inputs.map(io => { return { ...io } }),
     outputs: starterNode.outputs.map(io => { return { ...io } })
 }
@@ -20,7 +21,7 @@ export const starterEngineNode: EngineNode = {
 export const incrementTestValueEngineNode: EngineNode = {
     id: "incrementTestValueEngineNode",
     configId: "incrementTestValueNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: incrementTestValueNode.inputs.map(io => { return { ...io } }),
     outputs: incrementTestValueNode.outputs.map(io => { return { ...io } })
 }
@@ -28,7 +29,7 @@ export const incrementTestValueEngineNode: EngineNode = {
 export const incrementTestValueEngineNode2: EngineNode = {
     id: "incrementTestValueEngineNode2",
     configId: "incrementTestValueNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: incrementTestValueNode.inputs.map(io => { return { ...io } }),
     outputs: incrementTestValueNode.outputs.map(io => { return { ...io } })
 }
@@ -36,7 +37,7 @@ export const incrementTestValueEngineNode2: EngineNode = {
 export const logEngineNode1: EngineNode = {
     id: "logEngineNode1",
     configId: "logNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: logNode.inputs.map(io => { return { ...io } }),
     outputs: logNode.outputs.map(io => { return { ...io } })
 }
@@ -44,7 +45,7 @@ export const logEngineNode1: EngineNode = {
 export const logEngineNode2: EngineNode = {
     id: "logEngineNode2",
     configId: "logNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: logNode.inputs.map(io => { return { ...io } }),
     outputs: logNode.outputs.map(io => { return { ...io } })
 }
@@ -52,7 +53,7 @@ export const logEngineNode2: EngineNode = {
 export const forEngineNode1: EngineNode = {
     id: "forEngineNode1",
     configId: "forNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: forNode.inputs.map(io => { return { ...io } }),
     outputs: forNode.outputs.map(io => { return { ...io } })
 }
@@ -60,7 +61,7 @@ export const forEngineNode1: EngineNode = {
 export const forEngineNodeTrigger: EngineNode = {
     id: "forEngineNodeTrigger",
     configId: "forNodeTrigger",
-    alwaysUpdate: true,
+    updateType: updateType.NEVER,
     inputs: forNode.inputs.map(io => { return { ...io } }),
     outputs: forNode.outputs.map(io => { return { ...io } })
 }
@@ -68,7 +69,7 @@ export const forEngineNodeTrigger: EngineNode = {
 export const ifEngineNode: EngineNode = {
     id: "ifEngineNode",
     configId: "ifNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: ifNode.inputs.map(io => { return { ...io } }),
     outputs: ifNode.outputs.map(io => { return { ...io } })
 }
@@ -76,7 +77,7 @@ export const ifEngineNode: EngineNode = {
 export const ifEngineNode2: EngineNode = {
     id: "ifEngineNode2",
     configId: "ifNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: ifNode.inputs.map(io => { return { ...io } }),
     outputs: ifNode.outputs.map(io => { return { ...io } })
 }
@@ -85,7 +86,7 @@ export const ifEngineNode2: EngineNode = {
 export const numberToStringConverterEngineNode1: EngineNode = {
     id: "numberToStringConverterEngineNode1",
     configId: "numberToStringConverterNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: numberToStringConverterNode.inputs.map(io => { return { ...io } }),
     outputs: numberToStringConverterNode.outputs.map(io => { return { ...io } })
 }
@@ -93,7 +94,7 @@ export const numberToStringConverterEngineNode1: EngineNode = {
 export const textHelloEngineNode: EngineNode = {
     id: "textHelloEngineNode",
     configId: "textNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: textNode.inputs.map(io => { return { ...io } }),
     outputs: textNode.outputs.map(io => { return { ...io } })
 }
@@ -101,7 +102,7 @@ export const textHelloEngineNode: EngineNode = {
 export const textWorldEngineNode: EngineNode = {
     id: "textWorldEngineNode",
     configId: "textNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: textNode.inputs.map(io => { return { ...io } }),
     outputs: textNode.outputs.map(io => { return { ...io } })
 }
@@ -109,7 +110,7 @@ export const textWorldEngineNode: EngineNode = {
 export const textCombineEngineNode1: EngineNode = {
     id: "textCombineEngineNode1",
     configId: "textCombineNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: textCombineNode.inputs.map(io => { return { ...io } }),
     outputs: textCombineNode.outputs.map(io => { return { ...io } })
 }
@@ -118,7 +119,7 @@ export const textCombineEngineNode1: EngineNode = {
 export const constZeroEngineNode: EngineNode = {
     id: "constZeroEngineNode",
     configId: "constNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: constNode.inputs.map(io => { return { ...io } }),
     outputs: constNode.outputs.map(io => { return { ...io } })
 }
@@ -126,7 +127,7 @@ export const constZeroEngineNode: EngineNode = {
 export const constOneEngineNode: EngineNode = {
     id: "constOneEngineNode",
     configId: "constNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: constNode.inputs.map(io => { return { ...io } }),
     outputs: constNode.outputs.map(io => { return { ...io } })
 }
@@ -134,7 +135,7 @@ export const constOneEngineNode: EngineNode = {
 export const constTwoEngineNode: EngineNode = {
     id: "constTwoEngineNode",
     configId: "constNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: constNode.inputs.map(io => { return { ...io } }),
     outputs: constNode.outputs.map(io => { return { ...io } })
 }
@@ -142,7 +143,7 @@ export const constTwoEngineNode: EngineNode = {
 export const constThreeEngineNode: EngineNode = {
     id: "constThreeEngineNode",
     configId: "constNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: constNode.inputs.map(io => { return { ...io } }),
     outputs: constNode.outputs.map(io => { return { ...io } })
 }
@@ -150,7 +151,7 @@ export const constThreeEngineNode: EngineNode = {
 export const constFourEngineNode: EngineNode = {
     id: "constFourEngineNode",
     configId: "constNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: constNode.inputs.map(io => { return { ...io } }),
     outputs: constNode.outputs.map(io => { return { ...io } })
 }
@@ -158,7 +159,7 @@ export const constFourEngineNode: EngineNode = {
 export const constFiveEngineNode: EngineNode = {
     id: "constFiveEngineNode",
     configId: "constNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: constNode.inputs.map(io => { return { ...io } }),
     outputs: constNode.outputs.map(io => { return { ...io } })
 }
@@ -166,7 +167,7 @@ export const constFiveEngineNode: EngineNode = {
 export const addEngineNode1: EngineNode = {
     id: "addEngineNode1",
     configId: "addNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: addNode.inputs.map(io => { return { ...io } }),
     outputs: addNode.outputs.map(io => { return { ...io } })
 }
@@ -174,7 +175,7 @@ export const addEngineNode1: EngineNode = {
 export const addEngineNode2: EngineNode = {
     id: "addEngineNode2",
     configId: "addNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: addNode.inputs.map(io => { return { ...io } }),
     outputs: addNode.outputs.map(io => { return { ...io } })
 }
@@ -182,7 +183,7 @@ export const addEngineNode2: EngineNode = {
 export const subEngineNode1: EngineNode = {
     id: "subEngineNode1",
     configId: "subNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: subNode.inputs.map(io => { return { ...io } }),
     outputs: subNode.outputs.map(io => { return { ...io } })
 }
@@ -190,7 +191,7 @@ export const subEngineNode1: EngineNode = {
 export const subEngineNode2: EngineNode = {
     id: "subEngineNode2",
     configId: "subNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: subNode.inputs.map(io => { return { ...io } }),
     outputs: subNode.outputs.map(io => { return { ...io } })
 }
@@ -198,7 +199,7 @@ export const subEngineNode2: EngineNode = {
 export const mulEngineNode1: EngineNode = {
     id: "mulEngineNode1",
     configId: "mulNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: mulNode.inputs.map(io => { return { ...io } }),
     outputs: mulNode.outputs.map(io => { return { ...io } })
 }
@@ -206,7 +207,7 @@ export const mulEngineNode1: EngineNode = {
 export const mulEngineNode2: EngineNode = {
     id: "mulEngineNode2",
     configId: "mulNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: mulNode.inputs.map(io => { return { ...io } }),
     outputs: mulNode.outputs.map(io => { return { ...io } })
 }
@@ -214,7 +215,7 @@ export const mulEngineNode2: EngineNode = {
 export const divEngineNode1: EngineNode = {
     id: "divEngineNode1",
     configId: "divNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: divNode.inputs.map(io => { return { ...io } }),
     outputs: divNode.outputs.map(io => { return { ...io } })
 }
@@ -222,7 +223,7 @@ export const divEngineNode1: EngineNode = {
 export const divEngineNode2: EngineNode = {
     id: "divEngineNode2",
     configId: "divNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: divNode.inputs.map(io => { return { ...io } }),
     outputs: divNode.outputs.map(io => { return { ...io } })
 }
@@ -230,7 +231,7 @@ export const divEngineNode2: EngineNode = {
 export const signalEngineNode1: EngineNode = {
     id: "signalEngineNode1",
     configId: "signalNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: signalNode.inputs.map(io => { return { ...io } }),
     outputs: signalNode.outputs.map(io => { return { ...io } })
 }
@@ -238,7 +239,7 @@ export const signalEngineNode1: EngineNode = {
 export const signalEngineNode2: EngineNode = {
     id: "signalEngineNode2",
     configId: "signalNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: signalNode.inputs.map(io => { return { ...io } }),
     outputs: signalNode.outputs.map(io => { return { ...io } })
 }
@@ -246,7 +247,7 @@ export const signalEngineNode2: EngineNode = {
 export const signalEngineNode3: EngineNode = {
     id: "signalEngineNode3",
     configId: "signalNode",
-    alwaysUpdate: false,
+    updateType: updateType.NEVER,
     inputs: signalNode.inputs.map(io => { return { ...io } }),
     outputs: signalNode.outputs.map(io => { return { ...io } })
 }
