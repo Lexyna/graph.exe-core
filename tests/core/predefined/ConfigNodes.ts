@@ -127,6 +127,7 @@ export const constNode: ConfigNode = {
 
 export const addNode: ConfigNode = {
     id: "addNode",
+    alwaysUpdate: true,
     inputs: [numberIn, numberIn],
     outputs: [numberOut],
     exe: function (in1: EngineIO<null, number>, in2: EngineIO<null, number>, out: EngineIO<null, number>): void {
@@ -136,6 +137,7 @@ export const addNode: ConfigNode = {
 
 export const subNode: ConfigNode = {
     id: "subNode",
+    alwaysUpdate: true,
     inputs: [numberIn, numberIn],
     outputs: [numberOut],
     exe: function (in1: EngineIO<null, number>, in2: EngineIO<null, number>, out: EngineIO<null, number>): void {
@@ -155,6 +157,7 @@ export const mulNode: ConfigNode = {
 
 export const divNode: ConfigNode = {
     id: "divNode",
+    alwaysUpdate: true,
     inputs: [numberIn, numberIn],
     outputs: [numberOut],
     exe: function (in1: EngineIO<null, number>, in2: EngineIO<null, number>, out: EngineIO<null, number>): void {
