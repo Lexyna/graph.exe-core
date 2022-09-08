@@ -14,6 +14,48 @@ export const starterEngineNodeOUTPUT0: ConnectionDetails = {
     index: 0
 }
 
+export const updateTypeNEVEREngineNodeINPUT0: ConnectionDetails = {
+    ioId: "updateTypeNEVEREngineNodeINPUT0",
+    nodeId: "updateTypeNEVEREngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const updateTypeNEVEREngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "updateTypeNEVEREngineNodeOUTPUT0",
+    nodeId: "updateTypeNEVEREngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const updateTypeDYNAMICEngineNodeINPUT0: ConnectionDetails = {
+    ioId: "updateTypeDYNAMICEngineNodeINPUT0",
+    nodeId: "updateTypeDYNAMICEngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const updateTypeDYNAMICEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "updateTypeDYNAMICEngineNodeOUTPUT0",
+    nodeId: "updateTypeDYNAMICEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const updateTypeALWAYSEngineNodeINPUT0: ConnectionDetails = {
+    ioId: "updateTypeALWAYSEngineNodeINPUT0",
+    nodeId: "updateTypeALWAYSEngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const updateTypeALWAYSEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "updateTypeALWAYSEngineNodeOUTPUT0",
+    nodeId: "updateTypeALWAYSEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
 export const incrementTestValueEngineNodeINPUT0: ConnectionDetails = {
     ioId: "incrementTestValueEngineNodeINPUT0",
     nodeId: "incrementTestValueEngineNode",

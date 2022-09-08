@@ -1,6 +1,6 @@
 import { updateType } from "../../../src/core/nodes/ConfigNode";
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
-import { addNode, constNode, divNode, forNode, ifNode, incrementTestValueNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode } from "./ConfigNodes";
+import { addNode, constNode, divNode, forNode, ifNode, incrementTestValueNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
@@ -16,6 +16,30 @@ export const starterEngineNode: EngineNode = {
     updateType: updateType.NEVER,
     inputs: starterNode.inputs.map(io => { return { ...io } }),
     outputs: starterNode.outputs.map(io => { return { ...io } })
+}
+
+export const updateTypeNEVEREngineNode: EngineNode = {
+    id: "updateTypeNEVEREngineNode",
+    configId: "updateTypeNEVERNode",
+    updateType: updateType.NEVER,
+    inputs: updateTypeNEVERNode.inputs.map(io => { return { ...io } }),
+    outputs: updateTypeNEVERNode.outputs.map(io => { return { ...io } })
+}
+
+export const updateTypeDYNAMICEngineNode: EngineNode = {
+    id: "updateTypeDYNAMICEngineNode",
+    configId: "updateTypeDYNAMICNode",
+    updateType: updateType.DYNAMIC,
+    inputs: updateTypeDYNAMICNode.inputs.map(io => { return { ...io } }),
+    outputs: updateTypeDYNAMICNode.outputs.map(io => { return { ...io } })
+}
+
+export const updateTypeALWAYSEngineNode: EngineNode = {
+    id: "updateTypeALWAYSEngineNode",
+    configId: "updateTypeALWAYSNode",
+    updateType: updateType.ALWAYS,
+    inputs: updateTypeALWAYSNode.inputs.map(io => { return { ...io } }),
+    outputs: updateTypeALWAYSNode.outputs.map(io => { return { ...io } })
 }
 
 export const incrementTestValueEngineNode: EngineNode = {
@@ -255,6 +279,9 @@ export const signalEngineNode3: EngineNode = {
 export const engineNodeDict: EngineNodeDict = {
     "root": rootEngineNode,
     "starterEngineNode": starterEngineNode,
+    "updateTypeNEVEREngineNode": updateTypeNEVEREngineNode,
+    "updateTypeDYNAMICEngineNode": updateTypeDYNAMICEngineNode,
+    "updateTypeALWAYSEngineNode": updateTypeALWAYSEngineNode,
     "textHelloEngineNode": textHelloEngineNode,
     "textWorldEngineNode": textWorldEngineNode,
     "textCombineEngineNode1": textCombineEngineNode1,

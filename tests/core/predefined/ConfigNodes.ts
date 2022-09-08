@@ -30,6 +30,36 @@ export const starterNode: ConfigNode = {
     }
 }
 
+export const updateTypeNEVERNode: ConfigNode = {
+    id: "updateTypeNEVERNode",
+    inputs: [numberIn],
+    outputs: [numberOut],
+    updateType: updateType.NEVER,
+    exe: function (numberIn: EngineIO<null, number>, numberOut: EngineIO<null, number>): void {
+        numberOut.value = testValue;
+    }
+}
+
+export const updateTypeDYNAMICNode: ConfigNode = {
+    id: "updateTypeDYNAMICNode",
+    inputs: [numberIn],
+    outputs: [numberOut],
+    updateType: updateType.DYNAMIC,
+    exe: function (numberIn: EngineIO<null, number>, numberOut: EngineIO<null, number>): void {
+        numberOut.value = testValue;
+    }
+}
+
+export const updateTypeALWAYSNode: ConfigNode = {
+    id: "updateTypeDYNAMICNode",
+    inputs: [numberIn],
+    outputs: [numberOut],
+    updateType: updateType.ALWAYS,
+    exe: function (numberIn: EngineIO<null, number>, numberOut: EngineIO<null, number>): void {
+        numberOut.value = testValue;
+    }
+}
+
 export const incrementTestValueNode: ConfigNode = {
     id: "incrementTestValueNode",
     inputs: [signalIn],
@@ -177,6 +207,9 @@ export const signalNode: ConfigNode = {
 export const configDict: ConfigNodeDict = {
     "rootNode": rootNode,
     "starterNode": starterNode,
+    "updateTypeNEVERNode": updateTypeNEVERNode,
+    "updateTypeDYNAMICNode": updateTypeDYNAMICNode,
+    "updateTypeALWAYSNode": updateTypeALWAYSNode,
     "textNode": textNode,
     "textCombineNode": textCombineNode,
     "constNode": constNode,
