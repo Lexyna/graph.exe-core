@@ -18,11 +18,12 @@ interface NodeIoInfo {
     outputs: IoIdInfo[]
 }
 export interface GraphExe {
-    nodes: LogicNodeDict,
-    connections: EngineConnections,
-    entry: string,
-    calleeDict: CalleeDict
-    ignoreDict: CalleeDict
+    nodes: LogicNodeDict, //All executable nodes in the graph 
+    connections: EngineConnections, // connections within this graph
+    entry: string, // Entry of the graph (if any)
+    calleeDict: CalleeDict //Keeps track of which node has called other nodes
+    ignoreDict: CalleeDict //Circular dependencies that would trigger an endless loop
+    dependencyStack: boolean[] //autoUpdate stack used to decide if a next() action should be executed 
 }
 
 interface boolWrapper {
@@ -57,6 +58,8 @@ const resolveDependency = (node: LogicNode, graph: GraphExe) => {
 
         const dependencies: ConnectionDetails[] = connectionFinder(con, graph.connections);
 
+        graph.dependencyStack.push(true);
+
         dependencies.forEach(dep => {
 
             //execute the dependencyNode and set it's ioPorts value
@@ -66,6 +69,8 @@ const resolveDependency = (node: LogicNode, graph: GraphExe) => {
             node.inputs[con.index].value = graph.nodes[dep.nodeId].outputs[dep.index].value;
 
         })
+
+        graph.dependencyStack.pop();
 
     })
 }
@@ -81,6 +86,11 @@ export const next = (io: EngineIO<any, any>) => {
 
     if (logicIO.details.type !== CONNECTION_TYPE.OUTPUT) return;
 
+    if (logicIO.graph_ref.dependencyStack[logicIO.graph_ref.dependencyStack.length - 1] === true &&
+        logicIO.graph_ref.nodes[logicIO.details.nodeId].isTrigger === false) return;
+
+    logicIO.graph_ref.dependencyStack.push(false);
+
     const toTrigger: ConnectionDetails[] = connectionFinder(logicIO.details, logicIO.graph_ref.connections);
 
     //Stores the information that this node has called other nodes, preventing it from triggering again as a dependency 
@@ -94,6 +104,8 @@ export const next = (io: EngineIO<any, any>) => {
         executeNode(logicIO.graph_ref.nodes[con.nodeId], true, logicIO.graph_ref);
 
     })
+
+    logicIO.graph_ref.dependencyStack.pop();
 
     //Remove callee information from graph
     logicIO.graph_ref.calleeDict[logicIO.details.nodeId]--;

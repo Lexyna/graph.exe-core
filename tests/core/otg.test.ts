@@ -313,6 +313,36 @@ describe("otg executive graph test", () => {
     })
 
 
+    test("graph with dependency request not triggering next() action", () => {
+
+        connector(starterEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(ifEngineNodeOUTPUT1, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(forEngineNode1OUTPUT1, ifEngineNodeINPUT1, connectionDict);
+
+        connector(forEngineNode1OUTPUT0, incrementTestValueEngineNode2INPUT0, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+        expect(testValue).toBe(1);
+
+    })
+
+    test("graph with dependency request not triggering next() action 2", () => {
+
+        connector(starterEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(ifEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(forEngineNode1OUTPUT1, ifEngineNodeINPUT1, connectionDict);
+
+        connector(forEngineNode1OUTPUT0, incrementTestValueEngineNode2INPUT0, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+        expect(testValue).toBe(0);
+
+    })
+
 })
 
 describe("otg executive graph with forward loops", () => {

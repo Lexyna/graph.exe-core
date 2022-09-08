@@ -50,7 +50,8 @@ const createOTG = (
         connections: Object.assign({}, connections),
         entry: entry,
         calleeDict: {},
-        ignoreDict: {}
+        ignoreDict: {},
+        dependencyStack: []
     }
 
     const graphNodeDict = nodeConverter(otg, config, nodes);

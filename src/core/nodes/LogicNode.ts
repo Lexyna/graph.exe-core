@@ -5,7 +5,7 @@ import { LogicIO } from "../IO/LogicIO";
  */
 export interface LogicNode {
     id: string;
-    autoUpdate: boolean;
+    isTrigger: boolean;
     inputs: LogicIO<any, any>[];
     outputs: LogicIO<any, any>[];
     exe: (...io: LogicIO<any, any>[]) => void;

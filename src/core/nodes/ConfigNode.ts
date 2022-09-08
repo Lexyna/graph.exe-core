@@ -3,7 +3,7 @@ import { EngineIO } from "../IO/EngineIO";
 /**
  * ConfigNode defines the functionality of the node.
  * id: Unique config id
- * autoUpdate: If true, node will always recompute upon being requested as a dependency. Default: false
+ * isTrigger: If true, node will call next() action even if called as a dependency. Default: false
  * inputs: Ingoing connections of this node
  * outputs: Outgoing connections of this node
  * exe: function to execute when this node get triggered
@@ -12,7 +12,7 @@ import { EngineIO } from "../IO/EngineIO";
  */
 export interface ConfigNode {
     id: string;
-    autoUpdate?: boolean;
+    isTrigger?: boolean;
     inputs: EngineIO<any, any>[],
     outputs: EngineIO<any, any>[],
     exe: (...io: EngineIO<any, any>[]) => void;

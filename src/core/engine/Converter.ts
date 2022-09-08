@@ -48,11 +48,11 @@ export const nodeConverter = (graph: GraphExe, config: ConfigNodeDict, nodeDict:
             }
         })
 
-        const update = config[value.configId].autoUpdate;
+        const trigger = config[value.configId].isTrigger;
 
         const logicNode: LogicNode = {
             id: value.id,
-            autoUpdate: !(update === undefined) ? update : true,
+            isTrigger: !(trigger === undefined) ? trigger : false,
             inputs: graphIoInput,
             outputs: graphIoOutput,
             exe: config[value.configId].exe,
