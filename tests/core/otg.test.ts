@@ -279,6 +279,40 @@ describe("otg executive graph test", () => {
         expect(testLog).toEqual(res);
 
     })
+
+    test("branching path", () => {
+
+        connector(starterEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT1, ifEngineNodeINPUT1, connectionDict);
+
+        connector(ifEngineNodeOUTPUT0, incrementTestValueEngineNode2INPUT0, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+
+        expect(testValue).toBe(1);
+
+    })
+
+    test("branching path 2", () => {
+
+        connector(starterEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT1, ifEngineNodeINPUT1, connectionDict);
+
+        connector(ifEngineNodeOUTPUT1, incrementTestValueEngineNode2INPUT0, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+
+        expect(testValue).toBe(2);
+
+    })
+
+
 })
 
 describe("otg executive graph with forward loops", () => {
@@ -304,9 +338,10 @@ describe("otg executive graph with forward loops", () => {
 
         connector(incrementTestValueEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
 
-        connector(ifEngineNodeOUTPUT1, incrementTestValueEngineNodeINPUT0, connectionDict);
-
         connector(incrementTestValueEngineNodeOUTPUT1, ifEngineNodeINPUT1, connectionDict);
+
+        //this connects the loop
+        connector(ifEngineNodeOUTPUT1, incrementTestValueEngineNodeINPUT0, connectionDict);
 
         executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
 
@@ -322,6 +357,7 @@ describe("otg executive graph with forward loops", () => {
 
         connector(incrementTestValueEngineNodeOUTPUT1, ifEngineNodeINPUT1, connectionDict);
 
+        //this connects the loop
         connector(ifEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
 
         executeGraph(configDict, engineNodeDict, connectionDict, "forEngineNode1");
@@ -352,6 +388,7 @@ describe("otg executive graph with forward loops", () => {
 
         connector(incrementTestValueEngineNodeOUTPUT1, ifEngineNodeINPUT1, connectionDict);
 
+        //this connects the loop
         connector(ifEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
 
         executeGraph(configDict, engineNodeDict, connectionDict, "forEngineNode1");
@@ -377,11 +414,31 @@ describe("otg executive graph with forward loops", () => {
 
         connector(incrementTestValueEngineNode2OUTPUT1, ifEngineNode2INPUT1, connectionDict);
 
+        //this connects the loop
         connector(ifEngineNode2OUTPUT1, incrementTestValueEngineNode2INPUT0, connectionDict);
 
         executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
 
         expect(testValue).toEqual(4);
+
+    })
+
+    test("branching path with forward loop", () => {
+
+        connector(starterEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT1, ifEngineNodeINPUT1, connectionDict);
+
+        connector(ifEngineNodeOUTPUT0, incrementTestValueEngineNode2INPUT0, connectionDict);
+
+        //this connects the loop
+        connector(ifEngineNodeOUTPUT1, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+
+        expect(testValue).toBe(3);
 
     })
 
