@@ -579,4 +579,76 @@ describe("node update type tests", () => {
     })
 
 
+    test("test NEVER update option without for loop", () => {
+
+        const res: string[] = ["1"];
+
+        connector(starterEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(ifEngineNodeOUTPUT1, incrementTestValueEngineNode2INPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNode2OUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(numberToStringConverterEngineNode1OUTPUT0, logEngineNode1INPUT1, connectionDict);
+
+        connector(updateTypeNEVEREngineNodeOUTPUT0, numberToStringConverterEngineNode1INPUT0, connectionDict);
+
+        connector(updateTypeNEVEREngineNodeOUTPUT0, ifEngineNodeINPUT1, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+
+        expect(testLog).toEqual(res);
+
+    })
+
+    test("test DYNAMIC update option without for loop", () => {
+
+        const res: string[] = ["1"];
+
+        connector(starterEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(ifEngineNodeOUTPUT1, incrementTestValueEngineNode2INPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNode2OUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(numberToStringConverterEngineNode1OUTPUT0, logEngineNode1INPUT1, connectionDict);
+
+        connector(updateTypeDYNAMICEngineNodeOUTPUT0, numberToStringConverterEngineNode1INPUT0, connectionDict);
+
+        connector(updateTypeDYNAMICEngineNodeOUTPUT0, ifEngineNodeINPUT1, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+
+        expect(testLog).toEqual(res);
+
+    })
+
+    test("test DYNAMIC update option without for loop", () => {
+
+        const res: string[] = ["2"];
+
+        connector(starterEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT0, ifEngineNodeINPUT0, connectionDict);
+
+        connector(ifEngineNodeOUTPUT1, incrementTestValueEngineNode2INPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNode2OUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(numberToStringConverterEngineNode1OUTPUT0, logEngineNode1INPUT1, connectionDict);
+
+        connector(updateTypeALWAYSEngineNodeOUTPUT0, numberToStringConverterEngineNode1INPUT0, connectionDict);
+
+        connector(updateTypeALWAYSEngineNodeOUTPUT0, ifEngineNodeINPUT1, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+
+        expect(testLog).toEqual(res);
+
+    })
+
 })
