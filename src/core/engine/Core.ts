@@ -3,6 +3,7 @@ import { ConnectionDetails, CONNECTION_TYPE, EngineConnections, IoIdInfo } from 
 import { extractor, NodePorts } from "../connections/Extractor";
 import { EngineIO } from "../IO/EngineIO";
 import { LogicIO } from "../IO/LogicIO";
+import { updateType } from "../nodes/ConfigNode";
 import { LogicNode, LogicNodeDict } from "../nodes/LogicNode";
 
 /**
@@ -39,6 +40,7 @@ export const executeNode = (node: LogicNode, isTriggered: boolean, graph: GraphE
     resolveDependency(node, graph);
     if (graph.calleeDict[node.id] && !isTriggered) return;
     node.exe(...node.inputs, ...node.outputs);
+    node.computed = true;
 }
 
 /**
@@ -63,7 +65,20 @@ const resolveDependency = (node: LogicNode, graph: GraphExe) => {
         dependencies.forEach(dep => {
 
             //execute the dependencyNode and set it's ioPorts value
-            executeNode(graph.nodes[dep.nodeId], false, graph);
+            switch (graph.nodes[dep.nodeId].updateType) {
+                case updateType.NEVER:
+                    if (!graph.nodes[dep.nodeId].computed)
+                        executeNode(graph.nodes[dep.nodeId], false, graph);
+                    break;
+                case updateType.DYNAMIC:
+                    if (!graph.nodes[dep.nodeId].computed ||
+                        needsUpdate(graph.nodes[dep.nodeId], graph))
+                        executeNode(graph.nodes[dep.nodeId], false, graph);
+                    break;
+                case updateType.ALWAYS:
+                    executeNode(graph.nodes[dep.nodeId], false, graph);
+                    break;
+            }
 
             //assign the computed value to this input now
             node.inputs[con.index].value = graph.nodes[dep.nodeId].outputs[dep.index].value;
@@ -254,6 +269,34 @@ const traverseNodeInput = (nodeInfo: NodeIoInfo, connections: EngineConnections,
     }
 
     return foundLoop;
+}
+
+/**
+ * Return true if the input parameters for this node are different to it's set values, indicating that a change happened 
+ * @param node The node to check if their parameters are still up to date
+ * @param graph The graph this node is in
+ * @returns 
+ */
+const needsUpdate = (node: LogicNode, graph: GraphExe): boolean => {
+
+    const ports: NodePorts = extractor(node);
+
+    let needsUpdate: boolean = false;
+
+    for (let i = 0; i < ports.inputs.length; i++) {
+
+        const dependencies: ConnectionDetails[] = connectionFinder(ports.inputs[i], graph.connections);
+
+        if (dependencies.length == 0)
+            continue;
+
+        if (node.inputs[i].value !== graph.nodes[dependencies[0].nodeId].outputs[dependencies[0].index].value) {
+            needsUpdate = true;
+            break;
+        }
+    }
+
+    return needsUpdate;
 }
 
 /**

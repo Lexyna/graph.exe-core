@@ -1,6 +1,6 @@
 import { next } from "../../../src/core/engine/Core";
 import { EngineIO } from "../../../src/core/IO/EngineIO";
-import { ConfigNode, ConfigNodeDict } from "../../../src/core/nodes/ConfigNode";
+import { ConfigNode, ConfigNodeDict, updateType } from "../../../src/core/nodes/ConfigNode";
 import { numberIn, signalIn, stringIn } from "./InputPorts";
 import { numberOut, signalOut, stringOut } from "./OutputPorts";
 
@@ -91,6 +91,7 @@ export const ifNode: ConfigNode = {
 
 export const numberToStringConverterNode: ConfigNode = {
     id: "numberToStringConverterNode",
+    updateType: updateType.ALWAYS,
     inputs: [numberIn],
     outputs: [stringOut],
     exe: function (numberIn: EngineIO<null, number>, stringOut: EngineIO<null, string>) {
@@ -126,6 +127,7 @@ export const constNode: ConfigNode = {
 
 export const addNode: ConfigNode = {
     id: "addNode",
+    updateType: updateType.DYNAMIC,
     inputs: [numberIn, numberIn],
     outputs: [numberOut],
     exe: function (in1: EngineIO<null, number>, in2: EngineIO<null, number>, out: EngineIO<null, number>): void {
@@ -135,6 +137,7 @@ export const addNode: ConfigNode = {
 
 export const subNode: ConfigNode = {
     id: "subNode",
+    updateType: updateType.DYNAMIC,
     inputs: [numberIn, numberIn],
     outputs: [numberOut],
     exe: function (in1: EngineIO<null, number>, in2: EngineIO<null, number>, out: EngineIO<null, number>): void {
@@ -144,6 +147,7 @@ export const subNode: ConfigNode = {
 
 export const mulNode: ConfigNode = {
     id: "mulNode",
+    updateType: updateType.DYNAMIC,
     inputs: [numberIn, numberIn],
     outputs: [numberOut],
     exe: function (in1: EngineIO<null, number>, in2: EngineIO<null, number>, out: EngineIO<null, number>): void {
@@ -153,6 +157,7 @@ export const mulNode: ConfigNode = {
 
 export const divNode: ConfigNode = {
     id: "divNode",
+    updateType: updateType.DYNAMIC,
     inputs: [numberIn, numberIn],
     outputs: [numberOut],
     exe: function (in1: EngineIO<null, number>, in2: EngineIO<null, number>, out: EngineIO<null, number>): void {

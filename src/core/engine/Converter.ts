@@ -1,6 +1,6 @@
 import { CONNECTION_TYPE } from "../connections/EngineConnections";
 import { LogicIO } from "../IO/LogicIO";
-import { ConfigNodeDict } from "../nodes/ConfigNode";
+import { ConfigNodeDict, updateType } from "../nodes/ConfigNode";
 import { EngineNodeDict } from "../nodes/EngineNode";
 import { LogicNode, LogicNodeDict } from "../nodes/LogicNode";
 import { GraphExe } from "./Core";
@@ -49,10 +49,13 @@ export const nodeConverter = (graph: GraphExe, config: ConfigNodeDict, nodeDict:
         })
 
         const trigger = config[value.configId].isTrigger;
+        const update = config[value.configId].updateType;
 
         const logicNode: LogicNode = {
             id: value.id,
             isTrigger: !(trigger === undefined) ? trigger : false,
+            updateType: !(update === undefined) ? update : updateType.NEVER,
+            computed: false,
             inputs: graphIoInput,
             outputs: graphIoOutput,
             exe: config[value.configId].exe,

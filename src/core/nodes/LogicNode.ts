@@ -1,4 +1,5 @@
 import { LogicIO } from "../IO/LogicIO";
+import { updateType } from "./ConfigNode";
 
 /**
  * Similar to EngineNode, but store a OTG_IO instead of a Engine Node to work while executing the graph
@@ -6,6 +7,8 @@ import { LogicIO } from "../IO/LogicIO";
 export interface LogicNode {
     id: string;
     isTrigger: boolean;
+    updateType: updateType;
+    computed: boolean;
     inputs: LogicIO<any, any>[];
     outputs: LogicIO<any, any>[];
     exe: (...io: LogicIO<any, any>[]) => void;
