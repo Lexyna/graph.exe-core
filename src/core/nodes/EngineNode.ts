@@ -11,7 +11,7 @@ import { EngineIO } from "../IO/EngineIO";
 export interface EngineNode {
     id: string;
     configId: string;
-    autoUpdate: boolean;
+    alwaysUpdate: boolean;
     inputs: EngineIO<any, any>[];
     outputs: EngineIO<any, any>[];
 }

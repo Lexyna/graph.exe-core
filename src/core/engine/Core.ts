@@ -39,6 +39,7 @@ export const executeNode = (node: LogicNode, isTriggered: boolean, graph: GraphE
     resolveDependency(node, graph);
     if (graph.calleeDict[node.id] && !isTriggered) return;
     node.exe(...node.inputs, ...node.outputs);
+    node.computed = true;
 }
 
 /**
@@ -63,7 +64,8 @@ const resolveDependency = (node: LogicNode, graph: GraphExe) => {
         dependencies.forEach(dep => {
 
             //execute the dependencyNode and set it's ioPorts value
-            executeNode(graph.nodes[dep.nodeId], false, graph);
+            if (!graph.nodes[dep.nodeId].computed || graph.nodes[dep.nodeId].alwaysUpdate)
+                executeNode(graph.nodes[dep.nodeId], false, graph);
 
             //assign the computed value to this input now
             node.inputs[con.index].value = graph.nodes[dep.nodeId].outputs[dep.index].value;

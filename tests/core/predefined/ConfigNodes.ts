@@ -91,6 +91,7 @@ export const ifNode: ConfigNode = {
 
 export const numberToStringConverterNode: ConfigNode = {
     id: "numberToStringConverterNode",
+    alwaysUpdate: true,
     inputs: [numberIn],
     outputs: [stringOut],
     exe: function (numberIn: EngineIO<null, number>, stringOut: EngineIO<null, string>) {
@@ -144,6 +145,7 @@ export const subNode: ConfigNode = {
 
 export const mulNode: ConfigNode = {
     id: "mulNode",
+    alwaysUpdate: true,
     inputs: [numberIn, numberIn],
     outputs: [numberOut],
     exe: function (in1: EngineIO<null, number>, in2: EngineIO<null, number>, out: EngineIO<null, number>): void {

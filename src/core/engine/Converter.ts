@@ -49,10 +49,13 @@ export const nodeConverter = (graph: GraphExe, config: ConfigNodeDict, nodeDict:
         })
 
         const trigger = config[value.configId].isTrigger;
+        const update = config[value.configId].alwaysUpdate;
 
         const logicNode: LogicNode = {
             id: value.id,
             isTrigger: !(trigger === undefined) ? trigger : false,
+            alwaysUpdate: !(update === undefined) ? update : false,
+            computed: false,
             inputs: graphIoInput,
             outputs: graphIoOutput,
             exe: config[value.configId].exe,
