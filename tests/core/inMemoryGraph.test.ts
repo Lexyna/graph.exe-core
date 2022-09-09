@@ -293,3 +293,79 @@ describe("onInit & onDestroy tests for img", () => {
     })
 
 })
+
+describe("multiple inMemoryGraphs", () => {
+
+    let connectionDict1: EngineConnections;
+    let connectionDict2: EngineConnections;
+
+    const graphName1 = "inMemoryGraph";
+    const graphName2 = "inMemoryGraph2";
+
+    beforeEach(() => {
+        connectionDict1 = {
+            input: {},
+            output: {}
+        }
+
+        connectionDict2 = {
+            input: {},
+            output: {}
+        }
+
+        resetAll();
+        initializeNodeValues();
+        initializeNodeValues();
+    })
+
+    test("two listeners, in two separate graphs", () => {
+
+        const nodeDict1: EngineNodeDict = {
+            "keyListenerEngineNode1": keyListenerEngineNode1,
+            "logEngineNode1": logEngineNode1,
+            "textWorldEngineNode": textWorldEngineNode,
+        }
+
+        const nodeDict2: EngineNodeDict = {
+            "keyListenerEngineNode2": keyListenerEngineNode2,
+            "logEngineNode2": logEngineNode2,
+            "textHelloEngineNode": textHelloEngineNode,
+        }
+
+        const res: string[] = ["Hello ", "World"]
+
+        connector(keyListenerEngineNode1OUTPUT0, logEngineNode1INPUT0, connectionDict1);
+
+        connector(textWorldEngineNodeOUTPUT0, logEngineNode1INPUT1, connectionDict1);
+
+        connector(keyListenerEngineNode2OUTPUT0, logEngineNode2INPUT0, connectionDict2);
+
+        connector(textHelloEngineNodeOUTPUT0, logEngineNode2INPUT1, connectionDict2);
+
+        createGraph(configDict, nodeDict1, connectionDict1, graphName1);
+
+        expect(getAllInMemoryGraphs()[graphName1]).not.toBe(undefined);
+
+        createGraph(configDict, nodeDict2, connectionDict2, graphName2);
+
+        expect(fakeListener).not.toBe(null);
+        expect(fakeListener2).not.toBe(null);
+
+        fakeListener2();
+
+        fakeListener();
+
+        expect(testLog).toEqual(res);
+
+        deleteGraph(graphName1);
+
+        expect(getAllInMemoryGraphs()[graphName2]).not.toBe(undefined);
+
+        deleteGraph(graphName2);
+
+        expect(fakeListener).toBe(null);
+        expect(fakeListener2).toBe(null);
+
+    })
+
+})
