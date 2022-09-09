@@ -8,9 +8,14 @@ export let testValue: number = 0;
 export let testString: string = "";
 export let testLog: string[] = [];
 
+export let initLog: string[] = [];
+export let destroyLog: string[] = [];
+
 export const resetTestValue = () => { testValue = 0 }
 export const resetTestString = () => { testString = "" }
 export const resetTestLog = () => { testLog = [] }
+export const resetInitLog = () => { initLog = [] }
+export const resetDestroyLog = () => { destroyLog = [] }
 
 export const rootNode: ConfigNode = {
     id: "rootNode",
@@ -26,6 +31,45 @@ export const starterNode: ConfigNode = {
     inputs: [],
     outputs: [signalOut],
     exe: function (signalOut: EngineIO<null, null>): void {
+        next(signalOut);
+    }
+}
+
+export const initFuncNode: ConfigNode = {
+    id: "initFuncNode",
+    inputs: [signalIn],
+    outputs: [signalOut],
+    onInit: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>): void {
+        initLog.push("init")
+    },
+    exe: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>): void {
+        next(signalOut);
+    }
+}
+
+export const destroyFuncNode: ConfigNode = {
+    id: "destroyFuncNode",
+    inputs: [signalIn],
+    outputs: [signalOut],
+    onDestroy: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>): void {
+        destroyLog.push("destroy")
+    },
+    exe: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>): void {
+        next(signalOut);
+    }
+}
+
+export const initDestroyFuncNode: ConfigNode = {
+    id: "initDestroyFuncNode",
+    inputs: [signalIn],
+    outputs: [signalOut],
+    onInit: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>): void {
+        initLog.push("init")
+    },
+    onDestroy: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>): void {
+        destroyLog.push("destroy")
+    },
+    exe: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>): void {
         next(signalOut);
     }
 }
@@ -207,6 +251,9 @@ export const signalNode: ConfigNode = {
 export const configDict: ConfigNodeDict = {
     "rootNode": rootNode,
     "starterNode": starterNode,
+    "initFuncNode": initFuncNode,
+    "destroyFuncNode": destroyFuncNode,
+    "initDestroyFuncNode": initDestroyFuncNode,
     "updateTypeNEVERNode": updateTypeNEVERNode,
     "updateTypeDYNAMICNode": updateTypeDYNAMICNode,
     "updateTypeALWAYSNode": updateTypeALWAYSNode,

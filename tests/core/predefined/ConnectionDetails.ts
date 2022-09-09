@@ -7,6 +7,48 @@ export const rootINPUT0: ConnectionDetails = {
     index: 0
 }
 
+export const initEngineNode1INPUT0: ConnectionDetails = {
+    ioId: "initEngineNode1INPUT0",
+    nodeId: "initEngineNode1",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const initEngineNode1OUTPUT0: ConnectionDetails = {
+    ioId: "initEngineNode1OUTPUT0",
+    nodeId: "initEngineNode1",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const destroyEngineNode1INPUT0: ConnectionDetails = {
+    ioId: "destroyEngineNode1INPUT0",
+    nodeId: "destroyEngineNode1",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const destroyEngineNode1OUTPUT0: ConnectionDetails = {
+    ioId: "destroyEngineNode1OUTPUT0",
+    nodeId: "destroyEngineNode1",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const initDestroyEngineNodeINPUT0: ConnectionDetails = {
+    ioId: "initDestroyEngineNodeINPUT0",
+    nodeId: "initDestroyEngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const initDestroyEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "initDestroyEngineNodeOUTPUT0",
+    nodeId: "initDestroyEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
 export const starterEngineNodeOUTPUT0: ConnectionDetails = {
     ioId: "starterEngineNodeOUTPUT0",
     nodeId: "starterEngineNode",

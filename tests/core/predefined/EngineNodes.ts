@@ -1,6 +1,6 @@
 import { updateType } from "../../../src/core/nodes/ConfigNode";
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
-import { addNode, constNode, divNode, forNode, ifNode, incrementTestValueNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode } from "./ConfigNodes";
+import { addNode, constNode, destroyFuncNode, divNode, forNode, ifNode, incrementTestValueNode, initDestroyFuncNode, initFuncNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
@@ -16,6 +16,30 @@ export const starterEngineNode: EngineNode = {
     updateType: updateType.NEVER,
     inputs: starterNode.inputs.map(io => { return { ...io } }),
     outputs: starterNode.outputs.map(io => { return { ...io } })
+}
+
+export const initEngineNode1: EngineNode = {
+    id: "initEngineNode1",
+    configId: "initFuncNode",
+    updateType: updateType.NEVER,
+    inputs: initFuncNode.inputs.map(io => { return { ...io } }),
+    outputs: initFuncNode.outputs.map(io => { return { ...io } })
+}
+
+export const destroyEngineNode1: EngineNode = {
+    id: "destroyEngineNode1",
+    configId: "destroyFuncNode",
+    updateType: updateType.NEVER,
+    inputs: destroyFuncNode.inputs.map(io => { return { ...io } }),
+    outputs: destroyFuncNode.outputs.map(io => { return { ...io } })
+}
+
+export const initDestroyEngineNode: EngineNode = {
+    id: "initDestroyEngineNode",
+    configId: "initDestroyFuncNode",
+    updateType: updateType.NEVER,
+    inputs: initDestroyFuncNode.inputs.map(io => { return { ...io } }),
+    outputs: initDestroyFuncNode.outputs.map(io => { return { ...io } })
 }
 
 export const updateTypeNEVEREngineNode: EngineNode = {
@@ -279,6 +303,9 @@ export const signalEngineNode3: EngineNode = {
 export const engineNodeDict: EngineNodeDict = {
     "root": rootEngineNode,
     "starterEngineNode": starterEngineNode,
+    "initEngineNode1": initEngineNode1,
+    "destroyEngineNode1": destroyEngineNode1,
+    "initDestroyEngineNode": initDestroyEngineNode,
     "updateTypeNEVEREngineNode": updateTypeNEVEREngineNode,
     "updateTypeDYNAMICEngineNode": updateTypeDYNAMICEngineNode,
     "updateTypeALWAYSEngineNode": updateTypeALWAYSEngineNode,
