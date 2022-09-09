@@ -7,6 +7,21 @@ export const rootINPUT0: ConnectionDetails = {
     index: 0
 }
 
+export const keyListenerEngineNode1OUTPUT0: ConnectionDetails = {
+    ioId: "keyListenerEngineNode1OUTPUT0",
+    nodeId: "keyListenerEngineNode1",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+export const keyListenerEngineNode2OUTPUT0: ConnectionDetails = {
+    ioId: "keyListenerEngineNode2OUTPUT0",
+    nodeId: "keyListenerEngineNode2",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
+
 export const initEngineNode1INPUT0: ConnectionDetails = {
     ioId: "initEngineNode1INPUT0",
     nodeId: "initEngineNode1",

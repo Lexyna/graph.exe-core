@@ -1,6 +1,6 @@
 import { updateType } from "../../../src/core/nodes/ConfigNode";
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
-import { addNode, constNode, destroyFuncNode, divNode, forNode, ifNode, incrementTestValueNode, initDestroyFuncNode, initFuncNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode } from "./ConfigNodes";
+import { addNode, constNode, destroyFuncNode, divNode, forNode, ifNode, incrementTestValueNode, initDestroyFuncNode, initFuncNode, keyListenerNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
@@ -16,6 +16,24 @@ export const starterEngineNode: EngineNode = {
     updateType: updateType.NEVER,
     inputs: starterNode.inputs.map(io => { return { ...io } }),
     outputs: starterNode.outputs.map(io => { return { ...io } })
+}
+
+//not in enginNode Dicts
+export const keyListenerEngineNode1: EngineNode = {
+    id: "keyListenerEngineNode1",
+    configId: "keyListenerNode",
+    updateType: updateType.NEVER,
+    inputs: keyListenerNode.inputs.map(io => { return { ...io } }),
+    outputs: keyListenerNode.outputs.map(io => { return { ...io } })
+}
+
+//not in enginNode Dicts
+export const keyListenerEngineNode2: EngineNode = {
+    id: "keyListenerEngineNode2",
+    configId: "keyListenerNode2",
+    updateType: updateType.NEVER,
+    inputs: keyListenerNode.inputs.map(io => { return { ...io } }),
+    outputs: keyListenerNode.outputs.map(io => { return { ...io } })
 }
 
 export const initEngineNode1: EngineNode = {

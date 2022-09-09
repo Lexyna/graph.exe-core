@@ -11,11 +11,27 @@ export let testLog: string[] = [];
 export let initLog: string[] = [];
 export let destroyLog: string[] = [];
 
+export let fakeListener: any = null;
+export let fakeListener2: any = null;
+
+export const resetAll = () => {
+    resetTestValue();
+    resetTestString();
+    resetTestLog();
+    resetInitLog();
+    resetDestroyLog();
+    resetEventListener();
+}
+
 export const resetTestValue = () => { testValue = 0 }
 export const resetTestString = () => { testString = "" }
 export const resetTestLog = () => { testLog = [] }
 export const resetInitLog = () => { initLog = [] }
 export const resetDestroyLog = () => { destroyLog = [] }
+export const resetEventListener = () => {
+    fakeListener = null;
+    fakeListener2 = null;
+}
 
 export const rootNode: ConfigNode = {
     id: "rootNode",
@@ -32,6 +48,42 @@ export const starterNode: ConfigNode = {
     outputs: [signalOut],
     exe: function (signalOut: EngineIO<null, null>): void {
         next(signalOut);
+    }
+}
+
+export const keyListenerNode: ConfigNode = {
+    id: "keyListenerNode",
+    inputs: [],
+    outputs: [signalOut],
+    onInit: function (signalOut: EngineIO<null, null>): void {
+        const myKeyListener = () => {
+            next(signalOut);
+        }
+        fakeListener = myKeyListener
+        //addEventListener("keypress", myKeyListener);
+    },
+    onDestroy: function (signalOut: EngineIO<null, null>): void {
+        fakeListener = null;
+        //removeEventListener("keypress", listenerWrapper);
+    },
+    exe: function (signalOut: EngineIO<null, null>): void {
+    }
+}
+
+export const keyListenerNode2: ConfigNode = {
+    id: "keyListenerNode2",
+    inputs: [],
+    outputs: [signalOut],
+    onInit: function (signalOut: EngineIO<null, null>): void {
+        const myKeyListener2 = () => {
+            next(signalOut);
+        }
+        fakeListener2 = myKeyListener2
+    },
+    onDestroy: function (signalOut: EngineIO<null, null>): void {
+        fakeListener2 = null;
+    },
+    exe: function (signalOut: EngineIO<null, null>): void {
     }
 }
 
@@ -270,5 +322,7 @@ export const configDict: ConfigNodeDict = {
     "forNodeTrigger": forNodeTrigger,
     "ifNode": ifNode,
     "incrementTestValueNode": incrementTestValueNode,
-    "numberToStringConverterNode": numberToStringConverterNode
+    "numberToStringConverterNode": numberToStringConverterNode,
+    "keyListenerNode": keyListenerNode,
+    "keyListenerNode2": keyListenerNode2
 }
