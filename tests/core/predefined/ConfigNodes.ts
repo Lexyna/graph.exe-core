@@ -1,4 +1,4 @@
-import { next } from "../../../src/core/engine/Core";
+import { getNodeId, next } from "../../../src/core/engine/Core";
 import { EngineIO } from "../../../src/core/IO/EngineIO";
 import { ConfigNode, ConfigNodeDict, updateType } from "../../../src/core/nodes/ConfigNode";
 import { numberIn, signalIn, stringIn } from "./InputPorts";
@@ -186,6 +186,16 @@ export const logNode: ConfigNode = {
     }
 }
 
+export const logIdNode: ConfigNode = {
+    id: "logIdNode",
+    inputs: [signalIn],
+    outputs: [signalOut],
+    exe: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>): void {
+        testLog.push(getNodeId(signalIn));
+        next(signalOut);
+    }
+}
+
 export const forNode: ConfigNode = {
     id: "forNode",
     inputs: [signalIn],
@@ -334,5 +344,6 @@ export const configDict: ConfigNodeDict = {
     "numberToStringConverterNode": numberToStringConverterNode,
     "keyListenerNode": keyListenerNode,
     "keyListenerNode2": keyListenerNode2,
-    "wrongNextNode": wrongNextNode
+    "wrongNextNode": wrongNextNode,
+    "logIdNode": logIdNode
 }

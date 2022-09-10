@@ -36,7 +36,7 @@ interface boolWrapper {
  * @param node The to be executed node
  * @param isTriggered allows node on stack to be explicitly called via the next() function
  */
-export const executeNode = (node: LogicNode, isTriggered: boolean, graph: GraphExe,) => {
+export const executeNode = (node: LogicNode, isTriggered: boolean, graph: GraphExe) => {
     resolveDependency(node, graph);
     if (graph.calleeDict[node.id] && !isTriggered) return;
     node.exe(...node.inputs, ...node.outputs);
@@ -127,6 +127,18 @@ export const next = (io: EngineIO<any, any>) => {
     if (logicIO.graph_ref.calleeDict[logicIO.details.nodeId] === 0)
         delete logicIO.graph_ref.calleeDict[logicIO.details.nodeId];
 
+}
+
+/**
+ * Returns the id of the parent EngineNode
+ * @param io IO port of the EngineNode
+ * @returns 
+ */
+export const getNodeId = (io: EngineIO<any, any>): string => {
+    //Function definition expects EngineIO, allowing us to call the function inside node function. But all EngineIO's 
+    //are converted to LogicIO's at runtime, allowing us to make this cast 
+    const logicIO: LogicIO<any, any> = io as LogicIO<any, any>;
+    return logicIO.details.nodeId;
 }
 
 /**
