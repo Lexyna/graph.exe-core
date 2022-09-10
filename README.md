@@ -21,10 +21,10 @@ WIP
 
 WIP
 
-## Guides & usage
+# Guides & usage
 
 Refer to [wip] for more information and a quickstart guide.
 
 # License
 
-MIT © Lexyna
+MIT © [Lexyna](https://github.com/Lexyna)
