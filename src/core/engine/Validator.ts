@@ -55,7 +55,7 @@ export const validator = (
             return;
         }
 
-        if (!nodes[value.self.nodeId].inputs[value.self.index]) {
+        if (!nodes[value.self.nodeId] || !nodes[value.self.nodeId].inputs[value.self.index]) {
             isValidInputMapping = false;
             return;
         }
@@ -65,6 +65,7 @@ export const validator = (
 
         for (let io of value.connections)
             if (!connections.output[io.ioId]) isValidInputMapping = false;
+            else if (!nodes[connections.output[io.ioId].self.nodeId]) { isValidInputMapping = false; return; }
             else if (!nodes[connections.output[io.ioId].self.nodeId].outputs[connections.output[io.ioId].self.index]) isValidInputMapping = false;
             else if (
                 nodes[connections.output[io.ioId].self.nodeId].outputs[connections.output[io.ioId].self.index].type !=
@@ -90,7 +91,7 @@ export const validator = (
             return;
         }
 
-        if (!nodes[value.self.nodeId].outputs[value.self.index]) {
+        if (!nodes[value.self.nodeId] || !nodes[value.self.nodeId].outputs[value.self.index]) {
             isValidOutputMapping = false;
             return;
         }

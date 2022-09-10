@@ -51,6 +51,15 @@ export const starterNode: ConfigNode = {
     }
 }
 
+export const wrongNextNode: ConfigNode = {
+    id: "wrongNextNode",
+    inputs: [signalIn],
+    outputs: [signalOut],
+    exe: function (signalIn: EngineIO<null, null>, signalOut: EngineIO<null, null>): void {
+        next(signalIn);
+    }
+}
+
 export const keyListenerNode: ConfigNode = {
     id: "keyListenerNode",
     inputs: [],
@@ -324,5 +333,6 @@ export const configDict: ConfigNodeDict = {
     "incrementTestValueNode": incrementTestValueNode,
     "numberToStringConverterNode": numberToStringConverterNode,
     "keyListenerNode": keyListenerNode,
-    "keyListenerNode2": keyListenerNode2
+    "keyListenerNode2": keyListenerNode2,
+    "wrongNextNode": wrongNextNode
 }

@@ -5,6 +5,7 @@ import { EngineNodeDict } from "../../src/core/nodes/EngineNode"
 import { configDict, destroyLog, fakeListener, fakeListener2, initLog, resetAll, testLog, testValue } from "./predefined/ConfigNodes"
 import { destroyEngineNode1INPUT0, incrementTestValueEngineNodeINPUT0, initDestroyEngineNodeINPUT0, initEngineNode1INPUT0, keyListenerEngineNode1OUTPUT0, keyListenerEngineNode2OUTPUT0, logEngineNode1INPUT0, logEngineNode1INPUT1, logEngineNode2INPUT0, logEngineNode2INPUT1, starterEngineNodeOUTPUT0, textHelloEngineNodeOUTPUT0, textWorldEngineNodeOUTPUT0 } from "./predefined/ConnectionDetails"
 import { destroyEngineNode1, engineNodeDict, incrementTestValueEngineNode, initDestroyEngineNode, initEngineNode1, initializeNodeValues, keyListenerEngineNode1, keyListenerEngineNode2, logEngineNode1, logEngineNode2, starterEngineNode, textHelloEngineNode, textWorldEngineNode } from "./predefined/EngineNodes"
+import { tooManyOutgoingConnection } from "./predefined/InvalidConnections"
 import { simpleValidConnection } from "./predefined/ValidConnections"
 
 describe("create and destroy IMG", () => {
@@ -16,6 +17,41 @@ describe("create and destroy IMG", () => {
         createGraph(configDict, engineNodeDict, simpleValidConnection, graphName);
 
         expect(getAllInMemoryGraphs()[graphName]).not.toBe(undefined)
+
+        deleteGraph(graphName);
+
+        expect(getAllInMemoryGraphs()[graphName]).toBe(undefined)
+
+    })
+
+    test("create same graph twice", () => {
+
+        const graphName: string = "test#1";
+
+        const g1 = createGraph(configDict, engineNodeDict, simpleValidConnection, graphName);
+
+        const g2 = createGraph(configDict, engineNodeDict, simpleValidConnection, graphName);
+
+        expect(g1).toBe(true);
+        expect(g2).toBe(false);
+
+        expect(getAllInMemoryGraphs()[graphName]).not.toBe(undefined)
+
+        deleteGraph(graphName);
+
+        expect(getAllInMemoryGraphs()[graphName]).toBe(undefined)
+
+    })
+
+    test("create graph with invalid configuration", () => {
+
+        const graphName: string = "test#1";
+
+        const ret = createGraph(configDict, engineNodeDict, tooManyOutgoingConnection, graphName);
+
+        expect(ret).toBe(false);
+
+        expect(getAllInMemoryGraphs()[graphName]).toBe(undefined)
 
         deleteGraph(graphName);
 

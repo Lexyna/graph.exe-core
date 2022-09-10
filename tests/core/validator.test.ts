@@ -1,9 +1,10 @@
 import { connector } from "../../src/core/connections/Connector"
-import { EngineConnections } from "../../src/core/connections/EngineConnections"
+import { CONNECTION_TYPE, EngineConnections } from "../../src/core/connections/EngineConnections"
 import { validator } from "../../src/core/engine/Validator"
+import { EngineNodeDict } from "../../src/core/nodes/EngineNode"
 import { configDict } from "./predefined/ConfigNodes"
-import { signalEngineNode1INPUT0, signalEngineNode2OUTPUT0, signalEngineNode3INPUT0, signalEngineNode3OUTPUT0 } from "./predefined/ConnectionDetails"
-import { engineNodeDict } from "./predefined/EngineNodes"
+import { constFiveEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, incrementTestValueEngineNodeOUTPUT0, logEngineNode1INPUT0, logEngineNode1INPUT1, logEngineNode1OUTPUT0, signalEngineNode1INPUT0, signalEngineNode2OUTPUT0, signalEngineNode3INPUT0, signalEngineNode3OUTPUT0, starterEngineNodeOUTPUT0 } from "./predefined/ConnectionDetails"
+import { engineNodeDict, incrementTestValueEngineNode, starterEngineNode } from "./predefined/EngineNodes"
 import {
     doubleEntryIngoingConnection,
     doubleEntryOutgoingConnection2,
@@ -155,6 +156,94 @@ describe("validator test - invalid graphs", () => {
         expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(false);
 
     })
+
+    test("missing input Node", () => {
+
+        const nodeDict: EngineNodeDict = {
+            "starterEngineNode": starterEngineNode,
+            "incrementTestValueEngineNode": incrementTestValueEngineNode
+        }
+
+        const connectionDict: EngineConnections = {
+            input: {},
+            output: {}
+        }
+
+        connector(starterEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(incrementTestValueEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        expect(validator(configDict, nodeDict, connectionDict, "starterEngineNode")).toBe(false);
+
+
+    })
+
+    test("missing output Node", () => {
+
+        const nodeDict: EngineNodeDict = {
+            "starterEngineNode": starterEngineNode,
+            "incrementTestValueEngineNode": incrementTestValueEngineNode,
+        }
+
+        const connectionDict: EngineConnections = {
+            input: {},
+            output: {}
+        }
+
+        connector(starterEngineNodeOUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        connector(logEngineNode1OUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
+
+        expect(validator(configDict, nodeDict, connectionDict, "starterEngineNode")).toBe(false);
+
+
+    })
+
+    test("input has invalid connection type to output", () => {
+
+        const connectionDict: EngineConnections = {
+            input: {},
+            output: {}
+        }
+
+        connector(starterEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(constFiveEngineNodeOUTPUT0, logEngineNode1INPUT1, connectionDict);
+
+        expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(false);
+
+
+    })
+
+    test("output has wrong index", () => {
+
+        const connectionDict: EngineConnections = {
+            input: {},
+            output: {
+                "starterEngineNodeOUTPUT1": {
+                    self: {
+                        ioId: "starterEngineNodeOUTPUT1",
+                        nodeId: "starterEngineNode",
+                        type: CONNECTION_TYPE.OUTPUT,
+                        index: 1
+                    }, connections: [
+                        {
+                            ioId: "rootINPUT0",
+                            nodeId: "root",
+                            type: CONNECTION_TYPE.INPUT,
+                            index: 0,
+                        }
+                    ]
+                }
+            }
+        }
+
+        connector(starterEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        expect(validator(configDict, engineNodeDict, connectionDict, "starterEngineNode")).toBe(false);
+
+    })
+
 })
 
 describe("validator test - valid graphs", () => {
