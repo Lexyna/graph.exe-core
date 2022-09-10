@@ -1,6 +1,6 @@
 import { updateType } from "../../../src/core/nodes/ConfigNode";
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
-import { addNode, constNode, destroyFuncNode, divNode, forNode, ifNode, incrementTestValueNode, initDestroyFuncNode, initFuncNode, keyListenerNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode } from "./ConfigNodes";
+import { addNode, constNode, destroyFuncNode, divNode, forNode, ifNode, incrementTestValueNode, initDestroyFuncNode, initFuncNode, keyListenerNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode, wrongNextNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
@@ -16,6 +16,14 @@ export const starterEngineNode: EngineNode = {
     updateType: updateType.NEVER,
     inputs: starterNode.inputs.map(io => { return { ...io } }),
     outputs: starterNode.outputs.map(io => { return { ...io } })
+}
+
+export const wrongNextEngineNode: EngineNode = {
+    id: "wrongNextEngineNode",
+    configId: "wrongNextNode",
+    updateType: updateType.NEVER,
+    inputs: wrongNextNode.inputs.map(io => { return { ...io } }),
+    outputs: wrongNextNode.outputs.map(io => { return { ...io } })
 }
 
 //not in enginNode Dicts
@@ -355,7 +363,8 @@ export const engineNodeDict: EngineNodeDict = {
     "incrementTestValueEngineNode2": incrementTestValueEngineNode2,
     "numberToStringConverterEngineNode1": numberToStringConverterEngineNode1,
     "ifEngineNode": ifEngineNode,
-    "ifEngineNode2": ifEngineNode2
+    "ifEngineNode2": ifEngineNode2,
+    "wrongNextEngineNode": wrongNextEngineNode
 }
 
 export const initializeNodeValues = () => {

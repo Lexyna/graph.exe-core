@@ -7,6 +7,20 @@ export const rootINPUT0: ConnectionDetails = {
     index: 0
 }
 
+export const wrongNextEngineNodeINPUT0: ConnectionDetails = {
+    ioId: "wrongNextEngineNodeINPUT0",
+    nodeId: "wrongNextEngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0,
+}
+
+export const wrongNextEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "wrongNextEngineNodeOUTPUT0",
+    nodeId: "wrongNextEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0,
+}
+
 export const keyListenerEngineNode1OUTPUT0: ConnectionDetails = {
     ioId: "keyListenerEngineNode1OUTPUT0",
     nodeId: "keyListenerEngineNode1",

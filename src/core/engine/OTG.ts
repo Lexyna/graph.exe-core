@@ -18,10 +18,10 @@ export const executeGraph = (
     nodes: EngineNodeDict,
     connections: EngineConnections,
     entry: string,
-): void => {
+): boolean => {
 
     if (!validator(config, nodes, connections, entry))
-        return;
+        return false;
 
     const oneTimeGraph: GraphExe = createOTG(config, nodes, connections, entry);
 
@@ -36,6 +36,8 @@ export const executeGraph = (
         if (node.onDestroy)
             node.onDestroy(...node.inputs, ...node.outputs)
     })
+
+    return true;
 }
 
 const createOTG = (

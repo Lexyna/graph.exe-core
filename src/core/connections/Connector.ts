@@ -52,26 +52,5 @@ export const connector = (outputDetails: ConnectionDetails, inputDetails: Connec
         return true;
     }
 
-    //Input and output are registered 
-    if (inputExists && outputExists) {
-
-        let isDuplicate = false;
-
-        input.connections.forEach(con => {
-            if (con.ioId === inputDetails.ioId) isDuplicate = true
-        })
-
-        output.connections.forEach(con => {
-            if (con.ioId === outputDetails.ioId) isDuplicate = true
-        })
-
-        if (isDuplicate) return false;
-
-        input.connections.push(outputDetails);
-        output.connections.push(inputDetails);
-
-        return true;
-    }
-
     return false;
 }

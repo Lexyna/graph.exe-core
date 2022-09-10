@@ -1,6 +1,7 @@
 import { connector } from "../../src/core/connections/Connector"
 import { splitter } from "../../src/core/connections/Splitter"
 import { addEngineNode1OUTPUT0, addEngineNode2INPUT1, constFiveEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, rootINPUT0 } from "./predefined/ConnectionDetails"
+import { missingIngoingConnection, missingOutgoingConnection } from "./predefined/InvalidConnections"
 import { addingThreeNumberConnectionAfterSplit2, addingTwoNumberConnectionAfterSplit1 } from "./predefined/splitterConnections"
 import { addingThreeNumberConnection, addingTwoNumberConnection } from "./predefined/ValidConnections"
 
@@ -73,6 +74,22 @@ describe("Splitter tests", () => {
 
         expect(connectionDict).toEqual(res);
         expect(success).toBe(true);
+
+    })
+
+    test("split connection without input", () => {
+
+        const ret = splitter(rootINPUT0, constOneEngineNodeOUTPUT0, missingIngoingConnection);
+
+        expect(ret).toBe(false);
+
+    })
+
+    test("split connection without output", () => {
+
+        const ret = splitter(rootINPUT0, constOneEngineNodeOUTPUT0, missingOutgoingConnection);
+
+        expect(ret).toBe(false);
 
     })
 
