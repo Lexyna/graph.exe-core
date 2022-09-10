@@ -2,7 +2,7 @@ import { connector } from "../../src/core/connections/Connector";
 import { EngineConnections } from "../../src/core/connections/EngineConnections";
 import { validator } from "../../src/core/engine/Validator";
 import { configDict } from "./predefined/ConfigNodes";
-import { addEngineNode1INPUT0, addEngineNode1INPUT1, addEngineNode1OUTPUT0, constFiveEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, rootINPUT0 } from "./predefined/ConnectionDetails";
+import { addEngineNode1INPUT0, addEngineNode1INPUT1, addEngineNode1OUTPUT0, constFiveEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, logEngineNode1INPUT0, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, rootINPUT0, starterEngineNodeOUTPUT0 } from "./predefined/ConnectionDetails";
 import { engineNodeDict } from "./predefined/EngineNodes";
 
 describe("connector test", () => {
@@ -52,6 +52,14 @@ describe("connector test", () => {
         connector(constFiveEngineNodeOUTPUT0, mulEngineNode1INPUT1, connectionDict);
 
         expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(true);
+
+    })
+
+    test("create connection that already exists", () => {
+
+        connector(starterEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        expect(connector(starterEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict)).toBe(false);
 
     })
 
