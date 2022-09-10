@@ -211,6 +211,20 @@ export const logEngineNode2OUTPUT0: ConnectionDetails = {
     index: 0
 }
 
+export const logIdEngineNodeINPUT0: ConnectionDetails = {
+    ioId: "logIdEngineNodeINPUT0",
+    nodeId: "logIdEngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const logIdEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "logIdEngineNodeOUTPUT0",
+    nodeId: "logIdEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
 export const forEngineNode1INPUT0: ConnectionDetails = {
     ioId: "forEngineNode1INPUT0",
     nodeId: "forEngineNode1",

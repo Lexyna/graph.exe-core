@@ -36,7 +36,7 @@ interface boolWrapper {
  * @param node The to be executed node
  * @param isTriggered allows node on stack to be explicitly called via the next() function
  */
-export const executeNode = (node: LogicNode, isTriggered: boolean, graph: GraphExe,) => {
+export const executeNode = (node: LogicNode, isTriggered: boolean, graph: GraphExe) => {
     resolveDependency(node, graph);
     if (graph.calleeDict[node.id] && !isTriggered) return;
     node.exe(...node.inputs, ...node.outputs);
