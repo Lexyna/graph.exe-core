@@ -11,6 +11,7 @@ import { validator } from "./Validator";
  * @param nodes 
  * @param connections 
  * @param entry 
+ * @param preservationMode
  * @returns 
  */
 export const executeGraph = (
@@ -18,6 +19,7 @@ export const executeGraph = (
     nodes: EngineNodeDict,
     connections: EngineConnections,
     entry: string,
+    preservationMode: boolean = true
 ): boolean => {
 
     if (!validator(config, nodes, connections, entry))
@@ -36,6 +38,19 @@ export const executeGraph = (
         if (node.onDestroy)
             node.onDestroy(...node.inputs, ...node.outputs)
     })
+
+    if (!preservationMode)
+        Object.entries(oneTimeGraph.nodes).forEach(([key, value]) => {
+            if (!(key in nodes)) return;
+            value.inputs.forEach((io, index) => {
+                nodes[key].inputs[index].value = io.value;
+                nodes[key].inputs[index].data = io.data;
+            });
+            value.outputs.forEach((io, index) => {
+                nodes[key].outputs[index].value = io.value;
+                nodes[key].outputs[index].data = io.data;
+            });
+        })
 
     return true;
 }
