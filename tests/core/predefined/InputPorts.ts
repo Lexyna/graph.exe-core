@@ -1,6 +1,23 @@
 import { EngineIO } from "../../../src/core/IO/EngineIO";
 import { CON_MAPPING } from "../../../src/core/IO/IOMapping";
 
+export interface dataTest {
+    value: number
+}
+
+export const numberWithDataOut: EngineIO<dataTest, number> = {
+    type: "number",
+    mapping: CON_MAPPING.SINGLE,
+    data: { value: 0 },
+    value: 0
+}
+
+export const numberWithDataIn: EngineIO<dataTest, number> = {
+    type: "number",
+    mapping: CON_MAPPING.SINGLE,
+    data: { value: 0 },
+    value: 0
+}
 
 export const numberIn: EngineIO<null, number> = {
     type: "number",

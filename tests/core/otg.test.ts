@@ -3,8 +3,8 @@ import { EngineConnections } from "../../src/core/connections/EngineConnections"
 import { executeGraph } from "../../src/core/engine/OTG";
 import { EngineNodeDict } from "../../src/core/nodes/EngineNode";
 import { configDict, destroyLog, initLog, resetAll, testLog, testString, testValue } from "./predefined/ConfigNodes";
-import { addEngineNode1INPUT0, addEngineNode1INPUT1, addEngineNode1OUTPUT0, addEngineNode2INPUT0, addEngineNode2INPUT1, addEngineNode2OUTPUT0, constFiveEngineNodeOUTPUT0, constFourEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, destroyEngineNode1INPUT0, destroyEngineNode1OUTPUT0, divEngineNode1INPUT0, divEngineNode1INPUT1, divEngineNode1OUTPUT0, divEngineNode2INPUT0, divEngineNode2INPUT1, divEngineNode2OUTPUT0, forEngineNode1INPUT0, forEngineNode1OUTPUT0, forEngineNode1OUTPUT1, forEngineNodeTriggerOUTPUT0, forEngineNodeTriggerOUTPUT1, ifEngineNode2INPUT0, ifEngineNode2INPUT1, ifEngineNode2OUTPUT1, ifEngineNodeINPUT0, ifEngineNodeINPUT1, ifEngineNodeOUTPUT0, ifEngineNodeOUTPUT1, incrementTestValueEngineNode2INPUT0, incrementTestValueEngineNode2OUTPUT0, incrementTestValueEngineNode2OUTPUT1, incrementTestValueEngineNodeINPUT0, incrementTestValueEngineNodeOUTPUT0, incrementTestValueEngineNodeOUTPUT1, initDestroyEngineNodeINPUT0, initEngineNode1INPUT0, initEngineNode1OUTPUT0, logEngineNode1INPUT0, logEngineNode1INPUT1, logEngineNode1OUTPUT0, logEngineNode2INPUT0, logEngineNode2INPUT1, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, numberToStringConverterEngineNode1INPUT0, numberToStringConverterEngineNode1OUTPUT0, rootINPUT0, starterEngineNodeOUTPUT0, subEngineNode1INPUT0, subEngineNode1INPUT1, subEngineNode1OUTPUT0, subEngineNode2INPUT0, subEngineNode2INPUT1, subEngineNode2OUTPUT0, textCombineEngineNode1INPUT0, textCombineEngineNode1INPUT1, textHelloEngineNodeOUTPUT0, textWorldEngineNodeOUTPUT0, updateTypeALWAYSEngineNodeOUTPUT0, updateTypeDYNAMICEngineNodeINPUT0, updateTypeDYNAMICEngineNodeOUTPUT0, updateTypeNEVEREngineNodeINPUT0, updateTypeNEVEREngineNodeOUTPUT0, wrongNextEngineNodeINPUT0, wrongNextEngineNodeOUTPUT0 } from "./predefined/ConnectionDetails";
-import { destroyEngineNode1, engineNodeDict, initDestroyEngineNode, initEngineNode1, initializeNodeValues, starterEngineNode } from "./predefined/EngineNodes";
+import { addEngineNode1INPUT0, addEngineNode1INPUT1, addEngineNode1OUTPUT0, addEngineNode2INPUT0, addEngineNode2INPUT1, addEngineNode2OUTPUT0, constFiveEngineNodeOUTPUT0, constFourEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, dataEngineNodeINPUT0, dataEngineNodeOUTPUT0, destroyEngineNode1INPUT0, destroyEngineNode1OUTPUT0, divEngineNode1INPUT0, divEngineNode1INPUT1, divEngineNode1OUTPUT0, divEngineNode2INPUT0, divEngineNode2INPUT1, divEngineNode2OUTPUT0, forEngineNode1INPUT0, forEngineNode1OUTPUT0, forEngineNode1OUTPUT1, forEngineNodeTriggerOUTPUT0, forEngineNodeTriggerOUTPUT1, ifEngineNode2INPUT0, ifEngineNode2INPUT1, ifEngineNode2OUTPUT1, ifEngineNodeINPUT0, ifEngineNodeINPUT1, ifEngineNodeOUTPUT0, ifEngineNodeOUTPUT1, incrementTestValueEngineNode2INPUT0, incrementTestValueEngineNode2OUTPUT0, incrementTestValueEngineNode2OUTPUT1, incrementTestValueEngineNodeINPUT0, incrementTestValueEngineNodeOUTPUT0, incrementTestValueEngineNodeOUTPUT1, initDestroyEngineNodeINPUT0, initEngineNode1INPUT0, initEngineNode1OUTPUT0, logEngineNode1INPUT0, logEngineNode1INPUT1, logEngineNode1OUTPUT0, logEngineNode2INPUT0, logEngineNode2INPUT1, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, numberToStringConverterEngineNode1INPUT0, numberToStringConverterEngineNode1OUTPUT0, rootINPUT0, starterEngineNodeOUTPUT0, subEngineNode1INPUT0, subEngineNode1INPUT1, subEngineNode1OUTPUT0, subEngineNode2INPUT0, subEngineNode2INPUT1, subEngineNode2OUTPUT0, textCombineEngineNode1INPUT0, textCombineEngineNode1INPUT1, textHelloEngineNodeOUTPUT0, textWorldEngineNodeOUTPUT0, updateTypeALWAYSEngineNodeOUTPUT0, updateTypeDYNAMICEngineNodeINPUT0, updateTypeDYNAMICEngineNodeOUTPUT0, updateTypeNEVEREngineNodeINPUT0, updateTypeNEVEREngineNodeOUTPUT0, wrongNextEngineNodeINPUT0, wrongNextEngineNodeOUTPUT0 } from "./predefined/ConnectionDetails";
+import { addEngineNode1, addEngineNode2, dataEngineNode, destroyEngineNode1, engineNodeDict, initDestroyEngineNode, initEngineNode1, initializeNodeValues, logEngineNode1, mulEngineNode1, mulEngineNode2, rootEngineNode, starterEngineNode, subEngineNode2, textCombineEngineNode1 } from "./predefined/EngineNodes";
 import { missingOutgoingConnection } from "./predefined/InvalidConnections";
 import { addingThreeNumberConnection, addingTwoNumberConnection, simpleValidConnection } from "./predefined/ValidConnections";
 
@@ -782,6 +782,178 @@ describe("onInit & onDestroy tests", () => {
 
         expect(destroyLog).toEqual(resDestroy);
         expect(initLog).toEqual(resInit);
+
+    })
+
+})
+
+describe("preservationModeTest", () => {
+
+    let connectionDict: EngineConnections;
+
+    beforeEach(() => {
+        connectionDict = {
+            input: {},
+            output: {}
+        }
+
+        resetAll();
+        initializeNodeValues();
+    })
+
+    test("addTwoNumberTest, mutate original", () => {
+
+        executeGraph(configDict, engineNodeDict, addingTwoNumberConnection, "root", false);
+        expect(testValue).toBe(2)
+        expect(addEngineNode1.inputs[0].value).toBe(1);
+        expect(addEngineNode1.inputs[1].value).toBe(1);
+        expect(addEngineNode1.outputs[0].value).toBe(2);
+        expect(rootEngineNode.inputs[0].value).toBe(2);
+    })
+
+    test("addThreeNumbers connection, mutate original", () => {
+        executeGraph(configDict, engineNodeDict, addingThreeNumberConnection, "root", false);
+        expect(testValue).toBe(3)
+        expect(addEngineNode1.inputs[0].value).toBe(1);
+        expect(addEngineNode1.inputs[1].value).toBe(1);
+        expect(addEngineNode2.inputs[0].value).toBe(2);
+        expect(addEngineNode2.inputs[1].value).toBe(1);
+        expect(addEngineNode2.outputs[0].value).toBe(3);
+        expect(rootEngineNode.inputs[0].value).toBe(3);
+    })
+
+    test("simple string concat, mutate original", () => {
+
+        connector(textHelloEngineNodeOUTPUT0, textCombineEngineNode1INPUT0, connectionDict);
+        connector(textWorldEngineNodeOUTPUT0, textCombineEngineNode1INPUT1, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "textCombineEngineNode1", false);
+        expect(testString).toBe("Hello World")
+        expect(textCombineEngineNode1.inputs[0].value).toBe("Hello ");
+        expect(textCombineEngineNode1.inputs[1].value).toBe("World");
+        expect(textCombineEngineNode1.outputs[0].value).toBe("Hello World");
+    })
+
+    test("complex arithmetic calculation, mutate original", () => {
+
+        //connect res from mul Node 2 to root
+        connector(mulEngineNode2OUTPUT0, rootINPUT0, connectionDict);
+
+        //connect sub Engine 2 output to mulEngine input
+        connector(subEngineNode2OUTPUT0, mulEngineNode2INPUT0, connectionDict);
+
+        //connect add Engine 1 output to mulEngine Input 1
+        connector(addEngineNode1OUTPUT0, mulEngineNode2INPUT1, connectionDict);
+
+        //connect add engine 2 output to add Engine 1 input 1
+        connector(addEngineNode2OUTPUT0, addEngineNode1INPUT0, connectionDict);
+
+        //connect mul engine 1 output to add engine 1
+        connector(mulEngineNode1OUTPUT0, addEngineNode1INPUT1, connectionDict);
+
+        //connect const one output to sub engine 2
+        connector(constOneEngineNodeOUTPUT0, subEngineNode2INPUT0, connectionDict);
+
+        //connect const five to sub engine 2
+        connector(constFiveEngineNodeOUTPUT0, subEngineNode2INPUT1, connectionDict);
+
+        //connect const five to add engine 2
+        connector(constFiveEngineNodeOUTPUT0, addEngineNode2INPUT0, connectionDict);
+
+        //connect const three to add engine 2
+        connector(constThreeEngineNodeOUTPUT0, addEngineNode2INPUT1, connectionDict);
+
+        //connect const four to mul engine 1
+        connector(constFourEngineNodeOUTPUT0, mulEngineNode1INPUT0, connectionDict);
+
+        //connect const two to mul engine 1
+        connector(constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT1, connectionDict);
+
+        // ((4 * 2) + ( 5 + 3 )) * (1 - 5) = -64
+        executeGraph(configDict, engineNodeDict, connectionDict, "root", false);
+        expect(testValue).toBe(-64)
+
+        expect(mulEngineNode1.inputs[0].value).toBe(4);
+        expect(mulEngineNode1.inputs[1].value).toBe(2);
+        expect(mulEngineNode1.outputs[0].value).toBe(8);
+
+        expect(addEngineNode2.inputs[0].value).toBe(5);
+        expect(addEngineNode2.inputs[1].value).toBe(3);
+        expect(addEngineNode2.outputs[0].value).toBe(8);
+
+        expect(subEngineNode2.inputs[0].value).toBe(1);
+        expect(subEngineNode2.inputs[1].value).toBe(5);
+        expect(subEngineNode2.outputs[0].value).toBe(-4);
+
+        expect(addEngineNode1.inputs[0].value).toBe(8);
+        expect(addEngineNode1.inputs[1].value).toBe(8);
+        expect(addEngineNode1.outputs[0].value).toBe(16);
+
+        expect(mulEngineNode2.inputs[0].value).toBe(-4);
+        expect(mulEngineNode2.inputs[1].value).toBe(16);
+        expect(mulEngineNode2.outputs[0].value).toBe(-64);
+
+        expect(rootEngineNode.inputs[0].value).toBe(-64);
+    })
+
+    test("for loop log, mutate original", () => {
+
+        const res: string[] = []
+
+        for (let i = 0; i < 100; i++)
+            res.push(i.toString())
+
+        connector(forEngineNode1OUTPUT0, logEngineNode1INPUT0, connectionDict);
+
+        connector(forEngineNode1OUTPUT1, numberToStringConverterEngineNode1INPUT0, connectionDict);
+
+        connector(numberToStringConverterEngineNode1OUTPUT0, logEngineNode1INPUT1, connectionDict)
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "forEngineNode1", false);
+        expect(testLog).toEqual(res);
+        expect(logEngineNode1.inputs[1].value).toBe("99")
+    })
+
+    test("create multiplying three number connection, mutate original + updateData", () => {
+
+        const connectionDict: EngineConnections = {
+            input: {},
+            output: {}
+        }
+
+        connector(dataEngineNodeOUTPUT0, rootINPUT0, connectionDict);
+        //connect  result form mul Node 2 to root
+        connector(mulEngineNode2OUTPUT0, dataEngineNodeINPUT0, connectionDict);
+
+        //connect result from mul node 1 with mul node 2
+        connector(mulEngineNode1OUTPUT0, mulEngineNode2INPUT1, connectionDict);
+
+        //connect const 2 with mul node 2
+        connector(constTwoEngineNodeOUTPUT0, mulEngineNode2INPUT0, connectionDict);
+
+        //connect const 3 with mul node 1
+        connector(constThreeEngineNodeOUTPUT0, mulEngineNode1INPUT0, connectionDict);
+
+        //connect const 5 with mul node 1
+        connector(constFiveEngineNodeOUTPUT0, mulEngineNode1INPUT1, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "root", false);
+        expect(testValue).toBe(30)
+
+        expect(mulEngineNode1.inputs[0].value).toBe(3);
+        expect(mulEngineNode1.inputs[1].value).toBe(5);
+        expect(mulEngineNode1.outputs[0].value).toBe(15);
+
+        expect(mulEngineNode2.inputs[0].value).toBe(2);
+        expect(mulEngineNode2.inputs[1].value).toBe(15);
+        expect(mulEngineNode2.outputs[0].value).toBe(30);
+
+        expect(dataEngineNode.inputs[0].value).toBe(30);
+        expect(dataEngineNode.inputs[0].data).toStrictEqual({ value: 30 });
+        expect(dataEngineNode.outputs[0].value).toBe(30);
+        expect(dataEngineNode.outputs[0].data).toStrictEqual({ value: 30 });
+
+        expect(rootEngineNode.inputs[0].value).toBe(30);
 
     })
 

@@ -78,6 +78,20 @@ export const initDestroyEngineNodeOUTPUT0: ConnectionDetails = {
     index: 0
 }
 
+export const dataEngineNodeINPUT0: ConnectionDetails = {
+    ioId: "dataEngineNodeINPUT0",
+    nodeId: "dataEngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const dataEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "dataEngineNodeOUTPUT0",
+    nodeId: "dataEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
 export const starterEngineNodeOUTPUT0: ConnectionDetails = {
     ioId: "starterEngineNodeOUTPUT0",
     nodeId: "starterEngineNode",
