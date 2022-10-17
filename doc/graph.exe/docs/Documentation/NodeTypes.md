@@ -41,6 +41,10 @@ interface ConfigNodeDict {
 
 Dict to handle [`ConfigNodes`](./NodeTypes.md#confignode), used by a graph to execute node behavior.
 
+:::caution
+The key of the `ConfogNodeDict` needs to be equal to the given `ConfigNodes`'s `id`.
+:::
+
 ## `EngineNode`:
 
 ```ts
@@ -55,7 +59,7 @@ interface EngineNode {
 
 `id`: Unique id of the `EngineNode`.
 
-`configId`: Unique id of the [`ConfigNode`](#confignode) this noe inherits behavior from.
+`configId`: Unique id of the [`ConfigNode`](#confignode) this node inherits behavior from.
 
 `updateType`: Inherited from [`ConfigNode`](#confignode).
 
