@@ -33,15 +33,15 @@ export const createGraph = (
     nodes: EngineNodeDict,
     connections: EngineConnections,
     graphName: string
-): boolean => {
+): [boolean, string] => {
 
     if (inMemoryGraphDictionary[graphName])
-        return false;
+        return [false, "Graph name already in use"];
 
-    const [executable, msg] = validator(config, nodes, connections, "", true);
+    const [executable, validatorMsg] = validator(config, nodes, connections, "", true);
 
     if (!executable)
-        return false;
+        return [false, validatorMsg];
 
     const inMemoryGraph = createIMG(config, nodes, connections);
 
@@ -52,7 +52,7 @@ export const createGraph = (
 
     inMemoryGraphDictionary[graphName] = inMemoryGraph;
 
-    return true;
+    return [true, validatorMsg];
 }
 
 /**

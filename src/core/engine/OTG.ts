@@ -20,12 +20,12 @@ export const executeGraph = (
     connections: EngineConnections,
     entry: string,
     preservationMode: boolean = true
-): boolean => {
+): [boolean, string] => {
 
-    const [executable, msg] = validator(config, nodes, connections, entry);
+    const [executable, validatorMsg] = validator(config, nodes, connections, entry);
 
     if (!executable)
-        return false;
+        return [false, validatorMsg];
 
     const oneTimeGraph: GraphExe = createOTG(config, nodes, connections, entry);
 
@@ -54,7 +54,7 @@ export const executeGraph = (
             });
         })
 
-    return true;
+    return [true, validatorMsg];
 }
 
 const createOTG = (
