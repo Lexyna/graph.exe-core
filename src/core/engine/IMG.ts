@@ -38,7 +38,9 @@ export const createGraph = (
     if (inMemoryGraphDictionary[graphName])
         return false;
 
-    if (!validator(config, nodes, connections, "", true))
+    const [executable, msg] = validator(config, nodes, connections, "", true);
+
+    if (!executable)
         return false;
 
     const inMemoryGraph = createIMG(config, nodes, connections);

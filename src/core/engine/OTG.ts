@@ -22,7 +22,9 @@ export const executeGraph = (
     preservationMode: boolean = true
 ): boolean => {
 
-    if (!validator(config, nodes, connections, entry))
+    const [executable, msg] = validator(config, nodes, connections, entry);
+
+    if (!executable)
         return false;
 
     const oneTimeGraph: GraphExe = createOTG(config, nodes, connections, entry);
