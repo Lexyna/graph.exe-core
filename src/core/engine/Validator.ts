@@ -34,7 +34,7 @@ export const validator = (
     if (!isValidConfig) return [false, "Invalid config provided"];
 
     if (Object.keys(connections.input).length === 0 ||
-        Object.keys(connections.output).length === 0) return [false, "Connections contains more inputs/outputs than allowed"];
+        Object.keys(connections.output).length === 0) return [false, "No connections found"];
 
     let isValidInputMapping = true;
     let isValidOutputMapping = true;
