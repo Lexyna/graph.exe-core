@@ -6,7 +6,7 @@ sidebar_position: 1
 ## `NodeEditorProps`:
 
 ```ts   
-interface NodeEdiorProps {
+interface NodeEditorProps {
     config: ProtoNodeDict;
     nodes: ProtoEngineNodeDict;
     connections: EngineConnections;
