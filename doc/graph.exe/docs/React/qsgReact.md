@@ -228,7 +228,7 @@ export const config: ProtoNodeDict = {
 
 ```
 
-Now we need another dictionary to hold our [`ProtoEngineNode`](./react.md#protoenginenode)'s. Normally it would be totally fine to simply pass an empty dictionary as our `nodes` props, but since we declared our `rootNode` private, there is no way for the user to add it to the editor (as it should be!). But this also means we have to add it manually when we create our editor. For this specific case, react-plugin provide a `buildEngineNode` method that takes a [`ProtoNode`](./react.md#protonode) as well as a boolean as parameter and returns a [`ProtoEngineNode`](./react.md#protoenginenode):
+Now we need another dictionary to hold our [`ProtoEngineNode`](./react.md#protoenginenode)'s. Normally it would be totally fine to simply pass an empty dictionary as our `nodes` props, but since we declared our `rootNode` private, there is no way for the user to add it to the editor (as it should be!). But this also means we have to add it manually when we create our editor. For this specific case, react-plugin provide a [`buildEngineNode`](./functions.md#buildenginenode) method that takes a [`ProtoNode`](./react.md#protonode) as well as a boolean as parameter and returns a [`ProtoEngineNode`](./react.md#protoenginenode):
 
 ```ts src="src/EditorConfig.ts"
 //Makes the node static
@@ -240,7 +240,7 @@ export const engineNodes: ProtoEngineNodeDict = {
 
 ```
 
-The second parameter of `buildEngineNode` tells the node whatever it should be static or not. A static node cannot be deleted by the user. Since we don't want the root to be deletable, we tell the method we'd like it to be static. 
+The second parameter of [`buildEngineNode`](./functions.md#buildenginenode) tells the node whatever it should be static or not. A static node cannot be deleted by the user. Since we don't want the root to be deletable, we tell the method we'd like it to be static. 
 
 Next we create a empty `EngineConnections` object. This object will store the relationship between nodes and their ioPort which is used by the core engine to execute the Graph:
 
