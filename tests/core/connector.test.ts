@@ -20,7 +20,8 @@ describe("connector test", () => {
 
         connector(constOneEngineNodeOUTPUT0, rootINPUT0, connectionDict);
 
-        expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(true);
+        const [res, msg] = validator(configDict, engineNodeDict, connectionDict, "root");
+        expect(res).toBe(true);
 
     })
 
@@ -30,8 +31,8 @@ describe("connector test", () => {
         connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
         connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
 
-        expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(true);
-
+        const [res, msg] = validator(configDict, engineNodeDict, connectionDict, "root");
+        expect(res).toBe(true);
     })
 
     test("create multiplying three number connection", () => {
@@ -51,8 +52,8 @@ describe("connector test", () => {
         //connect const 5 with mul node 1
         connector(constFiveEngineNodeOUTPUT0, mulEngineNode1INPUT1, connectionDict);
 
-        expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(true);
-
+        const [res, msg] = validator(configDict, engineNodeDict, connectionDict, "root");
+        expect(res).toBe(true);
     })
 
     test("create connection that already exists", () => {
@@ -60,7 +61,6 @@ describe("connector test", () => {
         connector(starterEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict);
 
         expect(connector(starterEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict)).toBe(false);
-
     })
 
 })

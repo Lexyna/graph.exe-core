@@ -9,7 +9,7 @@ import { EngineNodeDict } from "../nodes/EngineNode";
  * @param nodes 
  * @param connections 
  * @param entry 
- * @returns boolean: true if Graph is executable, false otherwise
+ * @returns [boolean, string]: true if Graph is executable, false otherwise + validation message
  */
 export const validator = (
     config: ConfigNodeDict,
@@ -17,10 +17,10 @@ export const validator = (
     connections: EngineConnections,
     entry: string,
     isInMemoryGraph: boolean = false
-): boolean => {
+): [boolean, string] => {
 
     if (!isInMemoryGraph && !nodes[entry])
-        return false;
+        return [false, "Missing or wrong entry Id"];
 
     let isValidConfig = true;
 
@@ -31,13 +31,14 @@ export const validator = (
         if (!config[value.configId]) isValidConfig = false;
     })
 
-    if (!isValidConfig) return false;
+    if (!isValidConfig) return [false, "Invalid config provided"];
 
     if (Object.keys(connections.input).length === 0 ||
-        Object.keys(connections.output).length === 0) return false;
+        Object.keys(connections.output).length === 0) return [false, "No connections found"];
 
     let isValidInputMapping = true;
     let isValidOutputMapping = true;
+    let retMsg: string = "Valid";
 
     /**
      *  Checks if mapping of each inout is correct and
@@ -47,33 +48,42 @@ export const validator = (
 
         if (!isValidInputMapping) return;
 
-        if (value.connections.length == 0) isValidInputMapping = false;
+        if (value.connections.length == 0) {
+            retMsg = `Connection cannot be empty (${value.self.ioId})`;
+            isValidInputMapping = false;
+        }
 
         if (key !== value.self.nodeId + value.self.type + value.self.index ||
             key !== value.self.ioId) {
+            retMsg = `Body of IoId (input) does not match ${key}`;
             isValidInputMapping = false;
             return;
         }
 
         if (!nodes[value.self.nodeId] || !nodes[value.self.nodeId].inputs[value.self.index]) {
             isValidInputMapping = false;
+            retMsg = `Node ${value.self.nodeId} has no input io '${key}' at index ${value.self.index}`;
             return;
         }
 
-        if (nodes[value.self.nodeId].inputs[value.self.index].mapping == CON_MAPPING.SINGLE && value.connections.length > 1)
+        if (nodes[value.self.nodeId].inputs[value.self.index].mapping == CON_MAPPING.SINGLE && value.connections.length > 1) {
+            retMsg = `${key} has to many connections (${value.connections.lastIndexOf} allowed: 1)`;
             isValidInputMapping = false;
+        }
 
         for (let io of value.connections)
-            if (!connections.output[io.ioId]) isValidInputMapping = false;
-            else if (!nodes[connections.output[io.ioId].self.nodeId]) { isValidInputMapping = false; return; }
-            else if (!nodes[connections.output[io.ioId].self.nodeId].outputs[connections.output[io.ioId].self.index]) isValidInputMapping = false;
+            if (!connections.output[io.ioId]) { retMsg = `Output ${io.ioId} does not exist`; isValidInputMapping = false; }
+            else if (!nodes[connections.output[io.ioId].self.nodeId]) { retMsg = `Node ${io.nodeId} has no io Port ${io.ioId}`; isValidInputMapping = false; return; }
+            else if (!nodes[connections.output[io.ioId].self.nodeId].outputs[connections.output[io.ioId].self.index]) { retMsg = `Node ${io.nodeId} has no io Port ${io.ioId} at index ${io.index}`; isValidInputMapping = false; }
             else if (
                 nodes[connections.output[io.ioId].self.nodeId].outputs[connections.output[io.ioId].self.index].type !=
-                nodes[value.self.nodeId].inputs[value.self.index].type)
+                nodes[value.self.nodeId].inputs[value.self.index].type) {
+                retMsg = `Node ${io.nodeId} io Port ${io.ioId} does not match expected type`;
                 isValidInputMapping = false;
+            }
     })
 
-    if (!isValidInputMapping) return false;
+    if (!isValidInputMapping) return [false, retMsg];
 
     /**
      *  Checks if mapping of each inout is correct and
@@ -83,27 +93,34 @@ export const validator = (
 
         if (!isValidOutputMapping) return;
 
-        if (value.connections.length == 0) isValidOutputMapping = false;
+        if (value.connections.length == 0) {
+            retMsg = `Body of IoId (output) does not match ${key}`;
+            isValidOutputMapping = false;
+        }
 
         if (key !== value.self.nodeId + value.self.type + value.self.index ||
             key !== value.self.ioId) {
+            retMsg = `Body of IoId (output) does not match ${key}`;
             isValidOutputMapping = false;
             return;
         }
 
         if (!nodes[value.self.nodeId] || !nodes[value.self.nodeId].outputs[value.self.index]) {
+            retMsg = `Node ${value.self.nodeId} has no output io '${key}' at index ${value.self.index}`;
             isValidOutputMapping = false;
             return;
         }
 
-        if (nodes[value.self.nodeId].outputs[value.self.index].mapping == CON_MAPPING.SINGLE && value.connections.length > 1)
+        if (nodes[value.self.nodeId].outputs[value.self.index].mapping == CON_MAPPING.SINGLE && value.connections.length > 1) {
+            retMsg = `${key} has to many connections (${value.connections.lastIndexOf} allowed: 1)`;
             isValidOutputMapping = false;
+        }
 
         for (let io of value.connections)
-            if (!connections.input[io.ioId]) isValidOutputMapping = false;
+            if (!connections.input[io.ioId]) { retMsg = `Input ${io.ioId} does not exist`; isValidOutputMapping = false; }
     })
 
-    if (!isValidOutputMapping) return false;
+    if (!isValidOutputMapping) return [false, retMsg];
 
     let isValidConnection: boolean = true;
 
@@ -130,7 +147,10 @@ export const validator = (
                     hasConnection = true;
             })
 
-            if (!hasConnection) isValidConnection = false;
+            if (!hasConnection) {
+                retMsg = `${key} has missing outgoing connections`;
+                isValidConnection = false;
+            }
         }
     })
 
@@ -153,10 +173,10 @@ export const validator = (
 
     })
 
-    if (hasDuplicates) return false;
+    if (hasDuplicates) return [false, "Connections contain duplicates"];
 
-    if (!isValidConnection) return false;
+    if (!isValidConnection) return [false, retMsg];
 
-    return true;
+    return [true, retMsg];
 }
 

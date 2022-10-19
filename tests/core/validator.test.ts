@@ -35,112 +35,139 @@ import { addingThreeNumberConnection, addingTwoNumberConnection, simpleValidConn
 describe("validator test - invalid graphs", () => {
 
     test("Invalid entry", () => {
-        expect(validator({}, {}, emptyConnections, "empty")).toBe(false)
+        const [res, msg] = validator({}, {}, emptyConnections, "empty")
+        expect(res).toBe(false)
     })
 
     test("missing nodes", () => {
-        expect(validator(configDict, {}, onlyFalseIndexConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, {}, onlyFalseIndexConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("missing config", () => {
-        expect(validator({}, engineNodeDict, onlyFalseIndexConnection, "root")).toBe(false);
+        const [res, msg] = validator({}, engineNodeDict, onlyFalseIndexConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("missing connections", () => {
-        expect(validator(configDict, engineNodeDict, emptyConnections, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, emptyConnections, "root");
+        expect(res).toBe(false);
     })
 
 
     test("missing outgoing connection", () => {
-        expect(validator(configDict, engineNodeDict, missingOutgoingConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, missingOutgoingConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("missing ingoing connection", () => {
-        expect(validator(configDict, engineNodeDict, missingIngoingConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, missingIngoingConnection, "root")
+        expect(res).toBe(false);
     })
 
     test("false outgoing connection  mapping", () => {
-        expect(validator(configDict, engineNodeDict, falseOutgoingConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseOutgoingConnection, "root")
+        expect(res).toBe(false);
     })
 
     test("false ingoing connection  mapping", () => {
-        expect(validator(configDict, engineNodeDict, falseIngoingConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseIngoingConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("false index mapping", () => {
-        expect(validator(configDict, engineNodeDict, falseIndexMappingConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseIndexMappingConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("false index mapping2", () => {
-        expect(validator(configDict, engineNodeDict, falseIndexMappingConnection2, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseIndexMappingConnection2, "root");
+        expect(res).toBe(false);
     })
 
     test("too many outgoing connections with fake node", () => {
-        expect(validator(configDict, engineNodeDict, tooManyOutgoingConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, tooManyOutgoingConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("too many outgoing connections with real node", () => {
-        expect(validator(configDict, engineNodeDict, tooManyOutgoingConnection2, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, tooManyOutgoingConnection2, "root")
+        expect(res).toBe(false);
     })
 
     test("too many ingoing connections with fake node", () => {
-        expect(validator(configDict, engineNodeDict, tooManyIngoingConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, tooManyIngoingConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("too many ingoing connections with real node", () => {
-        expect(validator(configDict, engineNodeDict, tooManyIngoingConnection2, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, tooManyIngoingConnection2, "root")
+        expect(res).toBe(false);
     })
 
     test("non-existent input", () => {
-        expect(validator(configDict, engineNodeDict, falseInputConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseInputConnection, "root")
+        expect(res).toBe(false);
     })
 
     test("false self id", () => {
-        expect(validator(configDict, engineNodeDict, falseSelfIdConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseSelfIdConnection, "root")
+        expect(res).toBe(false);
     })
 
     test("false self id 2", () => {
-        expect(validator(configDict, engineNodeDict, falseSelfIdConnection2, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseSelfIdConnection2, "root");
+        expect(res).toBe(false);
     })
 
     test("false self index", () => {
-        expect(validator(configDict, engineNodeDict, falseSelfIndexConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseSelfIndexConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("false self index 2", () => {
-        expect(validator(configDict, engineNodeDict, falseSelfIndexConnection2, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseSelfIndexConnection2, "root");
+        expect(res).toBe(false);
     })
 
     test("false self index 3", () => {
-        expect(validator(configDict, engineNodeDict, falseSelfIndexConnection3, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseSelfIndexConnection3, "root")
+        expect(res).toBe(false);
     })
 
     test("false self index 4", () => {
-        expect(validator(configDict, engineNodeDict, falseSelfIndexConnection4, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseSelfIndexConnection4, "root");
+        expect(res).toBe(false);
     })
 
     test("only false index connection", () => {
-        expect(validator(configDict, engineNodeDict, onlyFalseIndexConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, onlyFalseIndexConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("false self ioId", () => {
-        expect(validator(configDict, engineNodeDict, falseSelfIoIdConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseSelfIoIdConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("false self ioId", () => {
-        expect(validator(configDict, engineNodeDict, falseSelfIoIdConnection2, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, falseSelfIoIdConnection2, "root")
+        expect(res).toBe(false);
     })
 
     test("double Entry ingoing connection", () => {
-        expect(validator(configDict, engineNodeDict, doubleEntryIngoingConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, doubleEntryIngoingConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("double Entry outgoing connection 2", () => {
-        expect(validator(configDict, engineNodeDict, doubleEntryOutgoingConnection2, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, doubleEntryOutgoingConnection2, "root");
+        expect(res).toBe(false);
     })
 
     test("dual double Entry connection 2", () => {
-        expect(validator(configDict, engineNodeDict, dualDuplicateEntryOutgoingConnection, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, dualDuplicateEntryOutgoingConnection, "root");
+        expect(res).toBe(false);
     })
 
     test("invalid multi signal connection", () => {
@@ -153,7 +180,8 @@ describe("validator test - invalid graphs", () => {
         connector(signalEngineNode2OUTPUT0, signalEngineNode1INPUT0, connectionDict);
         connector(signalEngineNode2OUTPUT0, signalEngineNode3INPUT0, connectionDict);
 
-        expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(false);
+        const [res, msg] = validator(configDict, engineNodeDict, connectionDict, "root");
+        expect(res).toBe(false);
 
     })
 
@@ -173,8 +201,8 @@ describe("validator test - invalid graphs", () => {
 
         connector(incrementTestValueEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict);
 
-        expect(validator(configDict, nodeDict, connectionDict, "starterEngineNode")).toBe(false);
-
+        const [res, msg] = validator(configDict, nodeDict, connectionDict, "starterEngineNode");
+        expect(res).toBe(false);
 
     })
 
@@ -194,9 +222,8 @@ describe("validator test - invalid graphs", () => {
 
         connector(logEngineNode1OUTPUT0, incrementTestValueEngineNodeINPUT0, connectionDict);
 
-        expect(validator(configDict, nodeDict, connectionDict, "starterEngineNode")).toBe(false);
-
-
+        const [res, msg] = validator(configDict, nodeDict, connectionDict, "starterEngineNode");
+        expect(res).toBe(false);
     })
 
     test("input has invalid connection type to output", () => {
@@ -210,9 +237,8 @@ describe("validator test - invalid graphs", () => {
 
         connector(constFiveEngineNodeOUTPUT0, logEngineNode1INPUT1, connectionDict);
 
-        expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(false);
-
-
+        const [res, msg] = validator(configDict, engineNodeDict, connectionDict, "root");
+        expect(res).toBe(false);
     })
 
     test("output has wrong index", () => {
@@ -240,23 +266,26 @@ describe("validator test - invalid graphs", () => {
 
         connector(starterEngineNodeOUTPUT0, logEngineNode1INPUT0, connectionDict);
 
-        expect(validator(configDict, engineNodeDict, connectionDict, "starterEngineNode")).toBe(false);
-
+        const [res, msg] = validator(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+        expect(res).toBe(false);
     })
 
 })
 
 describe("validator test - valid graphs", () => {
     test("simple valid connection", () => {
-        expect(validator(configDict, engineNodeDict, simpleValidConnection, "root")).toBe(true);
+        const [res, msg] = validator(configDict, engineNodeDict, simpleValidConnection, "root");
+        expect(res).toBe(true);
     })
 
     test("adding Two numbers graph", () => {
-        expect(validator(configDict, engineNodeDict, addingTwoNumberConnection, "root")).toBe(true);
+        const [res, msg] = validator(configDict, engineNodeDict, addingTwoNumberConnection, "root");
+        expect(res).toBe(true);
     })
 
     test("adding three number graph", () => {
-        expect(validator(configDict, engineNodeDict, addingThreeNumberConnection, "root")).toBe(true);
+        const [res, msg] = validator(configDict, engineNodeDict, addingThreeNumberConnection, "root");
+        expect(res).toBe(true);
     })
 
     test("valid multi signal connection", () => {
@@ -269,7 +298,7 @@ describe("validator test - valid graphs", () => {
         connector(signalEngineNode2OUTPUT0, signalEngineNode1INPUT0, connectionDict);
         connector(signalEngineNode3OUTPUT0, signalEngineNode1INPUT0, connectionDict);
 
-        expect(validator(configDict, engineNodeDict, connectionDict, "root")).toBe(true);
-
+        const [res, msg] = validator(configDict, engineNodeDict, connectionDict, "root");
+        expect(res).toBe(true);
     })
 })

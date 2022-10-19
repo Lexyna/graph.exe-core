@@ -178,7 +178,7 @@ describe("otg dependency graph test", () => {
 
     test("try to execute invalid graph", () => {
 
-        const ret = executeGraph(configDict, engineNodeDict, missingOutgoingConnection, "root");
+        const [ret, msg] = executeGraph(configDict, engineNodeDict, missingOutgoingConnection, "root");
         expect(ret).toBe(false)
 
     })
