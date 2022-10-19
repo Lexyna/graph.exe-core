@@ -1,6 +1,7 @@
 import { updateType } from "../../../src/core/nodes/ConfigNode";
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
-import { addNode, constNode, dataNode, destroyFuncNode, divNode, forNode, ifNode, incrementTestValueNode, initDestroyFuncNode, initFuncNode, keyListenerNode, logIdNode, logNode, mulNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode, wrongNextNode } from "./ConfigNodes";
+
+import { addNode, constNode, dataNode, destroyFuncNode, divNode, forNode, ifNode, incrementTestValueNode, initDestroyFuncNode, initFuncNode, keyListenerNode, logIdNode, logNode, mulNode, multiConAddNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode, wrongNextNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
@@ -254,6 +255,14 @@ export const constFiveEngineNode: EngineNode = {
     outputs: constNode.outputs.map(io => { return { ...io } })
 }
 
+export const multiConAddEngineNode: EngineNode = {
+    id: "multiConAddEngineNode",
+    configId: "multiConAddNode",
+    updateType: updateType.NEVER,
+    inputs: multiConAddNode.inputs.map(io => { return { ...io } }),
+    outputs: multiConAddNode.outputs.map(io => { return { ...io } })
+}
+
 export const addEngineNode1: EngineNode = {
     id: "addEngineNode1",
     configId: "addNode",
@@ -361,6 +370,7 @@ export const engineNodeDict: EngineNodeDict = {
     "constThreeEngineNode": constThreeEngineNode,
     "constFourEngineNode": constFourEngineNode,
     "constFiveEngineNode": constFiveEngineNode,
+    "multiConAddEngineNode": multiConAddEngineNode,
     "addEngineNode1": addEngineNode1,
     "addEngineNode2": addEngineNode2,
     "subEngineNode1": subEngineNode1,

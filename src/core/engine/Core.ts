@@ -2,6 +2,7 @@ import { connectionFinder } from "../connections/ConnectionFinder";
 import { ConnectionDetails, CONNECTION_TYPE, EngineConnections, IoIdInfo } from "../connections/EngineConnections";
 import { extractor, NodePorts } from "../connections/Extractor";
 import { EngineIO } from "../IO/EngineIO";
+import { CON_MAPPING } from "../IO/IOMapping";
 import { LogicIO } from "../IO/LogicIO";
 import { updateType } from "../nodes/ConfigNode";
 import { LogicNode, LogicNodeDict } from "../nodes/LogicNode";
@@ -62,6 +63,8 @@ const resolveDependency = (node: LogicNode, graph: GraphExe) => {
 
         graph.dependencyStack.push(true);
 
+        const resolvedValues: any[] = [];
+
         dependencies.forEach(dep => {
 
             //execute the dependencyNode and set it's ioPorts value
@@ -80,10 +83,17 @@ const resolveDependency = (node: LogicNode, graph: GraphExe) => {
                     break;
             }
 
-            //assign the computed value to this input now
-            node.inputs[con.index].value = graph.nodes[dep.nodeId].outputs[dep.index].value;
+            resolvedValues.push(graph.nodes[dep.nodeId].outputs[dep.index].value);
 
+            //assign the computed value to this input now
+            //node.inputs[con.index].value = graph.nodes[dep.nodeId].outputs[dep.index].value;
         })
+
+        //assign the computed value to this input, if the input allows multiple connections, it will receive an array with all resolved values
+        if (node.inputs[con.index].mapping === CON_MAPPING.SINGLE)
+            node.inputs[con.index].value = resolvedValues[0];
+        else
+            node.inputs[con.index].value = resolvedValues;
 
         graph.dependencyStack.pop();
 
