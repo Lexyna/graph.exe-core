@@ -1,6 +1,6 @@
 # IO & connection types
 
-## `EngineIO`:
+## `EngineIO<K, T>`:
 
 ```ts
 interface EngineIO<K, T> {

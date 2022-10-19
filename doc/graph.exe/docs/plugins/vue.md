@@ -1,3 +1,0 @@
-# Vue Plugin
-
-WIP
