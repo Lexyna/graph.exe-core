@@ -414,6 +414,20 @@ export const constFiveEngineNodeOUTPUT0: ConnectionDetails = {
     index: 0
 }
 
+export const multiConAddEngineNodeINPUT0: ConnectionDetails = {
+    ioId: "multiConAddEngineNodeINPUT0",
+    nodeId: "multiConAddEngineNode",
+    type: CONNECTION_TYPE.INPUT,
+    index: 0
+}
+
+export const multiConAddEngineNodeOUTPUT0: ConnectionDetails = {
+    ioId: "multiConAddEngineNodeOUTPUT0",
+    nodeId: "multiConAddEngineNode",
+    type: CONNECTION_TYPE.OUTPUT,
+    index: 0
+}
+
 export const addEngineNode1INPUT0: ConnectionDetails = {
     ioId: "addEngineNode1INPUT0",
     nodeId: "addEngineNode1",

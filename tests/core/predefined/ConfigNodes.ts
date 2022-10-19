@@ -1,7 +1,7 @@
 import { getNodeId, next } from "../../../src/core/engine/Core";
 import { EngineIO } from "../../../src/core/IO/EngineIO";
 import { ConfigNode, ConfigNodeDict, updateType } from "../../../src/core/nodes/ConfigNode";
-import { numberIn, signalIn, stringIn } from "./InputPorts";
+import { multiNumberIn, numberIn, signalIn, stringIn } from "./InputPorts";
 import { numberOut, signalOut, stringOut } from "./OutputPorts";
 
 export let testValue: number = 0;
@@ -262,12 +262,24 @@ export const textCombineNode: ConfigNode = {
     }
 }
 
-
 export const constNode: ConfigNode = {
     id: "constNode",
     inputs: [],
     outputs: [numberOut],
     exe: function (out: EngineIO<null, number>): void { }
+}
+
+export const multiConAddNode: ConfigNode = {
+    id: "multiConAddNode",
+    updateType: updateType.DYNAMIC,
+    inputs: [multiNumberIn],
+    outputs: [numberOut],
+    exe: function (in1: EngineIO<null, number[]>, out: EngineIO<null, number>) {
+        let sum = 0;
+        for (let i = 0; i < in1.value.length; i++)
+            sum += in1.value[i];
+        out.value = sum;
+    }
 }
 
 export const addNode: ConfigNode = {
@@ -331,6 +343,7 @@ export const configDict: ConfigNodeDict = {
     "textNode": textNode,
     "textCombineNode": textCombineNode,
     "constNode": constNode,
+    "multiConAddNode": multiConAddNode,
     "addNode": addNode,
     "subNode": subNode,
     "mulNode": mulNode,
