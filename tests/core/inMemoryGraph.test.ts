@@ -28,9 +28,9 @@ describe("create and destroy IMG", () => {
 
         const graphName: string = "test#1";
 
-        const g1 = createGraph(configDict, engineNodeDict, simpleValidConnection, graphName);
+        const [g1, msg1] = createGraph(configDict, engineNodeDict, simpleValidConnection, graphName);
 
-        const g2 = createGraph(configDict, engineNodeDict, simpleValidConnection, graphName);
+        const [g2, msg2] = createGraph(configDict, engineNodeDict, simpleValidConnection, graphName);
 
         expect(g1).toBe(true);
         expect(g2).toBe(false);
@@ -47,7 +47,7 @@ describe("create and destroy IMG", () => {
 
         const graphName: string = "test#1";
 
-        const ret = createGraph(configDict, engineNodeDict, tooManyOutgoingConnection, graphName);
+        const [ret, msg] = createGraph(configDict, engineNodeDict, tooManyOutgoingConnection, graphName);
 
         expect(ret).toBe(false);
 

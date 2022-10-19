@@ -2,9 +2,16 @@
   "name": "graph.exe-core",
   "version": "0.0.1",
   "description": "Graph.exe Core",
-  "main": "index.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs"
   },
   "repository": {
     "type": "git",

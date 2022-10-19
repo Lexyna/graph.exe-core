@@ -1,7 +1,9 @@
 import { getNodeId, next } from "../../../src/core/engine/Core";
 import { EngineIO } from "../../../src/core/IO/EngineIO";
 import { ConfigNode, ConfigNodeDict, updateType } from "../../../src/core/nodes/ConfigNode";
-import { multiNumberIn, numberIn, signalIn, stringIn } from "./InputPorts";
+
+import {multiNumberIn,  dataTest, numberIn, numberWithDataIn, numberWithDataOut, signalIn, stringIn } from "./InputPorts";
+
 import { numberOut, signalOut, stringOut } from "./OutputPorts";
 
 export let testValue: number = 0;
@@ -39,6 +41,17 @@ export const rootNode: ConfigNode = {
     outputs: [],
     exe: function (input: EngineIO<null, number>): void {
         testValue = input.value;
+    }
+}
+
+export const dataNode: ConfigNode = {
+    id: "dataNode",
+    inputs: [numberWithDataIn],
+    outputs: [numberWithDataOut],
+    exe: function (input: EngineIO<dataTest, number>, out: EngineIO<dataTest, number>) {
+        input.data.value = input.value;
+        out.data.value = input.data.value;
+        out.value = input.value;
     }
 }
 
@@ -333,6 +346,7 @@ export const signalNode: ConfigNode = {
 
 export const configDict: ConfigNodeDict = {
     "rootNode": rootNode,
+    "dataNode": dataNode,
     "starterNode": starterNode,
     "initFuncNode": initFuncNode,
     "destroyFuncNode": destroyFuncNode,

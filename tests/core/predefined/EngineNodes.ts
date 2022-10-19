@@ -1,6 +1,7 @@
 import { updateType } from "../../../src/core/nodes/ConfigNode";
 import { EngineNode, EngineNodeDict } from "../../../src/core/nodes/EngineNode";
-import { addNode, constNode, destroyFuncNode, divNode, forNode, ifNode, incrementTestValueNode, initDestroyFuncNode, initFuncNode, keyListenerNode, logIdNode, logNode, mulNode, multiConAddNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode, wrongNextNode } from "./ConfigNodes";
+
+import { addNode, constNode, dataNode, destroyFuncNode, divNode, forNode, ifNode, incrementTestValueNode, initDestroyFuncNode, initFuncNode, keyListenerNode, logIdNode, logNode, mulNode, multiConAddNode, numberToStringConverterNode, rootNode, signalNode, starterNode, subNode, textCombineNode, textNode, updateTypeALWAYSNode, updateTypeDYNAMICNode, updateTypeNEVERNode, wrongNextNode } from "./ConfigNodes";
 
 export const rootEngineNode: EngineNode = {
     id: "root",
@@ -8,6 +9,14 @@ export const rootEngineNode: EngineNode = {
     updateType: updateType.NEVER,
     inputs: rootNode.inputs.map(io => { return { ...io } }),
     outputs: rootNode.outputs.map(io => { return { ...io } })
+}
+
+export const dataEngineNode: EngineNode = {
+    id: "dataEngineNode",
+    configId: "dataNode",
+    updateType: updateType.ALWAYS,
+    inputs: dataNode.inputs.map(io => { return { ...io } }),
+    outputs: dataNode.outputs.map(io => { return { ...io } })
 }
 
 export const starterEngineNode: EngineNode = {
@@ -344,6 +353,7 @@ export const signalEngineNode3: EngineNode = {
 
 export const engineNodeDict: EngineNodeDict = {
     "root": rootEngineNode,
+    "dataEngineNode": dataEngineNode,
     "starterEngineNode": starterEngineNode,
     "initEngineNode1": initEngineNode1,
     "destroyEngineNode1": destroyEngineNode1,
@@ -393,5 +403,48 @@ export const initializeNodeValues = () => {
     constFourEngineNode.outputs[0].value = 4;
     constFiveEngineNode.outputs[0].value = 5;
     textHelloEngineNode.outputs[0].value = "Hello ";
-    textWorldEngineNode.outputs[0].value = "World"
+    textWorldEngineNode.outputs[0].value = "World";
+
+    addEngineNode1.inputs[0].value = 0;
+    addEngineNode1.inputs[1].value = 0;
+    addEngineNode1.outputs[0].value = 0;
+
+    addEngineNode2.inputs[0].value = 0;
+    addEngineNode2.inputs[1].value = 0;
+    addEngineNode2.outputs[0].value = 0;
+
+    subEngineNode1.inputs[0].value = 0;
+    subEngineNode1.inputs[1].value = 0;
+    subEngineNode1.outputs[0].value = 0;
+
+    subEngineNode2.inputs[0].value = 0;
+    subEngineNode2.inputs[1].value = 0;
+    subEngineNode2.outputs[0].value = 0;
+
+    mulEngineNode1.inputs[0].value = 0;
+    mulEngineNode1.inputs[1].value = 0;
+    mulEngineNode1.outputs[0].value = 0;
+
+    mulEngineNode2.inputs[0].value = 0;
+    mulEngineNode2.inputs[1].value = 0;
+    mulEngineNode2.outputs[0].value = 0;
+
+    divEngineNode1.inputs[0].value = 0;
+    divEngineNode1.inputs[1].value = 0;
+    divEngineNode1.outputs[0].value = 0;
+
+    divEngineNode2.inputs[0].value = 0;
+    divEngineNode2.inputs[1].value = 0;
+    divEngineNode2.outputs[0].value = 0;
+
+    dataEngineNode.inputs[0].value = 0;
+    dataEngineNode.inputs[0].data = { value: 0 };
+    dataEngineNode.outputs[0].value = 0;
+    dataEngineNode.outputs[0].data = { value: 0 };
+
+    textCombineEngineNode1.inputs[0].value = "";
+    textCombineEngineNode1.inputs[1].value = "";
+    textCombineEngineNode1.outputs[0].value = "";
+
+    logEngineNode1.inputs[1].value = "";
 }

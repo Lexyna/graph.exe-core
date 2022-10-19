@@ -8,6 +8,25 @@ export const multiNumberIn: EngineIO<null, number[]> = {
     value: []
 }
 
+export interface dataTest {
+    value: number
+}
+
+export const numberWithDataOut: EngineIO<dataTest, number> = {
+    type: "number",
+    mapping: CON_MAPPING.SINGLE,
+    data: { value: 0 },
+    value: 0
+}
+
+export const numberWithDataIn: EngineIO<dataTest, number> = {
+    type: "number",
+    mapping: CON_MAPPING.SINGLE,
+    data: { value: 0 },
+    value: 0
+
+}
+
 export const numberIn: EngineIO<null, number> = {
     type: "number",
     mapping: CON_MAPPING.SINGLE,
