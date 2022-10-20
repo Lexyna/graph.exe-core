@@ -1119,7 +1119,7 @@ describe("execute graph with circular dependencies", () => {
         connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
         connector(addEngineNode1OUTPUT0, addEngineNode1INPUT0, connectionDict);
 
-        const [executionStatus, msg] = executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+        const [executionStatus, msg] = executeGraph(configDict, engineNodeDict, connectionDict, "root");
         expect(executionStatus).toBe(false);
 
     })
