@@ -1098,3 +1098,30 @@ describe("preservationModeTest", () => {
     })
 
 })
+
+describe("execute graph with circular dependencies", () => {
+
+    let connectionDict: EngineConnections;
+
+    beforeEach(() => {
+        connectionDict = {
+            input: {},
+            output: {}
+        }
+
+        resetAll();
+        initializeNodeValues();
+    })
+
+    test("execute simple dependency loop", () => {
+
+        connector(addEngineNode1OUTPUT0, rootINPUT0, connectionDict);
+        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
+        connector(addEngineNode1OUTPUT0, addEngineNode1INPUT0, connectionDict);
+
+        const [executionStatus, msg] = executeGraph(configDict, engineNodeDict, connectionDict, "starterEngineNode");
+        expect(executionStatus).toBe(false);
+
+    })
+
+})
