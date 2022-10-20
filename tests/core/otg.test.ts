@@ -10,6 +10,8 @@ import { addEngineNode1, addEngineNode2, dataEngineNode, destroyEngineNode1, eng
 import { missingOutgoingConnection } from "./predefined/InvalidConnections";
 import { addingThreeNumberConnection, addingTwoNumberConnection, simpleValidConnection } from "./predefined/ValidConnections";
 
+import { splitter } from "../../src/core/connections/Splitter";
+
 describe("otg dependency graph test", () => {
 
     beforeEach(() => {
@@ -903,6 +905,28 @@ describe("preservationModeTest", () => {
         expect(addEngineNode1.inputs[1].value).toBe(1);
         expect(addEngineNode1.outputs[0].value).toBe(2);
         expect(rootEngineNode.inputs[0].value).toBe(2);
+    })
+
+    test("Split connection after first execution", () => {
+
+        connector(addEngineNode1OUTPUT0, rootINPUT0, connectionDict);
+        connector(constFourEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
+        connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "root", false);
+        expect(testValue).toBe(9);
+        expect(rootEngineNode.inputs[0].value).toBe(9);
+        expect(addEngineNode1.inputs[0].value).toBe(4);
+        expect(addEngineNode1.inputs[1].value).toBe(5);
+
+        splitter(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict)
+
+        //Values should reset to their default value, when no connection is found
+        executeGraph(configDict, engineNodeDict, connectionDict, "root", false);
+        expect(testValue).toBe(4);
+        expect(rootEngineNode.inputs[0].value).toBe(4);
+        expect(addEngineNode1.inputs[0].value).toBe(0);
+        expect(addEngineNode1.inputs[1].value).toBe(5);
     })
 
     test("addThreeNumbers connection, mutate original", () => {
