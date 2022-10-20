@@ -90,8 +90,10 @@ const resolveDependency = (node: LogicNode, graph: GraphExe) => {
         })
 
         //assign the computed value to this input, if the input allows multiple connections, it will receive an array with all resolved values
-        if (node.inputs[con.index].mapping === CON_MAPPING.SINGLE)
-            node.inputs[con.index].value = resolvedValues[0];
+        if (node.inputs[con.index].mapping === CON_MAPPING.SINGLE) {
+            if (resolvedValues[0])
+                node.inputs[con.index].value = resolvedValues[0];
+        }
         else
             node.inputs[con.index].value = resolvedValues;
 
