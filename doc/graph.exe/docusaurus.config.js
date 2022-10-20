@@ -69,7 +69,7 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          { to: '/Examples', label: 'Showcase', position: 'left' },
+          { to: '/Showcase', label: 'Showcase', position: 'left' },
           {
             href: 'https://github.com/Lexyna/graph.exe-core',
             label: 'GitHub',
