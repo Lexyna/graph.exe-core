@@ -925,8 +925,8 @@ describe("preservationModeTest", () => {
         executeGraph(configDict, engineNodeDict, connectionDict, "root", false);
         expect(testValue).toBe(4);
         expect(rootEngineNode.inputs[0].value).toBe(4);
-        expect(addEngineNode1.inputs[0].value).toBe(0);
-        expect(addEngineNode1.inputs[1].value).toBe(5);
+        expect(addEngineNode1.inputs[0].value).toBe(4);
+        expect(addEngineNode1.inputs[1].value).toBe(0);
     })
 
     test("addThreeNumbers connection, mutate original", () => {

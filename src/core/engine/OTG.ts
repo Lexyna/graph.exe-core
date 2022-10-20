@@ -44,6 +44,7 @@ export const executeGraph = (
     if (!preservationMode)
         Object.entries(oneTimeGraph.nodes).forEach(([key, value]) => {
             if (!(key in nodes)) return;
+            value.computed = false;
             value.inputs.forEach((io, index) => {
                 nodes[key].inputs[index].value = io.value;
                 nodes[key].inputs[index].data = io.data;

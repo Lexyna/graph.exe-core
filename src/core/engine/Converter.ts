@@ -23,7 +23,7 @@ export const nodeConverter = (graph: GraphExe, config: ConfigNodeDict, nodeDict:
                 data: io.data,
                 value: io.value,
                 graph_ref: graph,
-                defaultValue: io.value,
+                defaultValue: config[value.configId].inputs[index].value,
                 details: {
                     ioId: value.id + CONNECTION_TYPE.INPUT + index,
                     nodeId: value.id,
@@ -39,7 +39,7 @@ export const nodeConverter = (graph: GraphExe, config: ConfigNodeDict, nodeDict:
                 mapping: io.mapping,
                 data: io.data,
                 value: io.value,
-                defaultValue: io.value,
+                defaultValue: config[value.configId].outputs[index].value,
                 graph_ref: graph,
                 details: {
                     ioId: value.id + CONNECTION_TYPE.OUTPUT + index,
