@@ -929,6 +929,28 @@ describe("preservationModeTest", () => {
         expect(addEngineNode1.inputs[1].value).toBe(0);
     })
 
+    test("Split root after first execution (root default value)", () => {
+
+        connector(addEngineNode1OUTPUT0, rootINPUT0, connectionDict);
+        connector(constFourEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
+        connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "root", false);
+        expect(testValue).toBe(9);
+        expect(rootEngineNode.inputs[0].value).toBe(9);
+        expect(addEngineNode1.inputs[0].value).toBe(4);
+        expect(addEngineNode1.inputs[1].value).toBe(5);
+
+        splitter(addEngineNode1OUTPUT0, rootINPUT0, connectionDict)
+
+        //Values should reset to their default value, when no connection is found
+        executeGraph(configDict, engineNodeDict, connectionDict, "root", false);
+        expect(testValue).toBe(0);
+        expect(rootEngineNode.inputs[0].value).toBe(0);
+        expect(addEngineNode1.inputs[0].value).toBe(4);
+        expect(addEngineNode1.inputs[1].value).toBe(5);
+    })
+
     test("addThreeNumbers connection, mutate original", () => {
         executeGraph(configDict, engineNodeDict, addingThreeNumberConnection, "root", false);
         expect(testValue).toBe(3)
