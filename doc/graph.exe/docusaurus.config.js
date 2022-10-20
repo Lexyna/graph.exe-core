@@ -38,14 +38,9 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          routeBasePath: '/'
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -74,65 +69,13 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          { to: '/blog', label: 'Showcase', position: 'left' },
+          { to: '/Examples', label: 'Showcase', position: 'left' },
           {
             href: 'https://github.com/Lexyna/graph.exe-core',
             label: 'GitHub',
             position: 'right',
           },
         ],
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Quick Start Guide',
-                to: '/docs/quick-start-guide/quickStartGuide',
-              },
-              {
-                label: "Plugins",
-                to: '/docs/plugins/react'
-              },
-              {
-                label: 'Documentation',
-                to: `docs/Documentation/graph-core`
-              }
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
-              },
-            ],
-          },
-        ]
       },
       prism: {
         theme: lightCodeTheme,

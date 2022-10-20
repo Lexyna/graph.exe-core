@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+slug: /
 ---
 
 # Graphs.exe
 
-WIP
+Work in progress

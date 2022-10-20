@@ -12,6 +12,7 @@ interface NodeEditorProps {
     connections: EngineConnections;
     debugMode: boolean;
     entryId?: string;
+    gridOptions?: GridOptions; 
 }
 ```
 
@@ -24,6 +25,8 @@ interface NodeEditorProps {
 `debugMode`: If `true` will show a stringified version of the [`ProtoIO`](#protoiok-t)'s value next to the label.
 
 `entryId`: If provided, will attempt to execute the Graph with each change. A status symbol at the bottom right of the editor will display the Graphs status.
+
+`gridOptions`: Style options for the backgroundGrid, see [`GridOptions`](#girdoptions).
 
 ## `ProtoNode`: 
 
@@ -146,3 +149,22 @@ interface ProtoIOStyle {
 ```
 
 `color`: CSS color string. Changes the color of the io Port and connection line.
+
+## `GirdOptions`:
+
+```ts
+interface GridOptions {
+    backgroundColor?: string;
+    lineColor?: string;
+    boldLineColor?: string;
+    boldLineSpacing?: number;
+}
+```
+
+`backgroundColor`: CSS color string. Set's the default background for the nodeEditor.
+
+`lineColor`: CSS color string. Set's the color of the background lines.
+
+`boldLineColor`: CSS color string. Set's the color of the repeating bold lines in the background.
+
+`boldLineSpacing`: Defines how many tiles should be rendered in between bold lines. Will render `boldLineSpacing+1` tiles. Set to `0` to disable rendering of bold lines. 
