@@ -2,6 +2,7 @@ import { EngineConnections } from "../connections/EngineConnections";
 import { CON_MAPPING } from "../IO/IOMapping";
 import { ConfigNodeDict } from "../nodes/ConfigNode";
 import { EngineNodeDict } from "../nodes/EngineNode";
+import { dependencyCycleDetection } from "./Core";
 
 /**
  * Validates whatever a passed graph is valid, 'executable', or not
@@ -21,6 +22,9 @@ export const validator = (
 
     if (!isInMemoryGraph && !nodes[entry])
         return [false, "Missing or wrong entry Id"];
+
+    if (!isInMemoryGraph && dependencyCycleDetection(connections, entry))
+        return [false, "Graph contains circular dependencies"];
 
     let isValidConfig = true;
 

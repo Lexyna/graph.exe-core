@@ -1098,3 +1098,79 @@ describe("preservationModeTest", () => {
     })
 
 })
+
+describe("execute graph with circular dependencies", () => {
+
+    let connectionDict: EngineConnections;
+
+    beforeEach(() => {
+        connectionDict = {
+            input: {},
+            output: {}
+        }
+
+        resetAll();
+        initializeNodeValues();
+    })
+
+    test("execute simple dependency loop", () => {
+
+        connector(addEngineNode1OUTPUT0, rootINPUT0, connectionDict);
+        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT1, connectionDict);
+        connector(addEngineNode1OUTPUT0, addEngineNode1INPUT0, connectionDict);
+
+        const [executionStatus, msg] = executeGraph(configDict, engineNodeDict, connectionDict, "root");
+        expect(executionStatus).toBe(false);
+
+    })
+
+    test("execute co-dependent addNode's", () => {
+
+        connector(addEngineNode2OUTPUT0, rootINPUT0, connectionDict);
+        connector(addEngineNode1OUTPUT0, addEngineNode2INPUT0, connectionDict);
+        connector(addEngineNode2OUTPUT0, addEngineNode1INPUT1, connectionDict);
+        connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
+        connector(constFiveEngineNodeOUTPUT0, addEngineNode2INPUT1, connectionDict);
+
+        const [executionStatus, msg] = executeGraph(configDict, engineNodeDict, connectionDict, "root");
+        expect(executionStatus).toBe(false);
+    })
+
+    test("execute advanced graph with loop", () => {
+
+        connector(divEngineNode2OUTPUT0, rootINPUT0, connectionDict);
+
+        connector(mulEngineNode2OUTPUT0, divEngineNode2INPUT0, connectionDict);
+
+        connector(subEngineNode1OUTPUT0, divEngineNode2INPUT1, connectionDict);
+
+        connector(divEngineNode1OUTPUT0, mulEngineNode2INPUT0, connectionDict);
+
+        connector(divEngineNode1OUTPUT0, subEngineNode1INPUT0, connectionDict);
+
+        connector(mulEngineNode1OUTPUT0, divEngineNode1INPUT0, connectionDict);
+
+        connector(constTwoEngineNodeOUTPUT0, mulEngineNode1INPUT0, connectionDict);
+
+        connector(constFiveEngineNodeOUTPUT0, mulEngineNode1INPUT1, connectionDict);
+
+        connector(addEngineNode2OUTPUT0, divEngineNode1INPUT1, connectionDict);
+
+        connector(addEngineNode1OUTPUT0, addEngineNode2INPUT0, connectionDict);
+
+        connector(constThreeEngineNodeOUTPUT0, addEngineNode2INPUT1, connectionDict);
+
+        connector(constTwoEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
+
+        connector(addEngineNode1OUTPUT0, subEngineNode1INPUT1, connectionDict);
+
+        connector(constThreeEngineNodeOUTPUT0, mulEngineNode2INPUT1, connectionDict);
+
+        connector(divEngineNode2OUTPUT0, addEngineNode1INPUT1, connectionDict);
+
+        const [executionStatus, msg] = executeGraph(configDict, engineNodeDict, connectionDict, "root");
+        expect(executionStatus).toBe(false);
+
+    })
+
+})
