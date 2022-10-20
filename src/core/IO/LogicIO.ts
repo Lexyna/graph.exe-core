@@ -12,6 +12,7 @@ export interface LogicIO<K, T> {
     mapping: CON_MAPPING;
     data: K;
     value: T;
+    defaultValue: T;
     graph_ref: GraphExe;
     details: ConnectionDetails
 }
