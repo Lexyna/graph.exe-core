@@ -4,7 +4,7 @@ import { executeGraph } from "../../src/core/engine/OTG";
 import { EngineNodeDict } from "../../src/core/nodes/EngineNode";
 import { configDict, destroyLog, initLog, resetAll, testLog, testString, testValue } from "./predefined/ConfigNodes";
 
-import { multiConAddEngineNodeINPUT0, multiConAddEngineNodeOUTPUT0, addEngineNode1INPUT0, addEngineNode1INPUT1, addEngineNode1OUTPUT0, addEngineNode2INPUT0, addEngineNode2INPUT1, addEngineNode2OUTPUT0, constFiveEngineNodeOUTPUT0, constFourEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, dataEngineNodeINPUT0, dataEngineNodeOUTPUT0, destroyEngineNode1INPUT0, destroyEngineNode1OUTPUT0, divEngineNode1INPUT0, divEngineNode1INPUT1, divEngineNode1OUTPUT0, divEngineNode2INPUT0, divEngineNode2INPUT1, divEngineNode2OUTPUT0, forEngineNode1INPUT0, forEngineNode1OUTPUT0, forEngineNode1OUTPUT1, forEngineNodeTriggerOUTPUT0, forEngineNodeTriggerOUTPUT1, ifEngineNode2INPUT0, ifEngineNode2INPUT1, ifEngineNode2OUTPUT1, ifEngineNodeINPUT0, ifEngineNodeINPUT1, ifEngineNodeOUTPUT0, ifEngineNodeOUTPUT1, incrementTestValueEngineNode2INPUT0, incrementTestValueEngineNode2OUTPUT0, incrementTestValueEngineNode2OUTPUT1, incrementTestValueEngineNodeINPUT0, incrementTestValueEngineNodeOUTPUT0, incrementTestValueEngineNodeOUTPUT1, initDestroyEngineNodeINPUT0, initEngineNode1INPUT0, initEngineNode1OUTPUT0, logEngineNode1INPUT0, logEngineNode1INPUT1, logEngineNode1OUTPUT0, logEngineNode2INPUT0, logEngineNode2INPUT1, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, numberToStringConverterEngineNode1INPUT0, numberToStringConverterEngineNode1OUTPUT0, rootINPUT0, starterEngineNodeOUTPUT0, subEngineNode1INPUT0, subEngineNode1INPUT1, subEngineNode1OUTPUT0, subEngineNode2INPUT0, subEngineNode2INPUT1, subEngineNode2OUTPUT0, textCombineEngineNode1INPUT0, textCombineEngineNode1INPUT1, textHelloEngineNodeOUTPUT0, textWorldEngineNodeOUTPUT0, updateTypeALWAYSEngineNodeOUTPUT0, updateTypeDYNAMICEngineNodeINPUT0, updateTypeDYNAMICEngineNodeOUTPUT0, updateTypeNEVEREngineNodeINPUT0, updateTypeNEVEREngineNodeOUTPUT0, wrongNextEngineNodeINPUT0, wrongNextEngineNodeOUTPUT0 } from "./predefined/ConnectionDetails";
+import { addEngineNode1INPUT0, addEngineNode1INPUT1, addEngineNode1OUTPUT0, addEngineNode2INPUT0, addEngineNode2INPUT1, addEngineNode2OUTPUT0, constFiveEngineNodeOUTPUT0, constFourEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, dataEngineNodeINPUT0, dataEngineNodeOUTPUT0, destroyEngineNode1INPUT0, destroyEngineNode1OUTPUT0, divEngineNode1INPUT0, divEngineNode1INPUT1, divEngineNode1OUTPUT0, divEngineNode2INPUT0, divEngineNode2INPUT1, divEngineNode2OUTPUT0, forEngineNode1INPUT0, forEngineNode1OUTPUT0, forEngineNode1OUTPUT1, forEngineNodeTriggerOUTPUT0, forEngineNodeTriggerOUTPUT1, ifEngineNode2INPUT0, ifEngineNode2INPUT1, ifEngineNode2OUTPUT1, ifEngineNodeINPUT0, ifEngineNodeINPUT1, ifEngineNodeOUTPUT0, ifEngineNodeOUTPUT1, incrementTestValueEngineNode2INPUT0, incrementTestValueEngineNode2OUTPUT0, incrementTestValueEngineNode2OUTPUT1, incrementTestValueEngineNodeINPUT0, incrementTestValueEngineNodeOUTPUT0, incrementTestValueEngineNodeOUTPUT1, initDestroyEngineNodeINPUT0, initEngineNode1INPUT0, initEngineNode1OUTPUT0, logEngineNode1INPUT0, logEngineNode1INPUT1, logEngineNode1OUTPUT0, logEngineNode2INPUT0, logEngineNode2INPUT1, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, multiConAddEngineNodeINPUT0, multiConAddEngineNodeOUTPUT0, numberToStringConverterEngineNode1INPUT0, numberToStringConverterEngineNode1OUTPUT0, rootINPUT0, starterEngineNodeOUTPUT0, subEngineNode1INPUT0, subEngineNode1INPUT1, subEngineNode1OUTPUT0, subEngineNode2INPUT0, subEngineNode2INPUT1, subEngineNode2OUTPUT0, textCombineEngineNode1INPUT0, textCombineEngineNode1INPUT1, textHelloEngineNodeOUTPUT0, textWorldEngineNodeOUTPUT0, updateTypeALWAYSEngineNodeOUTPUT0, updateTypeDYNAMICEngineNodeINPUT0, updateTypeDYNAMICEngineNodeOUTPUT0, updateTypeNEVEREngineNodeINPUT0, updateTypeNEVEREngineNodeOUTPUT0, wrongNextEngineNodeINPUT0, wrongNextEngineNodeOUTPUT0 } from "./predefined/ConnectionDetails";
 import { addEngineNode1, addEngineNode2, dataEngineNode, destroyEngineNode1, engineNodeDict, initDestroyEngineNode, initEngineNode1, initializeNodeValues, logEngineNode1, mulEngineNode1, mulEngineNode2, rootEngineNode, starterEngineNode, subEngineNode2, textCombineEngineNode1 } from "./predefined/EngineNodes";
 
 import { missingOutgoingConnection } from "./predefined/InvalidConnections";
@@ -183,6 +183,19 @@ describe("otg dependency graph test", () => {
         const [ret, msg] = executeGraph(configDict, engineNodeDict, missingOutgoingConnection, "root");
         expect(ret).toBe(false)
 
+    })
+
+    test("Use default/latest value when no connection is found", () => {
+        const connectionDict: EngineConnections = {
+            input: {},
+            output: {}
+        }
+
+        connector(addEngineNode1OUTPUT0, rootINPUT0, connectionDict);
+        connector(constFiveEngineNodeOUTPUT0, addEngineNode1INPUT0, connectionDict);
+
+        executeGraph(configDict, engineNodeDict, connectionDict, "root");
+        expect(testValue).toBe(5);
     })
 
     test("test multi connect input - 1 connection", () => {
