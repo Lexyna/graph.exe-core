@@ -1,8 +1,8 @@
 
 import { EngineIO } from "graph.exe-core";
 import { ProtoNode } from "graph.exe-react/dist/cjs/ProtoTypes/ProtoNode";
-import { inputData, trigFuncSelect, TrigonometricFunctions } from "../CustomComp";
-import { numberIn, numberInputOut, numberInSum, numberInX, numberInY, numberOut, trigonometricInput } from "../IO";
+import { inputData, trigFuncSelect, TrigonometricFunctions } from "./CustomComp";
+import { numberIn, numberInputOut, numberInSum, numberInX, numberInY, numberOut, trigonometricInput } from "./IO";
 
 export const rootNode: ProtoNode = {
     id: "rootNode",
