@@ -187,7 +187,7 @@ export const meshPreview = (props: ExtraProps<null, Mesh | null>) => {
         if (props.value)
             mesh = props.value;
         else
-            mesh = new Mesh(new BoxGeometry(1, 1, 1), new MeshBasicMaterial({ color: 0xff00ff }));
+            mesh = new Mesh(new BoxGeometry(1, 1, 1), new MeshBasicMaterial({ color: 0xffffff }));
 
         scene.add(mesh);
 
@@ -200,7 +200,6 @@ export const meshPreview = (props: ExtraProps<null, Mesh | null>) => {
             line = new LineSegments(wireframe);
             scene.add(line);
         }
-
 
         camera.position.z = 5;
 

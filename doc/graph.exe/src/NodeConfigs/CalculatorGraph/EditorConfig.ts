@@ -4,7 +4,7 @@ import { buildEngineNode } from "graph.exe-react/dist/cjs/Utils/utils";
 import { addNode, constNode, divNode, mulNode, powerNode, rootNode, rootOpNode, subNode, summationNode, trigNode } from "./ConfigNodes";
 
 
-export const calculatorConfigNode: ProtoNodeDict = {
+export const calculatorConfigNodes: ProtoNodeDict = {
     [rootNode.id]: rootNode,
     [constNode.id]: constNode,
     [addNode.id]: addNode,
