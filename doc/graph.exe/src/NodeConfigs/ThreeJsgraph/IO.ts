@@ -4,31 +4,16 @@ import { BufferGeometry, Mesh } from "three";
 import { colorData, colorPicker, geometryData, geometrySelector, meshPreview } from "./CustomComp";
 
 
-export const numberIn: ProtoIO<null, number> = {
-    type: "number",
-    mapping: CON_MAPPING.SINGLE,
-    label: "number",
-    data: null,
-    extra: null,
-    value: 0
-}
-
-export const numberOut: ProtoIO<null, number> = {
-    type: "number",
-    mapping: CON_MAPPING.MULTI,
-    label: "number",
-    data: null,
-    extra: null,
-    value: 0
-}
-
 export const colorIn: ProtoIO<null, string> = {
     type: "color",
     mapping: CON_MAPPING.SINGLE,
     label: "Color",
     data: null,
     extra: null,
-    value: "#ffffff"
+    value: "#ffffff",
+    style: {
+        color: "lightblue"
+    }
 }
 
 export const colorOut: ProtoIO<colorData, string> = {
@@ -37,7 +22,10 @@ export const colorOut: ProtoIO<colorData, string> = {
     label: "Color",
     data: { color: "#ffffff" },
     extra: colorPicker,
-    value: "#ffffff"
+    value: "#ffffff",
+    style: {
+        color: "lightblue"
+    }
 }
 
 export const geometryIn: ProtoIO<null, BufferGeometry | null> = {
@@ -70,7 +58,10 @@ export const meshIn: ProtoIO<null, Mesh | null> = {
     label: "mesh",
     data: null,
     extra: null,
-    value: null
+    value: null,
+    style: {
+        color: "lightgreen"
+    }
 }
 
 export const meshOut: ProtoIO<null, Mesh | null> = {
@@ -79,7 +70,10 @@ export const meshOut: ProtoIO<null, Mesh | null> = {
     label: "mesh",
     data: null,
     extra: null,
-    value: null
+    value: null,
+    style: {
+        color: "lightgreen"
+    }
 }
 
 export const meshInWithPreview: ProtoIO<null, Mesh | null> = {
@@ -88,5 +82,8 @@ export const meshInWithPreview: ProtoIO<null, Mesh | null> = {
     label: "mesh",
     data: null,
     extra: meshPreview,
-    value: null
+    value: null,
+    style: {
+        color: "lightgreen"
+    }
 }

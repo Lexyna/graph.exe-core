@@ -157,7 +157,7 @@ export const geometrySelector = (props: ExtraProps<geometryData, BufferGeometry 
                     <input style={inputStyle} type="number" defaultValue={torusProperties.tubularSegments} min={1} onChange={e => setTorusPropertiesTubularSegments(parseFloat(e.target.value))} />
                     <br />
                     <label>arc: </label>
-                    <input style={inputStyle} type="number" defaultValue={torusProperties.arc} min={0.1} step={0.1} max={Math.PI * 2} onChange={e => setTorusPropertiesArc(parseFloat(e.target.value))} />
+                    <input style={inputStyle} type="number" defaultValue={torusProperties.arc} min={0.1} step={0.05} max={Math.PI * 2} onChange={e => setTorusPropertiesArc(parseFloat(e.target.value))} />
                 </div>
                 : null}
         </div>
