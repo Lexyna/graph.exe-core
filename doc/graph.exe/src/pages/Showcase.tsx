@@ -1,7 +1,7 @@
 import Layout from '@theme/Layout';
 import { NodeEditor } from 'graph.exe-react';
 import React, { CSSProperties } from "react";
-import { calculatorConfigNode, calculatorConnections, calculatorNodes, calculatorRootEngineNodeId } from "../NodeConfigs/CalculatorGraph/EditorConfig";
+import { threeConfigDict, threeConnections, threeNodes, threeRootEngineNodeId } from '../NodeConfigs/ThreeJsgraph/EditorConfig';
 
 const style: CSSProperties = {
     backgroundColor: "gray",
@@ -15,7 +15,7 @@ const examples = () => {
     return (
         <Layout>
             <div style={style}>
-                <NodeEditor config={calculatorConfigNode} nodes={calculatorNodes} connections={calculatorConnections} debugMode={true} entryId={calculatorRootEngineNodeId}></NodeEditor>
+                <NodeEditor config={threeConfigDict} nodes={threeNodes} connections={threeConnections} debugMode={false} entryId={threeRootEngineNodeId}></NodeEditor>
             </div>
         </Layout>)
 }
