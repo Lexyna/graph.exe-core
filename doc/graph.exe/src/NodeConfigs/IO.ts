@@ -20,6 +20,24 @@ export const numberOut: ProtoIO<null, number> = {
     value: 0
 }
 
+export const numberInX: ProtoIO<null, number> = {
+    type: "number",
+    mapping: CON_MAPPING.SINGLE,
+    label: "X",
+    data: null,
+    extra: null,
+    value: 0
+}
+
+export const numberInY: ProtoIO<null, number> = {
+    type: "number",
+    mapping: CON_MAPPING.SINGLE,
+    label: "Y",
+    data: null,
+    extra: null,
+    value: 0
+}
+
 export const numberInputOut: ProtoIO<inputData, number> = {
     type: "number",
     label: "number",

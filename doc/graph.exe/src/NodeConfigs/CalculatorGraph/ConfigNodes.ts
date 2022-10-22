@@ -2,7 +2,7 @@
 import { EngineIO } from "graph.exe-core";
 import { ProtoNode } from "graph.exe-react/dist/cjs/ProtoTypes/ProtoNode";
 import { inputData } from "../CustomComp";
-import { numberIn, numberInputOut, numberOut } from "../IO";
+import { numberIn, numberInputOut, numberInX, numberInY, numberOut } from "../IO";
 
 export const rootNode: ProtoNode = {
     id: "rootNode",
@@ -11,9 +11,7 @@ export const rootNode: ProtoNode = {
     inputs: [numberIn],
     outputs: [],
     private: true,
-    exe: function (in1: EngineIO<null, number>) {
-        console.log("Trigger Root", in1)
-    }
+    exe: function (in1: EngineIO<null, number>) { }
 }
 
 export const constNode: ProtoNode = {
@@ -70,5 +68,28 @@ export const divNode: ProtoNode = {
         if (in2.value === 0)
             out.value = 0;
         else out.value = in1.value / in2.value;
+    }
+}
+
+export const powerNode: ProtoNode = {
+    id: "powerNode",
+    description: "Raises x to the power of y",
+    name: "Power",
+    inputs: [numberInX, numberInY],
+    outputs: [numberOut],
+    exe: function (in1: EngineIO<null, number>, in2: EngineIO<null, number>, out: EngineIO<null, number>) {
+        out.value = Math.pow(in1.value, in2.value);
+    }
+}
+
+export const rootOpNode: ProtoNode = {
+    id: "rootOpNode",
+    description: "Take square root of x",
+    name: "sqrt(x)",
+    inputs: [numberInX],
+    outputs: [numberOut],
+    exe: function (in1: EngineIO<null, number>, out: EngineIO<null, number>) {
+        if (in1.value >= 0)
+            out.value = Math.sqrt(in1.value);
     }
 }

@@ -1,7 +1,7 @@
 import { EngineConnections } from "graph.exe-core";
 import { ProtoEngineNode, ProtoEngineNodeDict, ProtoNodeDict } from "graph.exe-react/dist/cjs/ProtoTypes/ProtoNode";
 import { buildEngineNode } from "graph.exe-react/dist/cjs/Utils/utils";
-import { addNode, constNode, divNode, mulNode, rootNode, subNode } from "./ConfigNodes";
+import { addNode, constNode, divNode, mulNode, powerNode, rootNode, rootOpNode, subNode } from "./ConfigNodes";
 
 
 export const calculatorConfigNode: ProtoNodeDict = {
@@ -10,7 +10,9 @@ export const calculatorConfigNode: ProtoNodeDict = {
     [addNode.id]: addNode,
     [subNode.id]: subNode,
     [mulNode.id]: mulNode,
-    [divNode.id]: divNode
+    [divNode.id]: divNode,
+    [powerNode.id]: powerNode,
+    [rootOpNode.id]: rootOpNode
 }
 
 const calculatorRootEngineNode: ProtoEngineNode = buildEngineNode(rootNode, true);
