@@ -7,6 +7,7 @@ export interface inputData {
 
 export const inputForm = (props: ExtraProps<inputData, number>) => {
     const update = (val: number) => {
+        if (val === null) return;
         props.setData({ val: val });
     }
     return (
