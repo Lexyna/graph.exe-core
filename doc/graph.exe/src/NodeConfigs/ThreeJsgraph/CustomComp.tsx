@@ -95,7 +95,7 @@ export const geometrySelector = (props: ExtraProps<geometryData, BufferGeometry 
 
     useEffect(() => {
         updateData();
-    }, [selectedGeometry])
+    }, [selectedGeometry, boxProperties, sphereProperties, circleProperties, dodecahedronProperties, torusProperties])
 
     return (
         <div>
