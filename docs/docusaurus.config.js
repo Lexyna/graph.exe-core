@@ -8,16 +8,16 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Graph.exe',
   tagline: 'A fast, easy-to-use, and typescript ready library to create executable graphs',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://github.com/Lexyna/graph.exe-core',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'Lexyna', // Usually your GitHub org/user name.
+  projectName: 'graph.exe-core', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -58,10 +58,7 @@ const config = {
       },
       navbar: {
         title: 'Graph.exe',
-        logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
-        },
+
         items: [
           {
             type: 'doc',
