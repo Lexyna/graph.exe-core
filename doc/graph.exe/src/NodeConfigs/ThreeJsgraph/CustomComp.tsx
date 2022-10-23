@@ -121,13 +121,13 @@ export const geometrySelector = (props: ExtraProps<geometryData, BufferGeometry 
             {selectedGeometry === Geometries.SPHERE ?
                 <div>
                     <label>radius: </label>
-                    <input style={inputStyle} type="number" defaultValue={sphereProperties.radius} min={1} onChange={e => setSpherePropertiesRadius(parseFloat(e.target.value))} />
+                    <input style={inputStyle} type="number" defaultValue={sphereProperties.radius} min={1} max={4} onChange={e => setSpherePropertiesRadius(parseFloat(e.target.value))} />
                 </div>
                 : null}
             {selectedGeometry === Geometries.CIRCLE ?
                 <div>
                     <label>radius: </label>
-                    <input style={inputStyle} type="number" defaultValue={circleProperties.radius} min={1} onChange={e => setCirclePropertiesRadius(parseFloat(e.target.value))} />
+                    <input style={inputStyle} type="number" defaultValue={circleProperties.radius} min={1} max={4} onChange={e => setCirclePropertiesRadius(parseFloat(e.target.value))} />
                     <br />
                     <label>segments: </label>
                     <input style={inputStyle} type="number" defaultValue={circleProperties.segments} min={1} onChange={e => setCirclePropertiesSegments(parseFloat(e.target.value))} />
@@ -136,7 +136,7 @@ export const geometrySelector = (props: ExtraProps<geometryData, BufferGeometry 
             {selectedGeometry === Geometries.DODECAHEDRON ?
                 <div>
                     <label>radius: </label>
-                    <input style={inputStyle} type="number" defaultValue={dodecahedronProperties.radius} min={1} onChange={e => setDodecahedronPropertiesRadius(parseFloat(e.target.value))} />
+                    <input style={inputStyle} type="number" defaultValue={dodecahedronProperties.radius} min={1} max={4} onChange={e => setDodecahedronPropertiesRadius(parseFloat(e.target.value))} />
                     <br />
                     <label>details: </label>
                     <input style={inputStyle} type="number" defaultValue={dodecahedronProperties.details} min={0} max={32} onChange={e => setDodecahedronPropertiesDetails(parseFloat(e.target.value))} />
@@ -145,7 +145,7 @@ export const geometrySelector = (props: ExtraProps<geometryData, BufferGeometry 
             {selectedGeometry === Geometries.TORUS ?
                 <div>
                     <label>radius: </label>
-                    <input style={inputStyle} type="number" defaultValue={torusProperties.radius} min={1} onChange={e => setTorusPropertiesRadius(parseFloat(e.target.value))} />
+                    <input style={inputStyle} type="number" defaultValue={torusProperties.radius} min={1} max={4} onChange={e => setTorusPropertiesRadius(parseFloat(e.target.value))} />
                     <br />
                     <label>tube: </label>
                     <input style={inputStyle} type="number" defaultValue={torusProperties.tube} min={0.1} step={0.05} onChange={e => setTorusPropertiesTube(parseFloat(e.target.value))} />
