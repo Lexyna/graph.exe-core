@@ -9,7 +9,7 @@ const config = {
   title: 'Graph.exe',
   tagline: 'A fast, easy-to-use, and typescript ready library to create executable graphs',
   url: 'https://github.com/Lexyna/graph.exe-core',
-  baseUrl: '/',
+  baseUrl: '/graph.exe-core/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
@@ -18,6 +18,7 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'Lexyna', // Usually your GitHub org/user name.
   projectName: 'graph.exe-core', // Usually your repo name.
+  trailingSlash: false,
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
