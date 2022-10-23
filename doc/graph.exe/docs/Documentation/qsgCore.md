@@ -11,6 +11,12 @@ If you want to use any of the available plugins, refer to their Quick Start guid
 This is step-by-step guide on how you can create any kind of graph with the help graph.exe.
 In this guide we will create a simple graph, that does some basic addition and will then print out our result on the console.
 
+To follow this tutorial make sure you install the `graph.exe-core` package.
+
+```ts
+npm install graph.exe-core
+```
+
 ## Step1: Defining our IO Ports
 
 The first step we have tp take in order to create our graph, is defining what kind of data we want to transport. For our simple graph, it will be enough to only have a `number` type:

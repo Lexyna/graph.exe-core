@@ -1,30 +1,25 @@
-# Graph.exe Core
+# Graph.exe
 
-Graph.exe is a modular npm package that aims to provide an easy and straight forward way for developer to define their own executable graphs.  
-# Install
+## What is Graph.exe?
 
-## Core  
+Graph.exe is a modular npm package, written completely in typescript aimed at creating executable Graph. It consists of multiple packages that, all packages are building upon the [`graph.exe-core`](https://github.com/Lexyna/graph.exe-core) package.
 
-`npm install graph.exe-core`
+The core package provides the main functionality of execution, creating and deleting a graph. It all so comes with some other [`utilities functions`](./Documentation/functions.md#utility-functions) to connect nodes, build nodes etc. 
 
-The core package is the backbone of graph.exe and all other extension are dependent on it. It is possible to install the core dependency without any other extension if you're only interested in executing graphs - or writing your own user-interface.
+Other packages provide a basic userInterface `NodeEditor` Component that can be used and configured for their respective frameworks (currently only react).
 
-## React
+## How does it work?
 
-WIP
+Each Graph gets its own `configuration`, usually consisting of an `entryId`, [`ConfigNodeDict`](./Documentation/NodeTypes.md#confognodedict), [`EngineNodeDict`](./Documentation/NodeTypes.md#enginenodedict), as well as [`EngineConnections`](./Documentation/connectionTypes.md#engineconnections).
 
-## Angular
+Together, they specify a graph. Each connection between nodes is documented [`EngineConnections`](./Documentation/connectionTypes.md#engineconnections) Object. At runtime, the engine will start at the `entryId` and, resolve all dependencies (ingoing connections) before calling the defined `executable` function in the [`ConfigNode`](./Documentation/NodeTypes.md#confignode) related to the [`EngineNode`](./Documentation/NodeTypes.md#enginenode).
 
-WIP
+To call another nodes, a special function [`next()`](./Documentation/functions.md#next) exists. This function can be placed inside the `executable` function of a node and will trigger all connected nodes (in no specific order).
 
-## Vue
+## What can I use graph.exe for?
 
-WIP
+`graph.exe` was designed to work with as many use cases a possible. Because each node contains their own callable function there is no limit to what is possible. Some other nodeEditor's don't allow for a simple way to create a control flow, e.g. from one node to another, while other might not even have an in build control flow making it difficult to resolve dependencies. `graph.exe` takes care of all of that. Some examples of what is possible can be found on the [`Showcase`](/Showcase) page. 
 
-# Guides & usage
+## Do I need to use React if I want to use this graph.exe?
 
-Refer to [wip] for more information and a quickstart guide.
-
-# License
-
-MIT © [Lexyna](https://github.com/Lexyna)
+No, the [`core`](https://github.com/Lexyna/graph.exe-core) package has no dependencies, you can run it anywhere you can run javascript. The only caveat is, that is has no user-interface by default. However you could easily build you own ontop of the core package using your preferred framework (or none at all). You can also take a look at the [`react-plugin`](https://github.com/Lexyna/graph.exe-react) github page to get an idea of how to get started.

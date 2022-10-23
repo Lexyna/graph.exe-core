@@ -34,6 +34,7 @@ interface NodeEditorProps {
 interface ProtoNode extends ConfigNode {
     name: string;
     description: string;
+    category?: string;
     private?: boolean;
     inputs: ProtoIO<any, any>;
     outputs: ProtoIO<any, any>;
@@ -45,13 +46,15 @@ interface ProtoNode extends ConfigNode {
 
 `description`: Provides the node description in the editor context Menu.
 
-`private`: if `true`, won't be addable by the user.
+`category`: Optional, defines a category this node is sort grouped into.
 
-`inputs`: Array of `ProtoIO`'s defining the nodes inputs.
+`private`: Optional, if `true`, won't be addable by the user.
 
-`outputs`: Array of `ProtoIO`'s defining the nodes outputs.
+`inputs`: Array of [`ProtoIO`](#protoiok-t)'s defining the nodes inputs.
 
-`style`: Optional `ProtoNodeStyle`. Changes the look of the node
+`outputs`: Array of [`ProtoIO`](#protoiok-t)'s defining the nodes outputs.
+
+`style`: Optional [`ProtoNodeStyle`](#protoiostyle). Changes the look of the node
 
 
 ## `ProtoNodeDict`:
@@ -139,6 +142,10 @@ interface ExtraProps<K, T> {
 `data`: Current data of the io Port.
 
 `value`: Current value of the io Port. 
+
+:::info
+The value `T` is readonly, changing it in a custom component won't have any effect. To change it, you have to call `setData` with your data object `K` and change it in the [`ConfigNode`](./../Documentation/NodeTypes.md#confignode)'s exe function with the provided `data` object. 
+:::
 
 ## `ProtoIOStyle`:
 

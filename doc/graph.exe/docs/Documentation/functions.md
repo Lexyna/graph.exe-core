@@ -15,15 +15,15 @@ This sections contains information about graph functions you can implement in yo
 
 ### executeGraph()
 
-The `executeGraph` function takes as parameter a `ConfigNodeDict`, `EngineNodedict`, `EngineConnections` and a entry point `string`, and tries to execute your graph once.
+The `executeGraph` function takes as parameter a `ConfigNodeDict`, `EngineNodedict`, `EngineConnections` as well as a entry point `string`, and tries to execute your graph once.
 
-If you have provided a valid, executable graph, the function will return `true` upon successful execution, otherwise it will return `false`.
+If you have provided a valid, executable graph, the function will return `[true, "Valid"]` upon successful execution, otherwise it will return `[false, errorMsg]`.
 
 The graph will also be destroyed upon complete execution.
 
 ```ts
 //Executes a valid, executable graph once
-executeGraph(config: ConfigNodeDict, nodes: EngineNodeDict, connections: EngineConnections, entry: string): boolean
+executeGraph(config: ConfigNodeDict, nodes: EngineNodeDict, connections: EngineConnections, entry: string): [boolean, string]
 ```
 
 `config`: Contains all [`ConfigNodes`](./NodeTypes.md#confignode) needed to execute this graph.
@@ -50,10 +50,10 @@ executeGraph(config: ConfigNodeDict, nodes: EngineNodeDict, connections: EngineC
 
 The `crateGraph()` function will create a `inMemoryGraph` that lives in memory and has to be manually delete via the [`deleteGraph()`](#deletegraph) function.
 
-Returns true if the graph got successfully created.
+Returns `[true, "Valid"]` if the graph got successfully created, `[false, errorMsg]` otherwise.
 
 ```ts
-createGraph(config: ConfigNodeDict, nodes: EngineNodeDict, connections: EngineConnections, graphName: string): boolean
+createGraph(config: ConfigNodeDict, nodes: EngineNodeDict, connections: EngineConnections, graphName: string): [boolean, string]
 ```
 
 `config`: Contains all [`ConfigNodes`](./NodeTypes.md#confignode) needed to execute this graph.
