@@ -12,6 +12,7 @@ interface NodeEditorProps {
     connections: EngineConnections;
     debugMode: boolean;
     entryId?: string;
+    gridOptions?: GridOptions; 
 }
 ```
 
@@ -25,12 +26,15 @@ interface NodeEditorProps {
 
 `entryId`: If provided, will attempt to execute the Graph with each change. A status symbol at the bottom right of the editor will display the Graphs status.
 
+`gridOptions`: Style options for the backgroundGrid, see [`GridOptions`](#girdoptions).
+
 ## `ProtoNode`: 
 
 ```ts
 interface ProtoNode extends ConfigNode {
     name: string;
     description: string;
+    category?: string;
     private?: boolean;
     inputs: ProtoIO<any, any>;
     outputs: ProtoIO<any, any>;
@@ -42,13 +46,15 @@ interface ProtoNode extends ConfigNode {
 
 `description`: Provides the node description in the editor context Menu.
 
-`private`: if `true`, won't be addable by the user.
+`category`: Optional, defines a category this node is sort grouped into.
 
-`inputs`: Array of `ProtoIO`'s defining the nodes inputs.
+`private`: Optional, if `true`, won't be addable by the user.
 
-`outputs`: Array of `ProtoIO`'s defining the nodes outputs.
+`inputs`: Array of [`ProtoIO`](#protoiok-t)'s defining the nodes inputs.
 
-`style`: Optional `ProtoNodeStyle`. Changes the look of the node
+`outputs`: Array of [`ProtoIO`](#protoiok-t)'s defining the nodes outputs.
+
+`style`: Optional [`ProtoNodeStyle`](#protoiostyle). Changes the look of the node
 
 
 ## `ProtoNodeDict`:
@@ -137,6 +143,10 @@ interface ExtraProps<K, T> {
 
 `value`: Current value of the io Port. 
 
+:::info
+The value `T` is readonly, changing it in a custom component won't have any effect. To change it, you have to call `setData` with your data object `K` and change it in the [`ConfigNode`](./../Documentation/NodeTypes.md#confignode)'s exe function with the provided `data` object. 
+:::
+
 ## `ProtoIOStyle`:
 
 ```ts
@@ -146,3 +156,22 @@ interface ProtoIOStyle {
 ```
 
 `color`: CSS color string. Changes the color of the io Port and connection line.
+
+## `GirdOptions`:
+
+```ts
+interface GridOptions {
+    backgroundColor?: string;
+    lineColor?: string;
+    boldLineColor?: string;
+    boldLineSpacing?: number;
+}
+```
+
+`backgroundColor`: CSS color string. Set's the default background for the nodeEditor.
+
+`lineColor`: CSS color string. Set's the color of the background lines.
+
+`boldLineColor`: CSS color string. Set's the color of the repeating bold lines in the background.
+
+`boldLineSpacing`: Defines how many tiles should be rendered in between bold lines. Will render `boldLineSpacing+1` tiles. Set to `0` to disable rendering of bold lines. 

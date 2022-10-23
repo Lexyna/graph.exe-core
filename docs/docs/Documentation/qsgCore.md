@@ -5,11 +5,17 @@ sidebar_position: 1
 
 :::info
 If you want to use any of the available plugins, refer to their Quick Start guide instead:
-[`React`](./qsgReact.md#quick-start-guide-react), [`Angular`](./qsgAngular.md), [`Vue`](./qsgVue.md).
+[`React`](../React/qsgReact.md).
 :::
 
 This is step-by-step guide on how you can create any kind of graph with the help graph.exe.
 In this guide we will create a simple graph, that does some basic addition and will then print out our result on the console.
+
+To follow this tutorial make sure you install the `graph.exe-core` package.
+
+```ts
+npm install graph.exe-core
+```
 
 ## Step1: Defining our IO Ports
 
@@ -108,7 +114,7 @@ const nodes: EngineNodeDict = {
 ```
 
 :::note
-Note how we had to set the output value for our const node explicitly in the code. Normally you would either have to create a `ConfigNode` with each of the desired output values, or create a dynamic const node like shown in the [`react quick start guide`](./qsgReact.md).
+Note how we had to set the output value for our const node explicitly in the code. Normally you would either have to create a `ConfigNode` with each of the desired output values, or create a dynamic const node like shown in the [`react quick start guide`](../React/qsgReact.md).
 :::
 
 ## Step4: Connecting our nodes
@@ -158,7 +164,7 @@ Output:
 
 ## Step6: Executing another node
 
-Now that we have out graph computing our output, let's create a new node which will take a input and log it our console, instead of having our root node do it. 
+Now that we have out graph computing our output, let's create a new node which will take a input and log it to our console instead of having our root node do it. 
 
 First, let's add two new [`EngineIO`](../Documentation/connectionTypes.md#engineio)'s to process our forward signals:
 
@@ -184,7 +190,7 @@ const signalOut: EngineIO<null, null>: EngineIO ?> {
 
 ```
 
-Now, let's slightly adjust our too node to output our value and and trigger another node:
+Now, let's slightly adjust our node to output our value and trigger another node:
 
 ```ts title="src/configNodes.ts"
 const "rootNode": ConfigNode = {

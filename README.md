@@ -1,29 +1,106 @@
-# Graph.exe Core
+# Graph.exe
 
-Graph.exe is a modular npm package that aims to provide an easy and straight forward way for developer to define their own executable graphs.  
-# Install
+![calculatorGraph](./img/Calculator.PNG)
+![threeJSGraph](./img/ThreeJS.PNG)
+# Install 
 
-## Core  
+```
+npm install graph.exe-core
+```
 
-`npm install graph.exe-core`
+# Documentation & Quick Start Guides
 
-The core package is the backbone of graph.exe and all other extension are dependent on it. It is possible to install the core dependency without any other extension if you're only interested in executing graphs - or writing your own user-interface.
+[Documentation](https://lexyna.github.io/graph.exe-core/)
 
-## React
+# Basic Use (React plugin example)
 
-WIP
+### Create Input/Output Ports
 
-## Angular
+```ts
+  export const numberIn: ProtoIO<null, number> = {
+    type: "number",
+    label: "number",
+    mapping: CON_MAPPING.SINGLE,
+    extra: null,
+    value: 0,
+    data: null,
+}
 
-WIP
+  export const numberOut: ProtoIO<null, number> = {
+    type: "number",
+    label: "number",
+    mapping: CON_MAPPING.MULTI,
+    extra: null,
+    value: 0,
+    data: null,
+}
+```
 
-## Vue
+### Define Config Nodes
 
-WIP
+```ts
+export const rootNode: ProtoNode = {
+    id: "root",
+    description: "Root",
+    name: "root",
+    inputs: [numberIn],
+    outputs: [],
+    private: true,
+    exe: function (in1: EngineIO<null, number>) {
+        console.log("received: ", in1.value);
+    }
+}
 
-# Guides & usage
+export const addNode: ProtoNode = {
+    id: "addNode",
+    description: "Adds two numbers",
+    name: "Add",
+    inputs: [numberIn, numberIn],
+    outputs: [numberOut],
+    exe: function (in1: EngineIO<null, number>, in2: EngineIO<null, number>, out: EngineIO<null, number>) {
+        out.value = in1.value + in2.value;
+    }
+}
 
-Refer to [wip] for more information and a quickstart guide.
+export const constNode: ProtoNode = {
+    id: "constNode",
+    description: "Outputs 1",
+    name: "COnst 1",
+    inputs: [],
+    outputs: [numberOut],
+    exe: function (out: EngineIO<null, number>) {
+        out.value = 1;
+    }
+}
+```
+
+### Create the configurations
+
+```ts
+const config: ProtoNodeDict = {
+  "root": rootEngineNode,
+  "addNode": addNode,
+  "constNode": constNode,
+}
+
+//Creates engineNode of our root
+const rootEngineNode = buildEngineNode(rootNode, true);
+
+const nodes: ProtoEngineNodeDict = {
+    [rootEngineNode.id]: rootEngineNode //Predefining out nodes
+};
+
+const connections: EngineConnections = {
+  input: {},
+  output: {}
+}
+```
+
+### Create your component
+
+```tsx
+<NodeEditor config={config} nodes={nodes} connections={connections} debugMode={true} entryId={rootEngineNode.id}></NodeEditor>
+```
 
 # License
 

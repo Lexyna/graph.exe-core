@@ -3,7 +3,7 @@ sidebar_position: 1
 ---
 # Quick Start Guide: React
 
-This guide will walk you though the steps to create a simple calculatorGraph with React, similar to the one found in the `Examples` page.
+This guide will walk you though the steps to create a simple calculatorGraph with React, similar to the one found on the [`Showcase`](/Showcase) page.
 
 To follow this tutorial, make sure to install the following packages: 
 
@@ -12,10 +12,10 @@ npm install graph.exe-core graph.exe-react
 ```
 
 :::info
-This guide assumes that you have a working react project, therefore it won't cover any ore specific setup configurations.
+This guide assumes that you have a working react project, therefore it won't cover any more specific setup configurations.
 :::
 
-## Step1: Defining our ioPorts
+## Step1: Defining the ioPorts
 
 The first step to creating functional nodes, is to tell them what kind of input they should accept by defining the [`ProtoIO<T, K>`](./react.md#protoiok-t). For this example, we will create 3 different ioPort. Two for our inputs and one for your outputs.
 
