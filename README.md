@@ -10,7 +10,7 @@ npm install graph.exe-core
 
 # Documentation & Quick Start Guides
 
-insert link here
+[Documentation](https://lexyna.github.io/graph.exe-core/)
 
 # Basic Use (React example)
 
