@@ -3,6 +3,7 @@ import { EngineConnections } from "../../src/core/connections/EngineConnections"
 import { validator } from "../../src/core/engine/Validator";
 import { configDict } from "./predefined/ConfigNodes";
 import { addEngineNode1INPUT0, addEngineNode1INPUT1, addEngineNode1OUTPUT0, constFiveEngineNodeOUTPUT0, constOneEngineNodeOUTPUT0, constThreeEngineNodeOUTPUT0, constTwoEngineNodeOUTPUT0, logEngineNode1INPUT0, mulEngineNode1INPUT0, mulEngineNode1INPUT1, mulEngineNode1OUTPUT0, mulEngineNode2INPUT0, mulEngineNode2INPUT1, mulEngineNode2OUTPUT0, multiConAddEngineNodeINPUT0, rootINPUT0, starterEngineNodeOUTPUT0 } from "./predefined/ConnectionDetails";
+import { connectToMultiConnect } from "./predefined/connectorTestsConnections";
 import { engineNodeDict } from "./predefined/EngineNodes";
 
 describe("connector test", () => {
@@ -83,6 +84,8 @@ describe("connector test", () => {
 
         expect(connector(addEngineNode1OUTPUT0, multiConAddEngineNodeINPUT0, connectionDict)).toBe(true);
         expect(connector(constOneEngineNodeOUTPUT0, multiConAddEngineNodeINPUT0, connectionDict)).toBe(true);
+
+        expect(connectionDict).toEqual(connectToMultiConnect);
     })
 
 })
