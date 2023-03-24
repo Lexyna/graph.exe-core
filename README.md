@@ -12,6 +12,10 @@ npm install graph.exe-core
 
 [Documentation](https://lexyna.github.io/graph.exe-core/)
 
+# Plugins
+
+* [React](https://github.com/Lexyna/graph.exe-react)
+
 # Basic Use (React plugin example)
 
 ### Create Input/Output Ports
